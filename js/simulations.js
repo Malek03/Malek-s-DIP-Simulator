@@ -7,8 +7,11 @@ const Simulations = (() => {
   'use strict';
 
   // Default sample image size for simulations
-  const SIM_W = 256;
-  const SIM_H = 100;
+  const SIM_W = 400;
+  const SIM_H = 150;
+
+  // Track which simulations have been initialized
+  const initialized = {};
 
   /**
    * Draws a grayscale gradient on a canvas.
@@ -26,24 +29,28 @@ const Simulations = (() => {
     // Start with gradient
     const grad = ctx.createLinearGradient(0, 0, w, 0);
     grad.addColorStop(0, '#000');
+    grad.addColorStop(0.25, '#404040');
     grad.addColorStop(0.5, '#808080');
+    grad.addColorStop(0.75, '#c0c0c0');
     grad.addColorStop(1, '#fff');
     ctx.fillStyle = grad;
     ctx.fillRect(0, 0, w, h);
 
     // Add some geometric shapes for visual interest
-    ctx.fillStyle = '#333';
-    ctx.fillRect(20, 20, 40, 60);
-    ctx.fillStyle = '#666';
+    ctx.fillStyle = '#1a1a1a';
+    ctx.fillRect(20, 20, 60, 90);
+    ctx.fillStyle = '#555';
     ctx.beginPath();
-    ctx.arc(w * 0.4, h * 0.5, 25, 0, Math.PI * 2);
+    ctx.arc(w * 0.35, h * 0.5, 35, 0, Math.PI * 2);
     ctx.fill();
-    ctx.fillStyle = '#aaa';
-    ctx.fillRect(w * 0.55, 15, 45, 70);
-    ctx.fillStyle = '#ddd';
+    ctx.fillStyle = '#999';
+    ctx.fillRect(w * 0.5, 15, 65, 100);
+    ctx.fillStyle = '#ccc';
     ctx.beginPath();
-    ctx.arc(w * 0.85, h * 0.5, 20, 0, Math.PI * 2);
+    ctx.arc(w * 0.8, h * 0.5, 30, 0, Math.PI * 2);
     ctx.fill();
+    ctx.fillStyle = '#eee';
+    ctx.fillRect(w * 0.88, 30, 40, 60);
 
     return ctx.getImageData(0, 0, w, h);
   }
@@ -66,6 +73,8 @@ const Simulations = (() => {
     const origCanvas = document.createElement('canvas');
     origCanvas.width = w;
     origCanvas.height = h;
+    origCanvas.style.maxWidth = '100%';
+    origCanvas.style.height = 'auto';
     origWrap.appendChild(origLabel);
     origWrap.appendChild(origCanvas);
 
@@ -78,6 +87,8 @@ const Simulations = (() => {
     const procCanvas = document.createElement('canvas');
     procCanvas.width = w;
     procCanvas.height = h;
+    procCanvas.style.maxWidth = '100%';
+    procCanvas.style.height = 'auto';
     procWrap.appendChild(procLabel);
     procWrap.appendChild(procCanvas);
 
@@ -97,19 +108,22 @@ const Simulations = (() => {
    * 1. Negatives Simulation
    * ---------------------------------------------------------- */
   function initNegative(containerId) {
+    if (initialized[containerId]) return;
     const container = document.getElementById(containerId);
     if (!container) return;
 
-    const { origCtx, procCtx, origCanvas } = setupCanvasPair(container, SIM_W, SIM_H);
+    const { origCtx, procCtx } = setupCanvasPair(container, SIM_W, SIM_H);
     const originalData = drawSampleImage(origCtx, SIM_W, SIM_H);
     const result = ImageProcessing.applyNegative(originalData);
     procCtx.putImageData(result, 0, 0);
+    initialized[containerId] = true;
   }
 
   /* ----------------------------------------------------------
    * 2. Log Transformation Simulation
    * ---------------------------------------------------------- */
   function initLog(containerId, sliderId, valueId) {
+    if (initialized[containerId]) return;
     const container = document.getElementById(containerId);
     const slider = document.getElementById(sliderId);
     const valueDisplay = document.getElementById(valueId);
@@ -127,12 +141,14 @@ const Simulations = (() => {
 
     slider.addEventListener('input', update);
     update();
+    initialized[containerId] = true;
   }
 
   /* ----------------------------------------------------------
    * 3. Gamma Correction Simulation
    * ---------------------------------------------------------- */
   function initGamma(containerId, sliderId, valueId) {
+    if (initialized[containerId]) return;
     const container = document.getElementById(containerId);
     const slider = document.getElementById(sliderId);
     const valueDisplay = document.getElementById(valueId);
@@ -150,12 +166,14 @@ const Simulations = (() => {
 
     slider.addEventListener('input', update);
     update();
+    initialized[containerId] = true;
   }
 
   /* ----------------------------------------------------------
    * 4. Thresholding Simulation
    * ---------------------------------------------------------- */
   function initThreshold(containerId, sliderId, valueId) {
+    if (initialized[containerId]) return;
     const container = document.getElementById(containerId);
     const slider = document.getElementById(sliderId);
     const valueDisplay = document.getElementById(valueId);
@@ -173,12 +191,14 @@ const Simulations = (() => {
 
     slider.addEventListener('input', update);
     update();
+    initialized[containerId] = true;
   }
 
   /* ----------------------------------------------------------
    * 5. Contrast Stretching Simulation
    * ---------------------------------------------------------- */
   function initContrast(containerId, r1Id, s1Id, r2Id, s2Id, valuesId) {
+    if (initialized[containerId]) return;
     const container = document.getElementById(containerId);
     const r1Slider = document.getElementById(r1Id);
     const s1Slider = document.getElementById(s1Id);
@@ -207,12 +227,14 @@ const Simulations = (() => {
       if (s) s.addEventListener('input', update);
     });
     update();
+    initialized[containerId] = true;
   }
 
   /* ----------------------------------------------------------
    * 6. Bit-plane Slicing Simulation
    * ---------------------------------------------------------- */
   function initBitPlane(containerId, buttonsContainerId) {
+    if (initialized[containerId]) return;
     const container = document.getElementById(containerId);
     const btnsContainer = document.getElementById(buttonsContainerId);
     if (!container || !btnsContainer) return;
@@ -246,7 +268,6 @@ const Simulations = (() => {
     function update() {
       const planes = Array.from(selectedPlanes);
       if (planes.length === 0) {
-        // Clear output
         procCtx.clearRect(0, 0, SIM_W, SIM_H);
         return;
       }
@@ -255,6 +276,7 @@ const Simulations = (() => {
     }
 
     update();
+    initialized[containerId] = true;
   }
 
   // Public API

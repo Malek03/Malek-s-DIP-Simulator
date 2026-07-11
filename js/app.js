@@ -102,14 +102,14 @@ const App = (() => {
 
     currentRoute = view;
 
-    // Trigger specific initializations based on route
+    // Trigger specific initializations AFTER section is visible
+    // Canvas rendering fails inside display:none elements, so we delay
     if (view.startsWith('point-processing/')) {
-      initConceptSimulation(view.split('/')[1]);
+      setTimeout(() => {
+        initConceptSimulation(view.split('/')[1]);
+      }, 100);
     } else if (view === 'playground' && window.Playground) {
-      // Ensure playground is initialized and layouts are refreshed if needed
-      if (!Playground.isInitialized) {
-        Playground.init();
-      }
+      Playground.init();
     }
   }
 
@@ -136,25 +136,25 @@ const App = (() => {
   function initConceptSimulation(concept) {
     if (!window.Simulations) return;
     
-    // Call the respective simulation init if it hasn't been done
+    // Call the respective simulation init with the correct DOM element IDs
     switch(concept) {
       case 'negatives':
-        Simulations.initNegative();
+        Simulations.initNegative('sim-negative-canvas');
         break;
       case 'log':
-        Simulations.initLog();
+        Simulations.initLog('sim-log-canvas', 'sim-log-slider', 'sim-log-value');
         break;
       case 'gamma':
-        Simulations.initGamma();
+        Simulations.initGamma('sim-gamma-canvas', 'sim-gamma-slider', 'sim-gamma-value');
         break;
       case 'threshold':
-        Simulations.initThreshold();
+        Simulations.initThreshold('sim-threshold-canvas', 'sim-threshold-slider', 'sim-threshold-value');
         break;
       case 'contrast':
-        Simulations.initContrast();
+        Simulations.initContrast('sim-contrast-canvas', 'sim-contrast-r1', 'sim-contrast-s1', 'sim-contrast-r2', 'sim-contrast-s2', 'sim-contrast-values');
         break;
       case 'bitplane':
-        Simulations.initBitplane();
+        Simulations.initBitPlane('sim-bitplane-canvas', 'sim-bitplane-btns');
         break;
     }
   }

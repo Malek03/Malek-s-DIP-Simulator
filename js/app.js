@@ -11,7 +11,6 @@ const App = (() => {
     'home': 'section-home',
     'point-processing': 'section-point-processing',
     'playground': 'section-playground',
-    'coming-soon': 'section-coming-soon',
     // Concept details
     'point-processing/negatives': 'section-concept-negatives',
     'point-processing/log': 'section-concept-log',
@@ -109,7 +108,7 @@ const App = (() => {
         initConceptSimulation(view.split('/')[1]);
       }, 100);
     } else if (view === 'playground' && typeof Playground !== 'undefined') {
-      Playground.init();
+      setTimeout(() => Playground.init(), 100);
     }
   }
 

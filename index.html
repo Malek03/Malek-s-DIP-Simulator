@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vision Studio — معالجة الصور الرقمية</title>
+  <meta name="description" content="منصة أكاديمية تفاعلية لتعليم معالجة الصور الرقمية - محاكاة تفاعلية، توليد كود بايثون، ومعالجة مباشرة.">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            'tajawal': ['Tajawal', 'sans-serif'],
+          },
+        },
+      },
+    };
+  </script>
+
+  <!-- Google Fonts: Tajawal + JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/custom.css">
+</head>
+
+<body class="font-tajawal bg-slate-50 dark:bg-gray-900 text-slate-800 dark:text-slate-100 min-h-screen">
+
+  <!-- ============================================================
+       NAVIGATION BAR
+       ============================================================ -->
+  <nav class="fixed top-0 inset-x-0 z-50 nav-blur bg-white/80 dark:bg-gray-900/80 border-b border-slate-200 dark:border-gray-700/50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+
+        <!-- Logo -->
+        <a href="#home" class="flex items-center gap-3 group" data-route="home">
+          <div class="w-9 h-9 rounded-lg bg-indigo-600 dark:bg-indigo-500 flex items-center justify-center shadow-md group-hover:shadow-indigo-500/25 transition-shadow">
+            <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="3" width="7" height="7" rx="1"/>
+              <rect x="14" y="3" width="7" height="7" rx="1"/>
+              <rect x="3" y="14" width="7" height="7" rx="1"/>
+              <rect x="14" y="14" width="7" height="7" rx="1"/>
+            </svg>
+          </div>
+          <span class="text-lg font-bold text-slate-800 dark:text-white">Vision Studio</span>
+        </a>
+
+        <!-- Desktop Nav Links -->
+        <div class="hidden md:flex items-center gap-1">
+          <a href="#home" data-route="home" class="nav-link px-3 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 rounded-lg hover:bg-slate-100 dark:hover:bg-gray-800 transition-colors">الرئيسية</a>
+          <a href="#point-processing" data-route="point-processing" class="nav-link px-3 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 rounded-lg hover:bg-slate-100 dark:hover:bg-gray-800 transition-colors">معالجة النقاط</a>
+          <a href="#playground" data-route="playground" class="nav-link px-3 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 rounded-lg hover:bg-slate-100 dark:hover:bg-gray-800 transition-colors">المختبر</a>
+          <a href="#coming-soon" data-route="coming-soon" class="nav-link px-3 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 rounded-lg hover:bg-slate-100 dark:hover:bg-gray-800 transition-colors">الوحدات القادمة</a>
+        </div>
+
+        <!-- Theme Toggle + Mobile Menu -->
+        <div class="flex items-center gap-2">
+          <button id="theme-toggle" class="p-2 rounded-lg text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-gray-800 transition-colors" aria-label="تبديل السمة">
+            <svg id="icon-sun" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+            </svg>
+            <svg id="icon-moon" class="w-5 h-5" style="display:none" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+            </svg>
+          </button>
+
+          <!-- Mobile menu button -->
+          <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-gray-800 transition-colors" aria-label="القائمة">
+            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile Menu (hidden by default) -->
+      <div id="mobile-menu" class="hidden md:hidden pb-4 border-t border-slate-200 dark:border-gray-700 mt-2 pt-3">
+        <div class="flex flex-col gap-1">
+          <a href="#home" data-route="home" class="nav-link px-3 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 rounded-lg hover:bg-slate-100 dark:hover:bg-gray-800">الرئيسية</a>
+          <a href="#point-processing" data-route="point-processing" class="nav-link px-3 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 rounded-lg hover:bg-slate-100 dark:hover:bg-gray-800">معالجة النقاط</a>
+          <a href="#playground" data-route="playground" class="nav-link px-3 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 rounded-lg hover:bg-slate-100 dark:hover:bg-gray-800">المختبر</a>
+          <a href="#coming-soon" data-route="coming-soon" class="nav-link px-3 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 rounded-lg hover:bg-slate-100 dark:hover:bg-gray-800">الوحدات القادمة</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Spacer for fixed nav -->
+  <div class="h-16"></div>
+
+  <!-- ============================================================
+       SECTION 1: HOME PAGE
+       ============================================================ -->
+  <div id="section-home" class="section-view">
+
+    <!-- Hero Section -->
+    <section class="relative overflow-hidden py-20 sm:py-28 lg:py-36">
+      <!-- Animated pixel grid background -->
+      <div class="hero-grid"></div>
+      <!-- Geometric floating shapes -->
+      <div class="hero-shape"></div>
+      <div class="hero-shape"></div>
+      <div class="hero-shape"></div>
+      <div class="hero-shape"></div>
+
+      <div class="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 text-center">
+        <!-- Badge -->
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 mb-6 rounded-full bg-indigo-50 dark:bg-indigo-900/30 border border-indigo-200 dark:border-indigo-700/50 text-indigo-700 dark:text-indigo-300 text-sm font-medium">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+          </svg>
+          منصة تعليمية تفاعلية
+        </div>
+
+        <!-- Headline -->
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight mb-6">
+          <span class="text-slate-900 dark:text-white">استكشف عالم</span>
+          <br>
+          <span class="bg-gradient-to-l from-indigo-600 to-violet-600 dark:from-indigo-400 dark:to-violet-400 bg-clip-text text-transparent">معالجة الصور الرقمية</span>
+        </h1>
+
+        <!-- Subtitle -->
+        <p class="text-lg sm:text-xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto mb-10 leading-relaxed">
+          تعلّم أساسيات تحويل البكسلات ومعالجة الصور عبر محاكاة تفاعلية حيّة، مع توليد تلقائي لأكواد
+          <span class="font-mono text-indigo-600 dark:text-indigo-400">Python</span>
+          باستخدام
+          <span class="font-mono text-indigo-600 dark:text-indigo-400">OpenCV</span>
+          و
+          <span class="font-mono text-indigo-600 dark:text-indigo-400">NumPy</span>.
+        </p>
+
+        <!-- CTA Buttons -->
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <a href="#playground" data-route="playground" class="inline-flex items-center gap-2 px-8 py-3.5 bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-600 text-white font-bold rounded-xl shadow-lg shadow-indigo-500/25 hover:shadow-indigo-500/40 transition-all text-base">
+            ابدأ معالجة الصور
+            <svg class="w-5 h-5 rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+            </svg>
+          </a>
+          <a href="#point-processing" data-route="point-processing" class="inline-flex items-center gap-2 px-8 py-3.5 bg-white dark:bg-gray-800 text-slate-700 dark:text-slate-200 font-bold rounded-xl border border-slate-200 dark:border-gray-700 hover:border-indigo-300 dark:hover:border-indigo-600 shadow-sm hover:shadow-md transition-all text-base">
+            تصفح الوحدات
+            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Course Introduction -->
+    <section class="py-16 px-4 sm:px-6">
+      <div class="max-w-4xl mx-auto">
+        <div class="bg-white dark:bg-gray-800 rounded-2xl p-8 sm:p-10 border border-slate-200 dark:border-gray-700 shadow-sm">
+          <div class="flex items-start gap-4">
+            <div class="w-12 h-12 rounded-xl bg-violet-100 dark:bg-violet-900/30 flex items-center justify-center flex-shrink-0">
+              <svg class="w-6 h-6 text-violet-600 dark:text-violet-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+              </svg>
+            </div>
+            <div>
+              <h2 class="text-2xl font-bold text-slate-900 dark:text-white mb-3">حول مقرر معالجة الصور الرقمية</h2>
+              <p class="text-slate-600 dark:text-slate-400 leading-relaxed mb-4">
+                معالجة الصور الرقمية (Digital Image Processing) هي أحد أعمدة الرؤية الحاسوبية والذكاء الاصطناعي. يتناول هذا المقرر الأسس الرياضية والخوارزمية لتحويل الصور على مستوى البكسل، بدءاً من التحويلات النقطية (Point Processing) وصولاً إلى الترشيح المكاني والمعالجة المورفولوجية.
+              </p>
+              <p class="text-slate-600 dark:text-slate-400 leading-relaxed">
+                تتيح لك هذه المنصة التعلم عبر <strong class="text-slate-800 dark:text-slate-200">التفاعل المباشر</strong> مع كل خوارزمية: شاهد المعادلة الرياضية، جرّب المعاملات بنفسك على Canvas تفاعلي، واحصل على كود Python/OpenCV جاهز للتطبيق.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Key Features Grid -->
+    <section class="py-16 px-4 sm:px-6">
+      <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-slate-900 dark:text-white mb-3">ماذا تقدم المنصة؟</h2>
+          <p class="text-slate-500 dark:text-slate-400 text-lg">أدوات تعليمية تفاعلية لفهم معالجة الصور بعمق</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <!-- Feature 1: Interactive Simulations -->
+          <div class="concept-card bg-white dark:bg-gray-800 rounded-2xl p-7 border border-slate-200 dark:border-gray-700 shadow-sm">
+            <div class="w-12 h-12 rounded-xl bg-indigo-100 dark:bg-indigo-900/30 flex items-center justify-center mb-5">
+              <svg class="w-6 h-6 text-indigo-600 dark:text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/>
+                <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+            </div>
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">محاكاة تفاعلية</h3>
+            <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">
+              جرّب كل تحويل على Canvas مباشر. حرّك المنزلقات وشاهد التأثير الفوري على البكسلات مع فهم المعادلة الرياضية.
+            </p>
+          </div>
+
+          <!-- Feature 2: Python Code Generation -->
+          <div class="concept-card bg-white dark:bg-gray-800 rounded-2xl p-7 border border-slate-200 dark:border-gray-700 shadow-sm">
+            <div class="w-12 h-12 rounded-xl bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center mb-5">
+              <svg class="w-6 h-6 text-emerald-600 dark:text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
+              </svg>
+            </div>
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">توليد كود بايثون</h3>
+            <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">
+              احصل على كود Python/OpenCV/NumPy جاهز يتحدث تلقائياً مع كل تعديل. انسخه مباشرة إلى Jupyter Notebook أو أي IDE.
+            </p>
+          </div>
+
+          <!-- Feature 3: Live Processing -->
+          <div class="concept-card bg-white dark:bg-gray-800 rounded-2xl p-7 border border-slate-200 dark:border-gray-700 shadow-sm">
+            <div class="w-12 h-12 rounded-xl bg-amber-100 dark:bg-amber-900/30 flex items-center justify-center mb-5">
+              <svg class="w-6 h-6 text-amber-600 dark:text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+              </svg>
+            </div>
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">معالجة مباشرة</h3>
+            <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">
+              ارفع صورتك الخاصة وطبّق عليها جميع التحويلات في الوقت الحقيقي. شاهد النتيجة والهيستوغرام فوراً.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-10 px-4 border-t border-slate-200 dark:border-gray-700/50 bg-white/50 dark:bg-gray-800/50">
+      <div class="max-w-6xl mx-auto text-center">
+        <div class="flex items-center justify-center gap-3 mb-4">
+          <div class="w-8 h-8 rounded-lg bg-indigo-600 dark:bg-indigo-500 flex items-center justify-center">
+            <svg class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="3" width="7" height="7" rx="1"/>
+              <rect x="14" y="3" width="7" height="7" rx="1"/>
+              <rect x="3" y="14" width="7" height="7" rx="1"/>
+              <rect x="14" y="14" width="7" height="7" rx="1"/>
+            </svg>
+          </div>
+          <span class="font-bold text-slate-800 dark:text-white">Vision Studio</span>
+        </div>
+        <p class="text-sm text-slate-500 dark:text-slate-400 mb-2">
+          Developed and Curated by <strong class="text-slate-700 dark:text-slate-300">Eng. Malek A. Almosanif</strong> — AI & Computer Vision Engineer
+        </p>
+        <p class="text-xs text-slate-400 dark:text-slate-500">
+          © 2026 Vision Studio. جميع الحقوق محفوظة.
+        </p>
+      </div>
+    </footer>
+  </div>
+
+  <!-- ============================================================
+       SECTION 2: POINT PROCESSING MODULE — Grid
+       ============================================================ -->
+  <div id="section-point-processing" class="section-view">
+    <section class="py-12 px-4 sm:px-6">
+      <div class="max-w-6xl mx-auto">
+        <!-- Header -->
+        <div class="text-center mb-12">
+          <div class="inline-flex items-center gap-2 px-3 py-1 mb-4 rounded-full bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 text-xs font-semibold">
+            Point Processing
+          </div>
+          <h1 class="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mb-3">التحسين على مستوى البكسل</h1>
+          <p class="text-slate-500 dark:text-slate-400 text-lg max-w-2xl mx-auto">
+            ستة تحويلات أساسية تعمل على كل بكسل بشكل مستقل — الأساس الذي تُبنى عليه كل تقنيات معالجة الصور.
+          </p>
+        </div>
+
+        <!-- 6 Concept Cards Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+          <!-- 1. Negatives -->
+          <a href="#point-processing/negatives" data-route="point-processing/negatives" class="concept-card bg-white dark:bg-gray-800 rounded-2xl p-6 border border-slate-200 dark:border-gray-700 shadow-sm cursor-pointer block">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-10 h-10 rounded-lg bg-rose-100 dark:bg-rose-900/30 flex items-center justify-center">
+                <span class="text-lg font-bold text-rose-600 dark:text-rose-400">¬</span>
+              </div>
+              <div>
+                <h3 class="font-bold text-slate-900 dark:text-white">الصور السلبية</h3>
+                <p class="text-xs text-slate-400">Image Negatives</p>
+              </div>
+            </div>
+            <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed mb-3">عكس قيم البكسلات — تحويل الأبيض إلى أسود والعكس. يُستخدم في تحليل الصور الطبية.</p>
+            <div class="formula-box text-sm bg-slate-50 dark:bg-gray-700/50 rounded-lg p-2">
+              <span class="var-math">s</span> = (<span class="var-math">L</span>−1) − <span class="var-math">r</span>
+            </div>
+          </a>
+
+          <!-- 2. Log -->
+          <a href="#point-processing/log" data-route="point-processing/log" class="concept-card bg-white dark:bg-gray-800 rounded-2xl p-6 border border-slate-200 dark:border-gray-700 shadow-sm cursor-pointer block">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-10 h-10 rounded-lg bg-sky-100 dark:bg-sky-900/30 flex items-center justify-center">
+                <span class="text-lg font-bold text-sky-600 dark:text-sky-400">㏒</span>
+              </div>
+              <div>
+                <h3 class="font-bold text-slate-900 dark:text-white">التحويل اللوغاريتمي</h3>
+                <p class="text-xs text-slate-400">Log Transformations</p>
+              </div>
+            </div>
+            <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed mb-3">توسيع النطاق الديناميكي للقيم المظلمة مع ضغط القيم المضيئة. مثالي لصور الطيف الترددي.</p>
+            <div class="formula-box text-sm bg-slate-50 dark:bg-gray-700/50 rounded-lg p-2">
+              <span class="var-math">s</span> = <span class="var-math">c</span> · log(1 + <span class="var-math">r</span>)
+            </div>
+          </a>
+
+          <!-- 3. Gamma -->
+          <a href="#point-processing/gamma" data-route="point-processing/gamma" class="concept-card bg-white dark:bg-gray-800 rounded-2xl p-6 border border-slate-200 dark:border-gray-700 shadow-sm cursor-pointer block">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-10 h-10 rounded-lg bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center">
+                <span class="text-lg font-bold text-purple-600 dark:text-purple-400">γ</span>
+              </div>
+              <div>
+                <h3 class="font-bold text-slate-900 dark:text-white">تصحيح غاما</h3>
+                <p class="text-xs text-slate-400">Gamma Correction</p>
+              </div>
+            </div>
+            <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed mb-3">التحكم الدقيق بإضاءة الصورة عبر معامل القوة. يُستخدم في شاشات العرض وأنظمة التصوير.</p>
+            <div class="formula-box text-sm bg-slate-50 dark:bg-gray-700/50 rounded-lg p-2">
+              <span class="var-math">s</span> = <span class="var-math">c</span> · <span class="var-math">r</span><sup>γ</sup>
+            </div>
+          </a>
+
+          <!-- 4. Threshold -->
+          <a href="#point-processing/threshold" data-route="point-processing/threshold" class="concept-card bg-white dark:bg-gray-800 rounded-2xl p-6 border border-slate-200 dark:border-gray-700 shadow-sm cursor-pointer block">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-10 h-10 rounded-lg bg-amber-100 dark:bg-amber-900/30 flex items-center justify-center">
+                <span class="text-lg font-bold text-amber-600 dark:text-amber-400">T</span>
+              </div>
+              <div>
+                <h3 class="font-bold text-slate-900 dark:text-white">العتبة</h3>
+                <p class="text-xs text-slate-400">Thresholding</p>
+              </div>
+            </div>
+            <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed mb-3">تحويل الصورة إلى ثنائية (أبيض وأسود) بناءً على قيمة حدّية. أساس تجزئة الصور.</p>
+            <div class="formula-box text-sm bg-slate-50 dark:bg-gray-700/50 rounded-lg p-2">
+              <span class="var-math">s</span> = 0 if <span class="var-math">r</span> &lt; <span class="var-math">T</span>, else 255
+            </div>
+          </a>
+
+          <!-- 5. Contrast Stretching -->
+          <a href="#point-processing/contrast" data-route="point-processing/contrast" class="concept-card bg-white dark:bg-gray-800 rounded-2xl p-6 border border-slate-200 dark:border-gray-700 shadow-sm cursor-pointer block">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-10 h-10 rounded-lg bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center">
+                <span class="text-lg font-bold text-emerald-600 dark:text-emerald-400">⇔</span>
+              </div>
+              <div>
+                <h3 class="font-bold text-slate-900 dark:text-white">تمدد التباين</h3>
+                <p class="text-xs text-slate-400">Contrast Stretching</p>
+              </div>
+            </div>
+            <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed mb-3">إعادة توزيع مستويات الرمادي عبر دالة خطية متعددة القطع لزيادة التباين.</p>
+            <div class="formula-box text-sm bg-slate-50 dark:bg-gray-700/50 rounded-lg p-2">
+              Piecewise Linear: (<span class="var-math">r₁</span>,<span class="var-math">s₁</span>) → (<span class="var-math">r₂</span>,<span class="var-math">s₂</span>)
+            </div>
+          </a>
+
+          <!-- 6. Bit-plane -->
+          <a href="#point-processing/bitplane" data-route="point-processing/bitplane" class="concept-card bg-white dark:bg-gray-800 rounded-2xl p-6 border border-slate-200 dark:border-gray-700 shadow-sm cursor-pointer block">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-10 h-10 rounded-lg bg-teal-100 dark:bg-teal-900/30 flex items-center justify-center">
+                <span class="text-lg font-bold text-teal-600 dark:text-teal-400">01</span>
+              </div>
+              <div>
+                <h3 class="font-bold text-slate-900 dark:text-white">تقطيع المستوى البتّي</h3>
+                <p class="text-xs text-slate-400">Bit-plane Slicing</p>
+              </div>
+            </div>
+            <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed mb-3">تحليل الصورة إلى 8 مستويات ثنائية. المستويات العليا تحمل التفاصيل الأهم.</p>
+            <div class="formula-box text-sm bg-slate-50 dark:bg-gray-700/50 rounded-lg p-2">
+              bit<sub>k</sub> = (<span class="var-math">pixel</span> >> <span class="var-math">k</span>) & 1
+            </div>
+          </a>
+
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ============================================================
+       CONCEPT DETAIL VIEWS (6 concepts)
+       ============================================================ -->
+
+  <!-- ---- Concept: Image Negatives ---- -->
+  <div id="section-concept-negatives" class="section-view">
+    <section class="py-12 px-4 sm:px-6">
+      <div class="max-w-4xl mx-auto">
+        <a href="#point-processing" data-route="point-processing" class="inline-flex items-center gap-2 text-sm text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300 mb-8 font-medium">
+          <svg class="w-4 h-4 rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+          العودة إلى معالجة النقاط
+        </a>
+        <div class="flex items-center gap-3 mb-6">
+          <div class="w-12 h-12 rounded-xl bg-rose-100 dark:bg-rose-900/30 flex items-center justify-center">
+            <span class="text-2xl font-bold text-rose-600 dark:text-rose-400">¬</span>
+          </div>
+          <div>
+            <h1 class="text-3xl font-bold text-slate-900 dark:text-white">الصور السلبية</h1>
+            <p class="text-slate-400">Image Negatives</p>
+          </div>
+        </div>
+
+        <!-- Formula -->
+        <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-slate-200 dark:border-gray-700 mb-8">
+          <h2 class="text-lg font-bold text-slate-800 dark:text-slate-200 mb-3">المعادلة الرياضية</h2>
+          <div class="formula-box text-xl bg-slate-50 dark:bg-gray-700/50 rounded-xl p-4 mb-4">
+            <span class="var-math">s</span> = (<span class="var-math">L</span> − 1) − <span class="var-math">r</span>
+          </div>
+          <p class="text-sm text-slate-600 dark:text-slate-400">
+            حيث <strong>r</strong> هي قيمة البكسل الأصلية، <strong>L</strong> عدد مستويات الرمادي (عادةً 256)، و <strong>s</strong> هي القيمة الناتجة.
+            بالنسبة لصورة 8-bit: <code class="text-xs bg-slate-100 dark:bg-gray-700 px-1.5 py-0.5 rounded">s = 255 - r</code>
+          </p>
+        </div>
+
+        <!-- Use Cases -->
+        <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-slate-200 dark:border-gray-700 mb-8">
+          <h2 class="text-lg font-bold text-slate-800 dark:text-slate-200 mb-3">الاستخدامات العملية</h2>
+          <ul class="space-y-2 text-sm text-slate-600 dark:text-slate-400">
+            <li class="flex items-start gap-2">
+              <span class="text-indigo-500 mt-0.5">•</span>
+              تحليل الصور الطبية (أشعة X) — إبراز التفاصيل الفاتحة المخفية في المناطق المظلمة
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-indigo-500 mt-0.5">•</span>
+              معالجة الصور الفوتوغرافية — تحويل الأفلام السالبة إلى صور إيجابية
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-indigo-500 mt-0.5">•</span>
+              خطوة أولية في خوارزميات أكثر تعقيداً كالكشف عن الحواف
+            </li>
+          </ul>
+        </div>
+
+        <!-- Interactive Simulation -->
+        <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-slate-200 dark:border-gray-700">
+          <h2 class="text-lg font-bold text-slate-800 dark:text-slate-200 mb-4">محاكاة تفاعلية</h2>
+          <div id="sim-negative-canvas" class="mb-2"></div>
+          <p class="text-xs text-center text-slate-400 mt-2">التحويل يُطبَّق تلقائياً — لا يحتاج معاملات</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ---- Concept: Log Transformation ---- -->
+  <div id="section-concept-log" class="section-view">
+    <section class="py-12 px-4 sm:px-6">
+      <div class="max-w-4xl mx-auto">
+        <a href="#point-processing" data-route="point-processing" class="inline-flex items-center gap-2 text-sm text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300 mb-8 font-medium">
+          <svg class="w-4 h-4 rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+          العودة إلى معالجة النقاط
+        </a>
+        <div class="flex items-center gap-3 mb-6">
+          <div class="w-12 h-12 rounded-xl bg-sky-100 dark:bg-sky-900/30 flex items-center justify-center">
+            <span class="text-2xl font-bold text-sky-600 dark:text-sky-400">㏒</span>
+          </div>
+          <div>
+            <h1 class="text-3xl font-bold text-slate-900 dark:text-white">التحويل اللوغاريتمي</h1>
+            <p class="text-slate-400">Log Transformations</p>
+          </div>
+        </div>
+
+        <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-slate-200 dark:border-gray-700 mb-8">
+          <h2 class="text-lg font-bold text-slate-800 dark:text-slate-200 mb-3">المعادلة الرياضية</h2>
+          <div class="formula-box text-xl bg-slate-50 dark:bg-gray-700/50 rounded-xl p-4 mb-4">
+            <span class="var-math">s</span> = <span class="var-math">c</span> · log(1 + <span class="var-math">r</span>)
+          </div>
+          <p class="text-sm text-slate-600 dark:text-slate-400">
+            الثابت <strong>c</strong> يُستخدم لتقييس الخرج. عادةً <code class="text-xs bg-slate-100 dark:bg-gray-700 px-1.5 py-0.5 rounded">c = 255/log(256) ≈ 46</code>
+            لضمان تناسب القيم ضمن المدى [0, 255].
+          </p>
+        </div>
+
+        <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-slate-200 dark:border-gray-700 mb-8">
+          <h2 class="text-lg font-bold text-slate-800 dark:text-slate-200 mb-3">الاستخدامات العملية</h2>
+          <ul class="space-y-2 text-sm text-slate-600 dark:text-slate-400">
+            <li class="flex items-start gap-2"><span class="text-indigo-500 mt-0.5">•</span>عرض طيف فورييه (Fourier Spectrum) — النطاق الديناميكي الواسع يحتاج ضغطاً لوغاريتمياً</li>
+            <li class="flex items-start gap-2"><span class="text-indigo-500 mt-0.5">•</span>تحسين الصور ذات الإضاءة المنخفضة — إظهار التفاصيل في المناطق المظلمة</li>
+            <li class="flex items-start gap-2"><span class="text-indigo-500 mt-0.5">•</span>ضغط النطاق الديناميكي في الصور عالية التباين (HDR)</li>
+          </ul>
+        </div>
+
+        <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-slate-200 dark:border-gray-700">
+          <h2 class="text-lg font-bold text-slate-800 dark:text-slate-200 mb-4">محاكاة تفاعلية</h2>
+          <div class="mb-4">
+            <div class="flex items-center justify-between mb-2">
+              <label class="text-sm font-medium text-slate-700 dark:text-slate-300">الثابت c</label>
+              <span id="sim-log-value" class="text-sm font-mono text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-900/30 px-2 py-0.5 rounded">46.0</span>
+            </div>
+            <input type="range" id="sim-log-slider" min="1" max="100" step="0.5" value="46" class="w-full">
+          </div>
+          <div id="sim-log-canvas"></div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ---- Concept: Gamma Correction ---- -->
+  <div id="section-concept-gamma" class="section-view">
+    <section class="py-12 px-4 sm:px-6">
+      <div class="max-w-4xl mx-auto">
+        <a href="#point-processing" data-route="point-processing" class="inline-flex items-center gap-2 text-sm text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300 mb-8 font-medium">
+          <svg class="w-4 h-4 rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+          العودة إلى معالجة النقاط
+        </a>
+        <div class="flex items-center gap-3 mb-6">
+          <div class="w-12 h-12 rounded-xl bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center">
+            <span class="text-2xl font-bold text-purple-600 dark:text-purple-400">γ</span>
+          </div>
+          <div>
+            <h1 class="text-3xl font-bold text-slate-900 dark:text-white">تصحيح غاما</h1>
+            <p class="text-slate-400">Power-Law / Gamma Correction</p>
+          </div>
+        </div>
+
+        <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-slate-200 dark:border-gray-700 mb-8">
+          <h2 class="text-lg font-bold text-slate-800 dark:text-slate-200 mb-3">المعادلة الرياضية</h2>
+          <div class="formula-box text-xl bg-slate-50 dark:bg-gray-700/50 rounded-xl p-4 mb-4">
+            <span class="var-math">s</span> = <span class="var-math">c</span> · <span class="var-math">r</span><sup>γ</sup>
+          </div>
+          <p class="text-sm text-slate-600 dark:text-slate-400">
+            عندما <strong>γ &lt; 1</strong>: يتم تفتيح الصورة (توسيع القيم الداكنة). عندما <strong>γ &gt; 1</strong>: يتم تعتيم الصورة (ضغط القيم الداكنة).
+            عند <strong>γ = 1</strong>: لا تغيير (تحويل الهوية).
+          </p>
+        </div>
+
+        <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-slate-200 dark:border-gray-700 mb-8">
+          <h2 class="text-lg font-bold text-slate-800 dark:text-slate-200 mb-3">الاستخدامات العملية</h2>
+          <ul class="space-y-2 text-sm text-slate-600 dark:text-slate-400">
+            <li class="flex items-start gap-2"><span class="text-indigo-500 mt-0.5">•</span>تصحيح الشاشات (CRT/LCD) — كل شاشة لها قيمة γ خاصة بها</li>
+            <li class="flex items-start gap-2"><span class="text-indigo-500 mt-0.5">•</span>تحسين التباين في التصوير الفوتوغرافي والسينمائي</li>
+            <li class="flex items-start gap-2"><span class="text-indigo-500 mt-0.5">•</span>معايرة ألوان الطابعات والماسحات الضوئية</li>
+          </ul>
+        </div>
+
+        <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-slate-200 dark:border-gray-700">
+          <h2 class="text-lg font-bold text-slate-800 dark:text-slate-200 mb-4">محاكاة تفاعلية</h2>
+          <div class="mb-4">
+            <div class="flex items-center justify-between mb-2">
+              <label class="text-sm font-medium text-slate-700 dark:text-slate-300">قيمة غاما (γ)</label>
+              <span id="sim-gamma-value" class="text-sm font-mono text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-900/30 px-2 py-0.5 rounded">1.00</span>
+            </div>
+            <input type="range" id="sim-gamma-slider" min="0.04" max="5" step="0.01" value="1" class="w-full">
+          </div>
+          <div id="sim-gamma-canvas"></div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ---- Concept: Thresholding ---- -->
+  <div id="section-concept-threshold" class="section-view">
+    <section class="py-12 px-4 sm:px-6">
+      <div class="max-w-4xl mx-auto">
+        <a href="#point-processing" data-route="point-processing" class="inline-flex items-center gap-2 text-sm text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300 mb-8 font-medium">
+          <svg class="w-4 h-4 rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+          العودة إلى معالجة النقاط
+        </a>
+        <div class="flex items-center gap-3 mb-6">
+          <div class="w-12 h-12 rounded-xl bg-amber-100 dark:bg-amber-900/30 flex items-center justify-center">
+            <span class="text-2xl font-bold text-amber-600 dark:text-amber-400">T</span>
+          </div>
+          <div>
+            <h1 class="text-3xl font-bold text-slate-900 dark:text-white">العتبة</h1>
+            <p class="text-slate-400">Thresholding</p>
+          </div>
+        </div>
+
+        <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-slate-200 dark:border-gray-700 mb-8">
+          <h2 class="text-lg font-bold text-slate-800 dark:text-slate-200 mb-3">المعادلة الرياضية</h2>
+          <div class="formula-box text-xl bg-slate-50 dark:bg-gray-700/50 rounded-xl p-4 mb-4">
+            <span class="var-math">s</span> = 
+            <span>{ 0 &nbsp;&nbsp;&nbsp;if&nbsp; <span class="var-math">r</span> &lt; <span class="var-math">T</span> }</span>
+            <br>
+            <span>{ 255 &nbsp;if&nbsp; <span class="var-math">r</span> ≥ <span class="var-math">T</span> }</span>
+          </div>
+          <p class="text-sm text-slate-600 dark:text-slate-400">
+            قيمة العتبة <strong>T</strong> تحدد نقطة الفصل بين الأسود والأبيض. اختيار T المناسب حاسم لجودة التجزئة.
+          </p>
+        </div>
+
+        <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-slate-200 dark:border-gray-700 mb-8">
+          <h2 class="text-lg font-bold text-slate-800 dark:text-slate-200 mb-3">الاستخدامات العملية</h2>
+          <ul class="space-y-2 text-sm text-slate-600 dark:text-slate-400">
+            <li class="flex items-start gap-2"><span class="text-indigo-500 mt-0.5">•</span>التعرف على الحروف (OCR) — فصل النص عن الخلفية</li>
+            <li class="flex items-start gap-2"><span class="text-indigo-500 mt-0.5">•</span>تجزئة الصور (Image Segmentation) — فصل الكائنات عن المحيط</li>
+            <li class="flex items-start gap-2"><span class="text-indigo-500 mt-0.5">•</span>تحليل الوثائق المطبوعة وتحويلها إلى ثنائية للأرشفة</li>
+          </ul>
+        </div>
+
+        <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-slate-200 dark:border-gray-700">
+          <h2 class="text-lg font-bold text-slate-800 dark:text-slate-200 mb-4">محاكاة تفاعلية</h2>
+          <div class="mb-4">
+            <div class="flex items-center justify-between mb-2">
+              <label class="text-sm font-medium text-slate-700 dark:text-slate-300">قيمة العتبة (T)</label>
+              <span id="sim-threshold-value" class="text-sm font-mono text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-900/30 px-2 py-0.5 rounded">128</span>
+            </div>
+            <input type="range" id="sim-threshold-slider" min="0" max="255" step="1" value="128" class="w-full">
+          </div>
+          <div id="sim-threshold-canvas"></div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ---- Concept: Contrast Stretching ---- -->
+  <div id="section-concept-contrast" class="section-view">
+    <section class="py-12 px-4 sm:px-6">
+      <div class="max-w-4xl mx-auto">
+        <a href="#point-processing" data-route="point-processing" class="inline-flex items-center gap-2 text-sm text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300 mb-8 font-medium">
+          <svg class="w-4 h-4 rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+          العودة إلى معالجة النقاط
+        </a>
+        <div class="flex items-center gap-3 mb-6">
+          <div class="w-12 h-12 rounded-xl bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center">
+            <span class="text-2xl font-bold text-emerald-600 dark:text-emerald-400">⇔</span>
+          </div>
+          <div>
+            <h1 class="text-3xl font-bold text-slate-900 dark:text-white">تمدد التباين</h1>
+            <p class="text-slate-400">Contrast Stretching</p>
+          </div>
+        </div>
+
+        <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-slate-200 dark:border-gray-700 mb-8">
+          <h2 class="text-lg font-bold text-slate-800 dark:text-slate-200 mb-3">المعادلة الرياضية</h2>
+          <div class="formula-box text-lg bg-slate-50 dark:bg-gray-700/50 rounded-xl p-4 mb-4">
+            تحويل خطي متعدد القطع بنقطتَي تحكم:<br>
+            (0, 0) → (<span class="var-math">r₁</span>, <span class="var-math">s₁</span>) → (<span class="var-math">r₂</span>, <span class="var-math">s₂</span>) → (255, 255)
+          </div>
+          <p class="text-sm text-slate-600 dark:text-slate-400">
+            النقطتان (<strong>r₁, s₁</strong>) و (<strong>r₂, s₂</strong>) تحددان شكل دالة التحويل. عندما s₁=0 و s₂=255 يكون التحويل أقرب إلى العتبة المزدوجة.
+          </p>
+        </div>
+
+        <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-slate-200 dark:border-gray-700 mb-8">
+          <h2 class="text-lg font-bold text-slate-800 dark:text-slate-200 mb-3">الاستخدامات العملية</h2>
+          <ul class="space-y-2 text-sm text-slate-600 dark:text-slate-400">
+            <li class="flex items-start gap-2"><span class="text-indigo-500 mt-0.5">•</span>تحسين الصور ذات التباين المنخفض (كالصور الضبابية أو الباهتة)</li>
+            <li class="flex items-start gap-2"><span class="text-indigo-500 mt-0.5">•</span>إبراز نطاق محدد من مستويات الرمادي مع ضغط البقية</li>
+            <li class="flex items-start gap-2"><span class="text-indigo-500 mt-0.5">•</span>خطوة تمهيدية لعمليات التجزئة وكشف الحواف</li>
+          </ul>
+        </div>
+
+        <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-slate-200 dark:border-gray-700">
+          <h2 class="text-lg font-bold text-slate-800 dark:text-slate-200 mb-4">محاكاة تفاعلية</h2>
+          <div class="grid grid-cols-2 gap-4 mb-4">
+            <div>
+              <div class="flex items-center justify-between mb-1">
+                <label class="text-xs font-medium text-slate-600 dark:text-slate-400">r₁</label>
+                <span class="text-xs font-mono text-indigo-500">70</span>
+              </div>
+              <input type="range" id="sim-contrast-r1" min="0" max="254" step="1" value="70" class="w-full">
+            </div>
+            <div>
+              <div class="flex items-center justify-between mb-1">
+                <label class="text-xs font-medium text-slate-600 dark:text-slate-400">s₁</label>
+                <span class="text-xs font-mono text-indigo-500">0</span>
+              </div>
+              <input type="range" id="sim-contrast-s1" min="0" max="255" step="1" value="0" class="w-full">
+            </div>
+            <div>
+              <div class="flex items-center justify-between mb-1">
+                <label class="text-xs font-medium text-slate-600 dark:text-slate-400">r₂</label>
+                <span class="text-xs font-mono text-indigo-500">180</span>
+              </div>
+              <input type="range" id="sim-contrast-r2" min="1" max="255" step="1" value="180" class="w-full">
+            </div>
+            <div>
+              <div class="flex items-center justify-between mb-1">
+                <label class="text-xs font-medium text-slate-600 dark:text-slate-400">s₂</label>
+                <span class="text-xs font-mono text-indigo-500">255</span>
+              </div>
+              <input type="range" id="sim-contrast-s2" min="0" max="255" step="1" value="255" class="w-full">
+            </div>
+          </div>
+          <div id="sim-contrast-values" class="text-xs text-center text-slate-500 dark:text-slate-400 font-mono mb-4">(r₁=70, s₁=0) → (r₂=180, s₂=255)</div>
+          <div id="sim-contrast-canvas"></div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ---- Concept: Bit-plane Slicing ---- -->
+  <div id="section-concept-bitplane" class="section-view">
+    <section class="py-12 px-4 sm:px-6">
+      <div class="max-w-4xl mx-auto">
+        <a href="#point-processing" data-route="point-processing" class="inline-flex items-center gap-2 text-sm text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300 mb-8 font-medium">
+          <svg class="w-4 h-4 rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+          العودة إلى معالجة النقاط
+        </a>
+        <div class="flex items-center gap-3 mb-6">
+          <div class="w-12 h-12 rounded-xl bg-teal-100 dark:bg-teal-900/30 flex items-center justify-center">
+            <span class="text-2xl font-bold text-teal-600 dark:text-teal-400">01</span>
+          </div>
+          <div>
+            <h1 class="text-3xl font-bold text-slate-900 dark:text-white">تقطيع المستوى البتّي</h1>
+            <p class="text-slate-400">Bit-plane Slicing</p>
+          </div>
+        </div>
+
+        <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-slate-200 dark:border-gray-700 mb-8">
+          <h2 class="text-lg font-bold text-slate-800 dark:text-slate-200 mb-3">المعادلة الرياضية</h2>
+          <div class="formula-box text-xl bg-slate-50 dark:bg-gray-700/50 rounded-xl p-4 mb-4">
+            bit<sub>k</sub> = (<span class="var-math">pixel</span> >> <span class="var-math">k</span>) & 1
+          </div>
+          <p class="text-sm text-slate-600 dark:text-slate-400">
+            كل بكسل 8-bit يمكن تحليله إلى 8 مستويات ثنائية (bit 0 إلى bit 7).
+            المستوى <strong>bit 7 (MSB)</strong> يحمل أكبر قدر من المعلومات البصرية، بينما <strong>bit 0 (LSB)</strong> يحمل أقل تأثير.
+          </p>
+        </div>
+
+        <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-slate-200 dark:border-gray-700 mb-8">
+          <h2 class="text-lg font-bold text-slate-800 dark:text-slate-200 mb-3">الاستخدامات العملية</h2>
+          <ul class="space-y-2 text-sm text-slate-600 dark:text-slate-400">
+            <li class="flex items-start gap-2"><span class="text-indigo-500 mt-0.5">•</span>ضغط الصور — الاحتفاظ بالمستويات العليا فقط يقلل حجم البيانات بشكل كبير</li>
+            <li class="flex items-start gap-2"><span class="text-indigo-500 mt-0.5">•</span>إخفاء البيانات (Steganography) — تخبئة رسائل في المستوى البتّي الأدنى</li>
+            <li class="flex items-start gap-2"><span class="text-indigo-500 mt-0.5">•</span>تحليل بنية الصورة الداخلية لفهم توزيع المعلومات</li>
+          </ul>
+        </div>
+
+        <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-slate-200 dark:border-gray-700">
+          <h2 class="text-lg font-bold text-slate-800 dark:text-slate-200 mb-4">محاكاة تفاعلية</h2>
+          <div class="mb-4">
+            <label class="text-sm font-medium text-slate-700 dark:text-slate-300 block mb-3">اختر المستويات البتّية:</label>
+            <div id="sim-bitplane-btns" class="flex gap-2 justify-center flex-row-reverse mb-2"></div>
+            <div class="text-xs text-center text-slate-400">7 = MSB (الأهم) &nbsp;←→&nbsp; 0 = LSB (الأقل)</div>
+          </div>
+          <div id="sim-bitplane-canvas"></div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ============================================================
+       SECTION 3: INTERACTIVE PLAYGROUND
+       ============================================================ -->
+  <div id="section-playground" class="section-view">
+    <section class="py-8 px-4 sm:px-6">
+      <div class="max-w-7xl mx-auto">
+        <!-- Header -->
+        <div class="text-center mb-8">
+          <div class="inline-flex items-center gap-2 px-3 py-1 mb-3 rounded-full bg-emerald-50 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 text-xs font-semibold">
+            Interactive Lab
+          </div>
+          <h1 class="text-3xl font-bold text-slate-900 dark:text-white mb-2">مختبر الرؤية</h1>
+          <p class="text-slate-500 dark:text-slate-400">ارفع صورتك وطبّق التحويلات مباشرة — شاهد النتيجة والكود في الوقت الحقيقي</p>
+        </div>
+
+        <!-- Split Layout: RTL means controls on right, code on left -->
+        <div class="playground-layout flex flex-col lg:flex-row gap-6">
+
+          <!-- RIGHT PANEL (visually first in RTL): Controls & Preview -->
+          <div class="lg:w-1/2 space-y-5">
+            <!-- Upload Zone -->
+            <div class="drop-zone p-6 text-center bg-white dark:bg-gray-800" id="playground-dropzone">
+              <input type="file" accept="image/*" id="playground-file-input" class="hidden">
+              <svg class="w-10 h-10 mx-auto mb-3 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+              </svg>
+              <p class="drop-text text-sm text-slate-500 dark:text-slate-400 font-medium">اسحب صورة هنا أو انقر للتحميل</p>
+              <p class="text-xs text-slate-400 mt-1">PNG, JPG, WebP — حد أقصى 512px</p>
+            </div>
+
+            <!-- Canvases: Original & Processed side by side -->
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <div class="text-xs font-semibold text-slate-500 dark:text-slate-400 mb-1 text-center">الأصلية</div>
+                <div class="canvas-container">
+                  <canvas id="playground-original" width="300" height="200"></canvas>
+                </div>
+              </div>
+              <div>
+                <div class="text-xs font-semibold text-slate-500 dark:text-slate-400 mb-1 text-center">المعالَجة</div>
+                <div class="canvas-container">
+                  <canvas id="playground-processed" width="300" height="200"></canvas>
+                </div>
+              </div>
+            </div>
+
+            <!-- Histogram -->
+            <div class="bg-white dark:bg-gray-800 rounded-xl p-3 border border-slate-200 dark:border-gray-700">
+              <div class="text-xs font-semibold text-slate-500 dark:text-slate-400 mb-1">الهيستوغرام</div>
+              <canvas id="playground-histogram" class="histogram-canvas w-full"></canvas>
+            </div>
+
+            <!-- Transformation Selector -->
+            <div class="bg-white dark:bg-gray-800 rounded-xl p-4 border border-slate-200 dark:border-gray-700">
+              <div class="flex items-center justify-between mb-3">
+                <label class="text-sm font-bold text-slate-700 dark:text-slate-300">نوع التحويل</label>
+                <button id="playground-reset" class="text-xs text-slate-400 hover:text-indigo-500 transition-colors flex items-center gap-1">
+                  <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+                  إعادة تعيين
+                </button>
+              </div>
+              <select id="playground-type-select" class="w-full px-3 py-2 bg-slate-50 dark:bg-gray-700 border border-slate-200 dark:border-gray-600 rounded-lg text-sm text-slate-800 dark:text-slate-200 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none">
+                <option value="negative">الصور السلبية (Negative)</option>
+                <option value="log">التحويل اللوغاريتمي (Log)</option>
+                <option value="gamma">تصحيح غاما (Gamma)</option>
+                <option value="threshold">العتبة (Threshold)</option>
+                <option value="contrast">تمدد التباين (Contrast Stretch)</option>
+                <option value="bitplane">تقطيع المستوى البتّي (Bit-plane)</option>
+              </select>
+
+              <!-- Dynamic Controls Container -->
+              <div id="playground-controls" class="mt-4"></div>
+            </div>
+          </div>
+
+          <!-- LEFT PANEL (visually second in RTL): Code Generation -->
+          <div class="lg:w-1/2">
+            <div class="bg-slate-900 dark:bg-gray-950 rounded-2xl overflow-hidden border border-slate-700/50 sticky top-20">
+              <!-- Code Header Bar -->
+              <div class="flex items-center justify-between px-4 py-3 bg-slate-800 dark:bg-gray-900 border-b border-slate-700/50">
+                <div class="flex items-center gap-3">
+                  <div class="flex gap-1.5">
+                    <div class="w-3 h-3 rounded-full bg-red-500/80"></div>
+                    <div class="w-3 h-3 rounded-full bg-yellow-500/80"></div>
+                    <div class="w-3 h-3 rounded-full bg-green-500/80"></div>
+                  </div>
+                  <span class="text-xs text-slate-400 font-mono">process_image.py</span>
+                </div>
+                <button id="playground-copy-code" class="copy-btn inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-slate-300 hover:text-white bg-slate-700 hover:bg-slate-600 rounded-lg transition-colors">
+                  <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                  </svg>
+                  نسخ الكود
+                </button>
+              </div>
+
+              <!-- Code Content -->
+              <div class="p-5 overflow-auto max-h-[70vh]">
+                <pre id="playground-code" class="code-block text-slate-100"></pre>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ============================================================
+       SECTION 4: COMING SOON MODULES
+       ============================================================ -->
+  <div id="section-coming-soon" class="section-view">
+    <section class="py-12 px-4 sm:px-6">
+      <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-12">
+          <h1 class="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mb-3">الوحدات القادمة</h1>
+          <p class="text-slate-500 dark:text-slate-400 text-lg">وحدات متقدمة قيد التطوير — ستتوفر قريباً بنفس التجربة التفاعلية</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+
+          <!-- Coming Soon 1: Geometry Transformations -->
+          <div class="concept-card disabled bg-white dark:bg-gray-800 rounded-2xl p-6 border border-slate-200 dark:border-gray-700 shadow-sm relative overflow-hidden">
+            <div class="absolute top-4 left-4">
+              <span class="badge-coming-soon">
+                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+                قريباً
+              </span>
+            </div>
+            <div class="w-12 h-12 rounded-xl bg-blue-100 dark:bg-blue-900/20 flex items-center justify-center mb-5">
+              <svg class="w-6 h-6 text-blue-500/60" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+              </svg>
+            </div>
+            <h3 class="text-lg font-bold text-slate-700 dark:text-slate-400 mb-2">التحويلات الهندسية</h3>
+            <p class="text-sm text-slate-400 dark:text-slate-500 mb-1">Image Geometry Transformations</p>
+            <p class="text-xs text-slate-400 dark:text-slate-500 leading-relaxed">
+              التدوير، القلب، القياس، الانحراف، التحويل الأفيني، والتحويل المنظوري — مع محاكاة مصفوفات التحويل.
+            </p>
+          </div>
+
+          <!-- Coming Soon 2: Spatial Filtering -->
+          <div class="concept-card disabled bg-white dark:bg-gray-800 rounded-2xl p-6 border border-slate-200 dark:border-gray-700 shadow-sm relative overflow-hidden">
+            <div class="absolute top-4 left-4">
+              <span class="badge-coming-soon">
+                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+                قريباً
+              </span>
+            </div>
+            <div class="w-12 h-12 rounded-xl bg-orange-100 dark:bg-orange-900/20 flex items-center justify-center mb-5">
+              <svg class="w-6 h-6 text-orange-500/60" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/>
+              </svg>
+            </div>
+            <h3 class="text-lg font-bold text-slate-700 dark:text-slate-400 mb-2">التنعيم والحدة</h3>
+            <p class="text-sm text-slate-400 dark:text-slate-500 mb-1">Spatial Filtering: Smoothing & Sharpening</p>
+            <p class="text-xs text-slate-400 dark:text-slate-500 leading-relaxed">
+              مرشحات الالتفاف (Convolution)، المتوسط، غاوس، Median، Laplacian، Sobel — مع تصور نواة المرشح.
+            </p>
+          </div>
+
+          <!-- Coming Soon 3: Morphological Processing -->
+          <div class="concept-card disabled bg-white dark:bg-gray-800 rounded-2xl p-6 border border-slate-200 dark:border-gray-700 shadow-sm relative overflow-hidden">
+            <div class="absolute top-4 left-4">
+              <span class="badge-coming-soon">
+                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+                قريباً
+              </span>
+            </div>
+            <div class="w-12 h-12 rounded-xl bg-pink-100 dark:bg-pink-900/20 flex items-center justify-center mb-5">
+              <svg class="w-6 h-6 text-pink-500/60" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5"/>
+              </svg>
+            </div>
+            <h3 class="text-lg font-bold text-slate-700 dark:text-slate-400 mb-2">المعالجة المورفولوجية</h3>
+            <p class="text-sm text-slate-400 dark:text-slate-500 mb-1">Morphological Image Processing</p>
+            <p class="text-xs text-slate-400 dark:text-slate-500 leading-relaxed">
+              التآكل، التمدد، الفتح، الإغلاق — عمليات الأشكال البنيوية على الصور الثنائية وذات التدرج الرمادي.
+            </p>
+          </div>
+
+          <!-- Coming Soon 4: Image Restoration -->
+          <div class="concept-card disabled bg-white dark:bg-gray-800 rounded-2xl p-6 border border-slate-200 dark:border-gray-700 shadow-sm relative overflow-hidden">
+            <div class="absolute top-4 left-4">
+              <span class="badge-coming-soon">
+                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+                قريباً
+              </span>
+            </div>
+            <div class="w-12 h-12 rounded-xl bg-cyan-100 dark:bg-cyan-900/20 flex items-center justify-center mb-5">
+              <svg class="w-6 h-6 text-cyan-500/60" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+              </svg>
+            </div>
+            <h3 class="text-lg font-bold text-slate-700 dark:text-slate-400 mb-2">استعادة الصور</h3>
+            <p class="text-sm text-slate-400 dark:text-slate-500 mb-1">Image Restoration</p>
+            <p class="text-xs text-slate-400 dark:text-slate-500 leading-relaxed">
+              إزالة الضوضاء، مرشح Wiener، تقنيات إزالة التمويه — استرجاع الصورة الأصلية من نسخة تالفة.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ============================================================
+       SCRIPTS (order matters: dependencies first)
+       ============================================================ -->
+  <script src="js/processing.js"></script>
+  <script src="js/codegen.js"></script>
+  <script src="js/simulations.js"></script>
+  <script src="js/playground.js"></script>
+  <script src="js/app.js"></script>
+
+</body>
+</html>

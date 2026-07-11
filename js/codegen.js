@@ -185,24 +185,23 @@ plt.show()`;
       .replace(/</g, '&lt;')
       .replace(/>/g, '&gt;');
 
-    // Order matters: comments first, then strings, then keywords, etc.
-
+    // Use placeholders to prevent subsequent regex passes from matching HTML attributes like 'class'
     // Comments (# ...)
-    html = html.replace(/(#[^\n]*)/g, '<span class="cmt">$1</span>');
+    html = html.replace(/(#[^\n]*)/g, '{{span:cmt}}$1{{/span}}');
 
     // Strings (single and double quotes, including f-strings)
-    html = html.replace(/(f?'[^']*'|f?"[^"]*")/g, '<span class="str">$1</span>');
+    html = html.replace(/(f?'[^']*'|f?"[^"]*")/g, '{{span:str}}$1{{/span}}');
 
     // Keywords
     const keywords = ['import', 'from', 'def', 'return', 'for', 'in', 'if', 'else', 'elif',
                        'True', 'False', 'None', 'and', 'or', 'not', 'as', 'class', 'with'];
     const kwRegex = new RegExp('\\b(' + keywords.join('|') + ')\\b', 'g');
-    html = html.replace(kwRegex, '<span class="kw">$1</span>');
+    html = html.replace(kwRegex, '{{span:kw}}$1{{/span}}');
 
     // Library names
     const libs = ['cv2', 'np', 'numpy', 'matplotlib', 'plt'];
     const libRegex = new RegExp('\\b(' + libs.join('|') + ')\\b', 'g');
-    html = html.replace(libRegex, '<span class="lib">$1</span>');
+    html = html.replace(libRegex, '{{span:lib}}$1{{/span}}');
 
     // Built-in functions
     const fns = ['print', 'range', 'len', 'int', 'float', 'str', 'type', 'round',
@@ -211,17 +210,21 @@ plt.show()`;
                  'bitwise_or', 'subplots', 'show', 'tight_layout', 'set_title',
                  'axis', 'zeros', 'ones', 'array', 'contrast_stretch'];
     const fnRegex = new RegExp('\\b(' + fns.join('|') + ')\\b', 'g');
-    html = html.replace(fnRegex, '<span class="fn">$1</span>');
+    html = html.replace(fnRegex, '{{span:fn}}$1{{/span}}');
 
     // Numbers (integers and floats)
-    html = html.replace(/\b(\d+\.?\d*)\b/g, '<span class="num">$1</span>');
+    html = html.replace(/\b(\d+\.?\d*)\b/g, '{{span:num}}$1{{/span}}');
 
     // Special variables
     const specialVars = ['img', 'output', 'result', 'negative', 'binary',
                          'gamma_corrected', 'log_transformed', 'stretched',
                          'normalized', 'plane', 'fig', 'axes', 'ax', 'mask1', 'mask2', 'mask3'];
     const varRegex = new RegExp('\\b(' + specialVars.join('|') + ')\\b', 'g');
-    html = html.replace(varRegex, '<span class="var">$1</span>');
+    html = html.replace(varRegex, '{{span:var}}$1{{/span}}');
+
+    // Finally replace placeholders with actual HTML span tags
+    html = html.replace(/\{\{span:([a-z]+)\}\}/g, '<span class="$1">');
+    html = html.replace(/\{\{\/span\}\}/g, '</span>');
 
     return html;
   }

@@ -108,7 +108,7 @@ const App = (() => {
       setTimeout(() => {
         initConceptSimulation(view.split('/')[1]);
       }, 100);
-    } else if (view === 'playground' && window.Playground) {
+    } else if (view === 'playground' && typeof Playground !== 'undefined') {
       Playground.init();
     }
   }
@@ -134,7 +134,7 @@ const App = (() => {
    * ---------------------------------------------------------- */
   
   function initConceptSimulation(concept) {
-    if (!window.Simulations) return;
+    if (typeof Simulations === 'undefined') return;
     
     // Call the respective simulation init with the correct DOM element IDs
     switch(concept) {

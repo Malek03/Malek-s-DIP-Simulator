@@ -17,7 +17,14 @@ const App = (() => {
     'point-processing/gamma': 'section-concept-gamma',
     'point-processing/threshold': 'section-concept-threshold',
     'point-processing/contrast': 'section-concept-contrast',
-    'point-processing/bitplane': 'section-concept-bitplane'
+    'point-processing/bitplane': 'section-concept-bitplane',
+    // Image Basics
+    'image-basics': 'section-image-basics',
+    'basics-playground': 'section-basics-playground',
+    'image-basics/scale': 'section-concept-scale',
+    'image-basics/rotate': 'section-concept-rotate',
+    'image-basics/translate': 'section-concept-translate',
+    'image-basics/crop': 'section-concept-crop'
   };
 
   let currentRoute = 'home';
@@ -107,8 +114,14 @@ const App = (() => {
       setTimeout(() => {
         initConceptSimulation(view.split('/')[1]);
       }, 100);
+    } else if (view.startsWith('image-basics/')) {
+      setTimeout(() => {
+        initBasicsSimulation(view.split('/')[1]);
+      }, 100);
     } else if (view === 'playground' && typeof Playground !== 'undefined') {
       setTimeout(() => Playground.init(), 100);
+    } else if (view === 'basics-playground' && typeof BasicsPlayground !== 'undefined') {
+      setTimeout(() => BasicsPlayground.init(), 100);
     }
   }
 
@@ -154,6 +167,29 @@ const App = (() => {
         break;
       case 'bitplane':
         Simulations.initBitPlane('sim-bitplane-canvas', 'sim-bitplane-btns');
+        break;
+    }
+  }
+
+  /* ----------------------------------------------------------
+   * Basics Simulations Initializer
+   * ---------------------------------------------------------- */
+  
+  function initBasicsSimulation(concept) {
+    if (typeof BasicsSimulations === 'undefined') return;
+    
+    switch(concept) {
+      case 'scale':
+        BasicsSimulations.initScale('sim-scale-canvas', 'sim-scale-slider', 'sim-scale-value');
+        break;
+      case 'rotate':
+        BasicsSimulations.initRotate('sim-rotate-canvas', 'sim-rotate-slider', 'sim-rotate-value');
+        break;
+      case 'translate':
+        BasicsSimulations.initTranslate('sim-translate-canvas', 'sim-translate-x-slider', 'sim-translate-x-value', 'sim-translate-y-slider', 'sim-translate-y-value');
+        break;
+      case 'crop':
+        BasicsSimulations.initCrop('sim-crop-canvas');
         break;
     }
   }

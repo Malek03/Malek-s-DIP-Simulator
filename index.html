@@ -55,6 +55,7 @@
         <!-- Desktop Nav Links -->
         <div class="hidden md:flex items-center gap-1">
           <a href="#home" data-route="home" class="nav-link px-3 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 rounded-lg hover:bg-slate-100 dark:hover:bg-gray-800 transition-colors">الرئيسية</a>
+          <a href="#image-basics" data-route="image-basics" class="nav-link px-3 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 rounded-lg hover:bg-slate-100 dark:hover:bg-gray-800 transition-colors">أساسيات الصورة</a>
           <a href="#point-processing" data-route="point-processing" class="nav-link px-3 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 rounded-lg hover:bg-slate-100 dark:hover:bg-gray-800 transition-colors">معالجة النقاط</a>
         </div>
 
@@ -82,6 +83,7 @@
       <div id="mobile-menu" class="hidden md:hidden pb-4 border-t border-slate-200 dark:border-gray-700 mt-2 pt-3">
         <div class="flex flex-col gap-1">
           <a href="#home" data-route="home" class="nav-link px-3 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 rounded-lg hover:bg-slate-100 dark:hover:bg-gray-800">الرئيسية</a>
+          <a href="#image-basics" data-route="image-basics" class="nav-link px-3 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 rounded-lg hover:bg-slate-100 dark:hover:bg-gray-800">أساسيات الصورة</a>
           <a href="#point-processing" data-route="point-processing" class="nav-link px-3 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 rounded-lg hover:bg-slate-100 dark:hover:bg-gray-800">معالجة النقاط</a>
         </div>
       </div>
@@ -134,7 +136,7 @@
 
         <!-- CTA Buttons -->
         <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <a href="#point-processing" data-route="point-processing" class="inline-flex items-center gap-2 px-8 py-3.5 bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-600 text-white font-bold rounded-xl shadow-lg shadow-indigo-500/25 hover:shadow-indigo-500/40 transition-all text-base">
+          <a href="#image-basics" data-route="image-basics" class="inline-flex items-center gap-2 px-8 py-3.5 bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-600 text-white font-bold rounded-xl shadow-lg shadow-indigo-500/25 hover:shadow-indigo-500/40 transition-all text-base">
             ابدأ معالجة الصور
             <svg class="w-5 h-5 rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
@@ -247,25 +249,25 @@
             </p>
           </a>
 
-          <!-- Coming Soon 1: Geometry Transformations -->
-          <div class="concept-card disabled bg-white dark:bg-gray-800 rounded-2xl p-6 border border-slate-200 dark:border-gray-700 shadow-sm relative overflow-hidden">
+          <!-- Card 2: Image Basics (Now Active) -->
+          <a href="#image-basics" data-route="image-basics" class="concept-card bg-white dark:bg-gray-800 rounded-2xl p-6 border border-slate-200 dark:border-gray-700 shadow-sm cursor-pointer block relative overflow-hidden group hover:border-indigo-300 dark:hover:border-indigo-600 transition-all">
             <div class="absolute top-4 left-4">
-              <span class="badge-coming-soon">
-                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
-                قريباً
+              <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 text-xs font-medium">
+                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                متاح الآن
               </span>
             </div>
-            <div class="w-12 h-12 rounded-xl bg-blue-100 dark:bg-blue-900/20 flex items-center justify-center mb-5">
-              <svg class="w-6 h-6 text-blue-500/60" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <div class="w-12 h-12 rounded-xl bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+              <svg class="w-6 h-6 text-blue-500/80 dark:text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
               </svg>
             </div>
-            <h3 class="text-lg font-bold text-slate-700 dark:text-slate-400 mb-2">التحويلات الهندسية</h3>
-            <p class="text-sm text-slate-400 dark:text-slate-500 mb-1">Image Geometry</p>
-            <p class="text-xs text-slate-400 dark:text-slate-500 leading-relaxed">
-              التدوير، القلب، القياس، الانحراف، والتحويل الأفيني.
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">أساسيات الصورة</h3>
+            <p class="text-sm text-slate-400 dark:text-slate-500 mb-1">Image Basics</p>
+            <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+              العمليات الهندسية الأساسية على الصور: التكبير/التصغير (Scale)، التدوير (Rotate)، الإزاحة (Translate)، والقص (Crop).
             </p>
-          </div>
+          </a>
 
           <!-- Coming Soon 2: Spatial Filtering -->
           <div class="concept-card disabled bg-white dark:bg-gray-800 rounded-2xl p-6 border border-slate-200 dark:border-gray-700 shadow-sm relative overflow-hidden">
@@ -983,12 +985,402 @@
 
 
   <!-- ============================================================
+       SECTION: IMAGE BASICS MODULE — Grid
+       ============================================================ -->
+  <div id="section-image-basics" class="section-view">
+    <section class="py-12 px-4 sm:px-6">
+      <div class="max-w-6xl mx-auto">
+        <!-- Header -->
+        <div class="text-center mb-12">
+          <div class="inline-flex items-center gap-2 px-3 py-1 mb-4 rounded-full bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-xs font-semibold">
+            Image Basics
+          </div>
+          <h1 class="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mb-3">أساسيات الصورة</h1>
+          <p class="text-slate-500 dark:text-slate-400 text-lg max-w-2xl mx-auto">
+            أربع عمليات هندسية أساسية لتغيير حجم، تدوير، تحريك وقص الصور — المهارات الأساسية للتعامل مع الفضاء الثنائي الأبعاد.
+          </p>
+        </div>
+
+        <!-- 4 Concept Cards Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+
+          <!-- 1. Scale -->
+          <a href="#image-basics/scale" data-route="image-basics/scale" class="concept-card bg-white dark:bg-gray-800 rounded-2xl p-6 border border-slate-200 dark:border-gray-700 shadow-sm cursor-pointer block">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-10 h-10 rounded-lg bg-sky-100 dark:bg-sky-900/30 flex items-center justify-center">
+                <svg class="w-6 h-6 text-sky-600 dark:text-sky-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-bold text-slate-900 dark:text-white">التكبير والتصغير</h3>
+                <p class="text-xs text-slate-400">Scale</p>
+              </div>
+            </div>
+            <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed mb-3">تغيير أبعاد الصورة بضرب الإحداثيات في معامل تحجيم (Scale Factor).</p>
+          </a>
+
+          <!-- 2. Rotate -->
+          <a href="#image-basics/rotate" data-route="image-basics/rotate" class="concept-card bg-white dark:bg-gray-800 rounded-2xl p-6 border border-slate-200 dark:border-gray-700 shadow-sm cursor-pointer block">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-10 h-10 rounded-lg bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center">
+                <svg class="w-6 h-6 text-purple-600 dark:text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-bold text-slate-900 dark:text-white">التدوير</h3>
+                <p class="text-xs text-slate-400">Rotate</p>
+              </div>
+            </div>
+            <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed mb-3">تدوير الصورة حول نقطة ارتكاز بزاوية محددة باستخدام مصفوفة الدوران.</p>
+          </a>
+
+          <!-- 3. Translate -->
+          <a href="#image-basics/translate" data-route="image-basics/translate" class="concept-card bg-white dark:bg-gray-800 rounded-2xl p-6 border border-slate-200 dark:border-gray-700 shadow-sm cursor-pointer block">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-10 h-10 rounded-lg bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center">
+                <svg class="w-6 h-6 text-emerald-600 dark:text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M10 9l-3 3m0 0l3 3m-3-3h8m-8 4l3 3m-3-3l3-3m0-6l3-3m0 0l3 3m-3-3v8" />
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-bold text-slate-900 dark:text-white">الإزاحة</h3>
+                <p class="text-xs text-slate-400">Translate</p>
+              </div>
+            </div>
+            <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed mb-3">تحريك الصورة أفقياً ورأسياً بإضافة قيم ثابتة لإحداثيات X و Y.</p>
+          </a>
+
+          <!-- 4. Crop -->
+          <a href="#image-basics/crop" data-route="image-basics/crop" class="concept-card bg-white dark:bg-gray-800 rounded-2xl p-6 border border-slate-200 dark:border-gray-700 shadow-sm cursor-pointer block">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-10 h-10 rounded-lg bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center">
+                <svg class="w-6 h-6 text-orange-600 dark:text-orange-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" />
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-bold text-slate-900 dark:text-white">القص</h3>
+                <p class="text-xs text-slate-400">Crop</p>
+              </div>
+            </div>
+            <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed mb-3">استخراج منطقة مستطيلة محددة من الصورة وتجاهل الباقي.</p>
+          </a>
+        </div>
+
+        <!-- CTA Banner to Playground -->
+        <div class="mt-12 bg-gradient-to-r from-blue-500 to-cyan-600 rounded-2xl p-8 text-center text-white shadow-lg relative overflow-hidden">
+          <div class="relative z-10">
+            <h3 class="text-2xl font-bold mb-3">مختبر الأساسيات</h3>
+            <p class="text-blue-100 mb-6 max-w-xl mx-auto">ارفع صورتك وجرب العمليات الهندسية الأربع بصورة تفاعلية مع توليد كود Python مباشر.</p>
+            <a href="#basics-playground" data-route="basics-playground" class="inline-flex items-center gap-2 px-6 py-3 bg-white text-blue-600 hover:bg-slate-50 font-bold rounded-xl shadow-md transition-all">
+              فتح مختبر الأساسيات
+              <svg class="w-5 h-5 rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ---- Concept: Scale ---- -->
+  <div id="section-concept-scale" class="section-view">
+    <section class="py-12 px-4 sm:px-6">
+      <div class="max-w-4xl mx-auto">
+        <a href="#image-basics" data-route="image-basics" class="inline-flex items-center gap-2 text-sm text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 mb-8 font-medium">
+          <svg class="w-4 h-4 rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+          العودة إلى أساسيات الصورة
+        </a>
+        <div class="flex items-center gap-3 mb-6">
+          <div class="w-12 h-12 rounded-xl bg-sky-100 dark:bg-sky-900/30 flex items-center justify-center">
+            <svg class="w-7 h-7 text-sky-600 dark:text-sky-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
+            </svg>
+          </div>
+          <div>
+            <h1 class="text-3xl font-bold text-slate-900 dark:text-white">التكبير والتصغير</h1>
+            <p class="text-slate-400">Scale</p>
+          </div>
+        </div>
+
+        <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-slate-200 dark:border-gray-700 mb-8">
+          <h2 class="text-lg font-bold text-slate-800 dark:text-slate-200 mb-3">مبدأ العمل</h2>
+          <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-4">
+            عملية التكبير والتصغير تعتمد على ضرب إحداثيات كل بكسل في معامل التحجيم (Scale Factor). إذا كان المعامل أكبر من 1 يتم التكبير، وإذا كان بين 0 و 1 يتم التصغير.
+          </p>
+          <div class="formula-box text-xl bg-slate-50 dark:bg-gray-700/50 rounded-xl p-4">
+            <span class="var-math">x'</span> = <span class="var-math">x</span> · <span class="var-math">S<sub>x</sub></span> <br>
+            <span class="var-math">y'</span> = <span class="var-math">y</span> · <span class="var-math">S<sub>y</sub></span>
+          </div>
+        </div>
+
+        <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-slate-200 dark:border-gray-700">
+          <h2 class="text-lg font-bold text-slate-800 dark:text-slate-200 mb-4">محاكاة تفاعلية</h2>
+          <div class="mb-4">
+            <div class="flex items-center justify-between mb-2">
+              <label class="text-sm font-medium text-slate-700 dark:text-slate-300">معامل التكبير (Scale)</label>
+              <span id="sim-scale-value" class="text-sm font-mono text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30 px-2 py-0.5 rounded">1.0x</span>
+            </div>
+            <input type="range" id="sim-scale-slider" min="0.1" max="3.0" step="0.1" value="1.0" class="w-full">
+          </div>
+          <div id="sim-scale-canvas"></div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ---- Concept: Rotate ---- -->
+  <div id="section-concept-rotate" class="section-view">
+    <section class="py-12 px-4 sm:px-6">
+      <div class="max-w-4xl mx-auto">
+        <a href="#image-basics" data-route="image-basics" class="inline-flex items-center gap-2 text-sm text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 mb-8 font-medium">
+          <svg class="w-4 h-4 rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+          العودة إلى أساسيات الصورة
+        </a>
+        <div class="flex items-center gap-3 mb-6">
+          <div class="w-12 h-12 rounded-xl bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center">
+            <svg class="w-7 h-7 text-purple-600 dark:text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+            </svg>
+          </div>
+          <div>
+            <h1 class="text-3xl font-bold text-slate-900 dark:text-white">التدوير</h1>
+            <p class="text-slate-400">Rotate</p>
+          </div>
+        </div>
+
+        <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-slate-200 dark:border-gray-700 mb-8">
+          <h2 class="text-lg font-bold text-slate-800 dark:text-slate-200 mb-3">مبدأ العمل</h2>
+          <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-4">
+            تدوير الصورة يعتمد على استخدام دوال المثلثات (sin, cos) لإنشاء مصفوفة دوران تحول الإحداثيات الأصلية إلى الإحداثيات الجديدة حول نقطة المركز.
+          </p>
+          <div class="formula-box text-xl bg-slate-50 dark:bg-gray-700/50 rounded-xl p-4">
+            <span class="var-math">x'</span> = <span class="var-math">x</span> cos(θ) - <span class="var-math">y</span> sin(θ) <br>
+            <span class="var-math">y'</span> = <span class="var-math">x</span> sin(θ) + <span class="var-math">y</span> cos(θ)
+          </div>
+        </div>
+
+        <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-slate-200 dark:border-gray-700">
+          <h2 class="text-lg font-bold text-slate-800 dark:text-slate-200 mb-4">محاكاة تفاعلية</h2>
+          <div class="mb-4">
+            <div class="flex items-center justify-between mb-2">
+              <label class="text-sm font-medium text-slate-700 dark:text-slate-300">الزاوية (θ)</label>
+              <span id="sim-rotate-value" class="text-sm font-mono text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30 px-2 py-0.5 rounded">0°</span>
+            </div>
+            <input type="range" id="sim-rotate-slider" min="-180" max="180" step="1" value="0" class="w-full">
+          </div>
+          <div id="sim-rotate-canvas"></div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ---- Concept: Translate ---- -->
+  <div id="section-concept-translate" class="section-view">
+    <section class="py-12 px-4 sm:px-6">
+      <div class="max-w-4xl mx-auto">
+        <a href="#image-basics" data-route="image-basics" class="inline-flex items-center gap-2 text-sm text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 mb-8 font-medium">
+          <svg class="w-4 h-4 rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+          العودة إلى أساسيات الصورة
+        </a>
+        <div class="flex items-center gap-3 mb-6">
+          <div class="w-12 h-12 rounded-xl bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center">
+            <svg class="w-7 h-7 text-emerald-600 dark:text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M10 9l-3 3m0 0l3 3m-3-3h8m-8 4l3 3m-3-3l3-3m0-6l3-3m0 0l3 3m-3-3v8" />
+            </svg>
+          </div>
+          <div>
+            <h1 class="text-3xl font-bold text-slate-900 dark:text-white">الإزاحة</h1>
+            <p class="text-slate-400">Translate</p>
+          </div>
+        </div>
+
+        <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-slate-200 dark:border-gray-700 mb-8">
+          <h2 class="text-lg font-bold text-slate-800 dark:text-slate-200 mb-3">مبدأ العمل</h2>
+          <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-4">
+            عملية بسيطة يتم فيها إضافة قيم ثابتة (t<sub>x</sub>, t<sub>y</sub>) إلى كل إحداثي لتحريك الصورة أفقياً ورأسياً.
+          </p>
+          <div class="formula-box text-xl bg-slate-50 dark:bg-gray-700/50 rounded-xl p-4">
+            <span class="var-math">x'</span> = <span class="var-math">x</span> + <span class="var-math">t<sub>x</sub></span> <br>
+            <span class="var-math">y'</span> = <span class="var-math">y</span> + <span class="var-math">t<sub>y</sub></span>
+          </div>
+        </div>
+
+        <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-slate-200 dark:border-gray-700">
+          <h2 class="text-lg font-bold text-slate-800 dark:text-slate-200 mb-4">محاكاة تفاعلية</h2>
+          <div class="grid grid-cols-2 gap-4 mb-4">
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <label class="text-sm font-medium text-slate-700 dark:text-slate-300">t<sub>x</sub> (أفقي)</label>
+                <span id="sim-translate-x-value" class="text-sm font-mono text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30 px-2 py-0.5 rounded">0px</span>
+              </div>
+              <input type="range" id="sim-translate-x-slider" min="-200" max="200" step="1" value="0" class="w-full">
+            </div>
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <label class="text-sm font-medium text-slate-700 dark:text-slate-300">t<sub>y</sub> (رأسي)</label>
+                <span id="sim-translate-y-value" class="text-sm font-mono text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30 px-2 py-0.5 rounded">0px</span>
+              </div>
+              <input type="range" id="sim-translate-y-slider" min="-200" max="200" step="1" value="0" class="w-full">
+            </div>
+          </div>
+          <div id="sim-translate-canvas"></div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ---- Concept: Crop ---- -->
+  <div id="section-concept-crop" class="section-view">
+    <section class="py-12 px-4 sm:px-6">
+      <div class="max-w-4xl mx-auto">
+        <a href="#image-basics" data-route="image-basics" class="inline-flex items-center gap-2 text-sm text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 mb-8 font-medium">
+          <svg class="w-4 h-4 rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+          العودة إلى أساسيات الصورة
+        </a>
+        <div class="flex items-center gap-3 mb-6">
+          <div class="w-12 h-12 rounded-xl bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center">
+            <svg class="w-7 h-7 text-orange-600 dark:text-orange-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" />
+            </svg>
+          </div>
+          <div>
+            <h1 class="text-3xl font-bold text-slate-900 dark:text-white">القص</h1>
+            <p class="text-slate-400">Crop</p>
+          </div>
+        </div>
+
+        <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-slate-200 dark:border-gray-700 mb-8">
+          <h2 class="text-lg font-bold text-slate-800 dark:text-slate-200 mb-3">مبدأ العمل</h2>
+          <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-4">
+            عملية بسيطة في برمجيات المصفوفات، تعتمد على استخراج نطاق معين (slice) من مصفوفة الإحداثيات بحيث يتم اقتطاع منطقة مستطيلة فقط.
+          </p>
+          <div class="formula-box text-xl bg-slate-50 dark:bg-gray-700/50 rounded-xl p-4">
+            <span class="var-math">Result</span> = <span class="var-math">Image</span>[ <span class="var-math">y<sub>1</sub></span> : <span class="var-math">y<sub>2</sub></span> , <span class="var-math">x<sub>1</sub></span> : <span class="var-math">x<sub>2</sub></span> ]
+          </div>
+        </div>
+
+        <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-slate-200 dark:border-gray-700">
+          <h2 class="text-lg font-bold text-slate-800 dark:text-slate-200 mb-4">محاكاة تفاعلية</h2>
+          <p class="text-sm text-slate-500 mb-4">قم بالسحب والإفلات بالماوس على الصورة الأصلية لاختيار منطقة القص.</p>
+          <div id="sim-crop-canvas"></div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ============================================================
+       SECTION: BASICS PLAYGROUND
+       ============================================================ -->
+  <div id="section-basics-playground" class="section-view">
+    <section class="py-12 px-4 sm:px-6">
+      <div class="max-w-7xl mx-auto">
+        <!-- Header -->
+        <div class="text-center mb-8">
+          <div class="inline-flex items-center gap-2 px-3 py-1 mb-3 rounded-full bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-xs font-semibold">
+            Basics Interactive Lab
+          </div>
+          <h2 class="text-3xl font-bold text-slate-900 dark:text-white mb-2">مختبر الأساسيات</h2>
+          <p class="text-slate-500 dark:text-slate-400">ارفع صورتك وطبّق العمليات الهندسية لترى الكود الخاص بها فوراً</p>
+        </div>
+
+        <div class="playground-layout flex flex-col lg:flex-row gap-6">
+
+          <!-- RIGHT PANEL -->
+          <div class="lg:w-1/2 space-y-5">
+            <!-- Upload Zone -->
+            <div class="drop-zone p-6 text-center bg-white dark:bg-gray-800 border border-slate-200 dark:border-gray-700" id="basics-playground-dropzone">
+              <input type="file" accept="image/*" id="basics-playground-file-input" class="hidden">
+              <svg class="w-10 h-10 mx-auto mb-3 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+              </svg>
+              <p class="drop-text text-sm text-slate-500 dark:text-slate-400 font-medium">اسحب صورة هنا أو انقر للتحميل</p>
+            </div>
+
+            <!-- Canvases -->
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <div class="text-xs font-semibold text-slate-500 dark:text-slate-400 mb-1 text-center">الأصلية</div>
+                <div class="canvas-container bg-white dark:bg-gray-800 border border-slate-200 dark:border-gray-700 rounded-lg p-1">
+                  <canvas id="basics-playground-original" width="300" height="200" class="rounded"></canvas>
+                </div>
+              </div>
+              <div>
+                <div class="text-xs font-semibold text-slate-500 dark:text-slate-400 mb-1 text-center">المعالَجة</div>
+                <div class="canvas-container bg-white dark:bg-gray-800 border border-slate-200 dark:border-gray-700 rounded-lg p-1">
+                  <canvas id="basics-playground-processed" width="300" height="200" class="rounded"></canvas>
+                </div>
+              </div>
+            </div>
+
+            <!-- Transformation Selector -->
+            <div class="bg-white dark:bg-gray-800 rounded-xl p-4 border border-slate-200 dark:border-gray-700 shadow-sm">
+              <div class="flex items-center justify-between mb-3">
+                <label class="text-sm font-bold text-slate-700 dark:text-slate-300">نوع العملية</label>
+                <button id="basics-playground-reset" class="text-xs text-slate-400 hover:text-blue-500 transition-colors flex items-center gap-1">
+                  <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+                  إعادة تعيين
+                </button>
+              </div>
+              <select id="basics-playground-type-select" class="w-full px-3 py-2 bg-slate-50 dark:bg-gray-700 border border-slate-200 dark:border-gray-600 rounded-lg text-sm text-slate-800 dark:text-slate-200 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none">
+                <option value="scale">التكبير والتصغير (Scale)</option>
+                <option value="rotate">التدوير (Rotate)</option>
+                <option value="translate">الإزاحة (Translate)</option>
+                <option value="crop">القص (Crop)</option>
+              </select>
+
+              <div id="basics-playground-controls" class="mt-4"></div>
+            </div>
+          </div>
+
+          <!-- LEFT PANEL: Code Generation -->
+          <div class="lg:w-1/2">
+            <div class="bg-slate-900 dark:bg-gray-950 rounded-2xl overflow-hidden border border-slate-700/50 sticky top-20 shadow-lg">
+              <div class="flex items-center justify-between px-4 py-3 bg-slate-800 dark:bg-gray-900 border-b border-slate-700/50">
+                <div class="flex items-center gap-3">
+                  <div class="flex gap-1.5">
+                    <div class="w-3 h-3 rounded-full bg-red-500/80"></div>
+                    <div class="w-3 h-3 rounded-full bg-yellow-500/80"></div>
+                    <div class="w-3 h-3 rounded-full bg-green-500/80"></div>
+                  </div>
+                  <span class="text-xs text-slate-400 font-mono">geometry.py</span>
+                </div>
+                <button id="basics-playground-copy-code" class="copy-btn inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-slate-300 hover:text-white bg-slate-700 hover:bg-slate-600 rounded-lg transition-colors">
+                  <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                  </svg>
+                  نسخ الكود
+                </button>
+              </div>
+              <div class="p-5 overflow-auto max-h-[70vh]">
+                <pre id="basics-playground-code" class="code-block text-slate-100"></pre>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ============================================================
        SCRIPTS (order matters: dependencies first)
        ============================================================ -->
+  <!-- Point Processing Scripts -->
   <script src="js/processing.js"></script>
   <script src="js/codegen.js"></script>
   <script src="js/simulations.js"></script>
   <script src="js/playground.js"></script>
+
+  <!-- Image Basics Scripts -->
+  <script src="js/basics-processing.js"></script>
+  <script src="js/basics-codegen.js"></script>
+  <script src="js/basics-simulations.js"></script>
+  <script src="js/basics-playground.js"></script>
+
   <script src="js/app.js"></script>
 
 </body>

@@ -372,15 +372,10 @@ const BasicsPlayground = (() => {
       .replace(/</g, '&lt;')
       .replace(/>/g, '&gt;');
 
-    // Comments
-    html = html.replace(/(#.*)/g, '<span class="cmt">$1</span>');
-    // Keywords
-    html = html.replace(/\b(import|from|as|if|else|elif|for|while|def|return|class|pass|break|continue|None)\b/g, '<span class="kw">$1</span>');
-    // Strings
     html = html.replace(/('[^']*'|"[^"]*")/g, '<span class="str">$1</span>');
-    // Numbers
-    html = html.replace(/\b(\d+(\.\d+)?)\b/g, '<span class="num">$1</span>');
-    // Library references
+    html = html.replace(/(#.*)/g, '<span class="cmt">$1</span>');
+    html = html.replace(/\b(import|from|as|if|else|elif|for|while|def|return|class|pass|break|continue|None)\b(?![^<]*>)/g, '<span class="kw">$1</span>');
+    html = html.replace(/\b(\d+(\.\d+)?)\b(?![^<]*>)/g, '<span class="num">$1</span>');
     html = html.replace(/\b(cv2|np|plt)\./g, '<span class="lib">$1</span>.');
 
     codeBlock.innerHTML = html;

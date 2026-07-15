@@ -11,8 +11,9 @@ const RepPlayground = (() => {
   let origCanvas, procCanvas, codeBlock, copyBtn;
   let origCtx, procCtx;
 
-  // Extra Canvas for RGB Demo (since we need 3 canvases, we'll draw them on the processed canvas side-by-side or hide processed canvas)
+  // Extra Canvases
   let rgbWrap;
+  let matricesWrap;
 
   // State
   let currentImage = null; // HTMLImageElement
@@ -56,6 +57,46 @@ const RepPlayground = (() => {
       c.className = 'w-full h-auto border border-slate-200 dark:border-gray-700 rounded';
       rgbWrap.appendChild(c);
     }
+
+    // Create wrapper for Matrices
+    matricesWrap = document.createElement('div');
+    matricesWrap.className = 'grid grid-cols-3 gap-2 mt-4 hidden';
+    
+    const rMat = document.createElement('canvas'); rMat.id = 'rep-matrix-r';
+    const gMat = document.createElement('canvas'); gMat.id = 'rep-matrix-g';
+    const bMat = document.createElement('canvas'); bMat.id = 'rep-matrix-b';
+    
+    [rMat, gMat, bMat].forEach((c, idx) => {
+      c.className = 'w-auto max-w-none';
+      const wrapper = document.createElement('div');
+      wrapper.className = 'overflow-auto max-h-[250px] border border-slate-300 dark:border-gray-600 rounded bg-white custom-scrollbar';
+      wrapper.appendChild(c);
+      
+      const label = document.createElement('div');
+      label.className = 'text-center text-xs font-bold text-white py-1';
+      label.style.backgroundColor = idx === 0 ? '#ef4444' : idx === 1 ? '#22c55e' : '#3b82f6';
+      label.textContent = idx === 0 ? 'الأحمر' : idx === 1 ? 'الأخضر' : 'الأزرق';
+      
+      const colWrap = document.createElement('div');
+      colWrap.appendChild(label);
+      colWrap.appendChild(wrapper);
+      matricesWrap.appendChild(colWrap);
+    });
+    
+    // Add custom scrollbar styles dynamically
+    if (!document.getElementById('rep-custom-scrollbar-style')) {
+      const style = document.createElement('style');
+      style.id = 'rep-custom-scrollbar-style';
+      style.textContent = `
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #f1f1f1; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #c1c1c1; border-radius: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #a8a8a8; }
+      `;
+      document.head.appendChild(style);
+    }
+
+    procCanvas.parentElement.appendChild(matricesWrap);
 
     // Event Listeners
     setupDropzone();
@@ -170,9 +211,11 @@ const RepPlayground = (() => {
     if (currentType === 'rgb') {
       procCanvas.style.display = 'none';
       rgbWrap.classList.remove('hidden');
+      matricesWrap.classList.add('hidden');
     } else {
       procCanvas.style.display = 'block';
       rgbWrap.classList.add('hidden');
+      if (currentType !== 'quantization') matricesWrap.classList.add('hidden');
     }
 
     renderControls();
@@ -199,10 +242,35 @@ const RepPlayground = (() => {
       });
     }
     else if (currentType === 'quantization') {
+      createSlider('أعمدة العينات (Cols)', '', 2, 100, 1, params.sampling.cols, (val) => {
+        params.sampling.cols = val;
+        processImage();
+      });
+      createSlider('صفوف العينات (Rows)', '', 2, 100, 1, params.sampling.rows, (val) => {
+        params.sampling.rows = val;
+        processImage();
+      });
       createSlider('مستويات الألوان (Levels)', '', 2, 256, 1, params.quantization.levels, (val) => {
         params.quantization.levels = val;
         processImage();
       });
+      
+      const matrixBtn = document.createElement('button');
+      matrixBtn.className = 'w-full py-2 bg-indigo-100 dark:bg-indigo-900/40 text-indigo-700 dark:text-indigo-300 font-bold rounded-lg hover:bg-indigo-200 transition-colors mt-2 text-sm';
+      matrixBtn.innerHTML = 'إظهار / إخفاء مصفوفات الألوان';
+      matrixBtn.onclick = () => {
+        matricesWrap.classList.toggle('hidden');
+        processImage();
+      };
+      controlsContainer.appendChild(matrixBtn);
+
+      const expandBtn = document.createElement('button');
+      expandBtn.className = 'w-full py-2 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-bold rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors mt-2 text-sm border border-slate-300 dark:border-slate-700';
+      expandBtn.innerHTML = 'عرض المصفوفات بحجم الشاشة ⛶';
+      expandBtn.onclick = () => {
+        openFullscreenMatrices();
+      };
+      controlsContainer.appendChild(expandBtn);
     }
     else if (currentType === 'colormix') {
       const msg = document.createElement('p');
@@ -351,7 +419,16 @@ const RepPlayground = (() => {
       updateCode(RepCodeGen.generateSampling(params.sampling.rows, params.sampling.cols));
     }
     else if (currentType === 'quantization') {
-      RepProcessing.applyQuantization(origCanvas, procCanvas, params.quantization.levels);
+      // For Quantization in playground, we first apply sampling, then quantize for the visual effect
+      RepProcessing.applySampling(origCanvas, procCanvas, params.sampling.rows, params.sampling.cols);
+      RepProcessing.applyQuantization(procCanvas, procCanvas, params.quantization.levels);
+      
+      // Update matrices
+      const tinyData = RepProcessing.getSampledQuantizedData(origCanvas, params.sampling.rows, params.sampling.cols, params.quantization.levels);
+      RepProcessing.drawChannelMatrix(document.getElementById('rep-matrix-r'), tinyData, 0);
+      RepProcessing.drawChannelMatrix(document.getElementById('rep-matrix-g'), tinyData, 1);
+      RepProcessing.drawChannelMatrix(document.getElementById('rep-matrix-b'), tinyData, 2);
+      
       updateCode(RepCodeGen.generateQuantization(params.quantization.levels));
     }
     else if (currentType === 'colormix') {
@@ -362,12 +439,65 @@ const RepPlayground = (() => {
 
   function updateCode(pythonStr) {
     let html = pythonStr.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-    html = html.replace(/(#.*)/g, '<span class="cmt">$1</span>');
-    html = html.replace(/\b(import|from|as|if|else|elif|for|while|def|return|class|pass|break|continue|None)\b/g, '<span class="kw">$1</span>');
     html = html.replace(/('[^']*'|"[^"]*")/g, '<span class="str">$1</span>');
-    html = html.replace(/\b(\d+(\.\d+)?)\b/g, '<span class="num">$1</span>');
+    html = html.replace(/(#.*)/g, '<span class="cmt">$1</span>');
+    html = html.replace(/\b(import|from|as|if|else|elif|for|while|def|return|class|pass|break|continue|None)\b(?![^<]*>)/g, '<span class="kw">$1</span>');
+    html = html.replace(/\b(\d+(\.\d+)?)\b(?![^<]*>)/g, '<span class="num">$1</span>');
     html = html.replace(/\b(cv2|np|plt|Image)\./g, '<span class="lib">$1</span>.');
     codeBlock.innerHTML = html;
+  }
+
+  function openFullscreenMatrices() {
+    if (!currentImage) return;
+    
+    const modal = document.getElementById('rep-matrices-modal');
+    const content = document.getElementById('rep-matrices-modal-content');
+    const closeBtn = document.getElementById('rep-matrices-close');
+    
+    if (!modal || !content) return;
+    
+    content.innerHTML = '';
+    
+    const tinyData = RepProcessing.getSampledQuantizedData(origCanvas, params.sampling.rows, params.sampling.cols, params.quantization.levels);
+    
+    ['الأحمر', 'الأخضر', 'الأزرق'].forEach((name, channel) => {
+      const wrap = document.createElement('div');
+      wrap.className = 'flex flex-col items-center bg-white dark:bg-slate-800 p-2 rounded-lg shadow-xl';
+      
+      const title = document.createElement('h4');
+      title.className = `text-white font-bold w-full text-center py-1 mb-2 rounded ${
+        channel === 0 ? 'bg-red-500' : channel === 1 ? 'bg-green-500' : 'bg-blue-500'
+      }`;
+      title.textContent = name;
+      
+      const c = document.createElement('canvas');
+      c.className = 'border border-slate-300 dark:border-slate-700';
+      RepProcessing.drawChannelMatrix(c, tinyData, channel, true); // true for fullscreen
+      
+      wrap.appendChild(title);
+      wrap.appendChild(c);
+      content.appendChild(wrap);
+    });
+    
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+    setTimeout(() => {
+      modal.classList.remove('opacity-0');
+    }, 10);
+    
+    const closeModal = () => {
+      modal.classList.add('opacity-0');
+      setTimeout(() => {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+        content.innerHTML = '';
+      }, 300);
+    };
+    
+    closeBtn.onclick = closeModal;
+    modal.onclick = (e) => {
+      if (e.target === modal) closeModal();
+    };
   }
 
   function copyCode() {

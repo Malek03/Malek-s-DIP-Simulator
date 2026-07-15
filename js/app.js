@@ -24,7 +24,14 @@ const App = (() => {
     'image-basics/scale': 'section-concept-scale',
     'image-basics/rotate': 'section-concept-rotate',
     'image-basics/translate': 'section-concept-translate',
-    'image-basics/crop': 'section-concept-crop'
+    'image-basics/crop': 'section-concept-crop',
+    // Image Representation
+    'image-rep': 'section-image-rep',
+    'rep-playground': 'section-rep-playground',
+    'image-rep/rgb': 'section-concept-rgb',
+    'image-rep/sampling': 'section-concept-sampling',
+    'image-rep/quantization': 'section-concept-quantization',
+    'image-rep/colormix': 'section-concept-colormix'
   };
 
   let currentRoute = 'home';
@@ -118,10 +125,16 @@ const App = (() => {
       setTimeout(() => {
         initBasicsSimulation(view.split('/')[1]);
       }, 100);
+    } else if (view.startsWith('image-rep/')) {
+      setTimeout(() => {
+        initRepSimulation(view.split('/')[1]);
+      }, 100);
     } else if (view === 'playground' && typeof Playground !== 'undefined') {
       setTimeout(() => Playground.init(), 100);
     } else if (view === 'basics-playground' && typeof BasicsPlayground !== 'undefined') {
       setTimeout(() => BasicsPlayground.init(), 100);
+    } else if (view === 'rep-playground' && typeof RepPlayground !== 'undefined') {
+      setTimeout(() => RepPlayground.init(), 100);
     }
   }
 
@@ -190,6 +203,29 @@ const App = (() => {
         break;
       case 'crop':
         BasicsSimulations.initCrop('sim-crop-canvas');
+        break;
+    }
+  }
+
+  /* ----------------------------------------------------------
+   * Representation Simulations Initializer
+   * ---------------------------------------------------------- */
+  
+  function initRepSimulation(concept) {
+    if (typeof RepSimulations === 'undefined') return;
+    
+    switch(concept) {
+      case 'rgb':
+        RepSimulations.initRGB('sim-rgb-container', 'sim-rgb-animate-btn');
+        break;
+      case 'sampling':
+        RepSimulations.initSampling('sim-sampling-container', 'sim-sampling-rows', 'sim-sampling-cols', 'sim-sampling-value');
+        break;
+      case 'quantization':
+        RepSimulations.initQuantization('sim-quantization-container', 'sim-quantization-slider', 'sim-quantization-value');
+        break;
+      case 'colormix':
+        RepSimulations.initColorMix('sim-colormix-container', 'sim-colormix-input');
         break;
     }
   }

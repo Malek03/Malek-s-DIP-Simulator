@@ -231,6 +231,24 @@ const App = (() => {
   }
 
   /* ----------------------------------------------------------
+   * Utility to Download Canvas Image
+   * ---------------------------------------------------------- */
+  function downloadCanvasImage(canvasId, defaultFilename) {
+    const canvas = document.getElementById(canvasId);
+    if (!canvas) return;
+    
+    // Create a temporary link element
+    const link = document.createElement('a');
+    link.href = canvas.toDataURL('image/png');
+    link.download = defaultFilename || 'processed_image.png';
+    
+    // Trigger download
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
+
+  /* ----------------------------------------------------------
    * Initialize Application
    * ---------------------------------------------------------- */
 
@@ -239,6 +257,16 @@ const App = (() => {
     initTheme();
     const themeBtn = document.getElementById('theme-toggle');
     if (themeBtn) themeBtn.addEventListener('click', toggleTheme);
+
+    // Save Buttons Event Listeners
+    const playSaveBtn = document.getElementById('playground-save');
+    if (playSaveBtn) playSaveBtn.addEventListener('click', () => downloadCanvasImage('playground-processed', 'point_processing_result.png'));
+
+    const basicsSaveBtn = document.getElementById('basics-playground-save');
+    if (basicsSaveBtn) basicsSaveBtn.addEventListener('click', () => downloadCanvasImage('basics-playground-processed', 'image_basics_result.png'));
+
+    const repSaveBtn = document.getElementById('rep-playground-save');
+    if (repSaveBtn) repSaveBtn.addEventListener('click', () => downloadCanvasImage('rep-playground-processed', 'image_rep_result.png'));
 
     // Mobile Menu
     const menuBtn = document.getElementById('mobile-menu-btn');

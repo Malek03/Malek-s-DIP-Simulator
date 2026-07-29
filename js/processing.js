@@ -170,6 +170,81 @@ const ImageProcessing = (() => {
   }
 
   /* ----------------------------------------------------------
+   * 7. Histogram Equalization  —  s = T(r) = (L-1) · CDF(r)
+   * Applies equalization on each channel (R, G, B) independently
+   * ---------------------------------------------------------- */
+  function applyHistogramEqualization(imageData) {
+    const src = imageData.data;
+    const dst = new Uint8ClampedArray(src.length);
+    const totalPixels = imageData.width * imageData.height;
+
+    // Compute histogram for each channel
+    const histR = new Array(256).fill(0);
+    const histG = new Array(256).fill(0);
+    const histB = new Array(256).fill(0);
+
+    for (let i = 0; i < src.length; i += 4) {
+      histR[src[i]]++;
+      histG[src[i + 1]]++;
+      histB[src[i + 2]]++;
+    }
+
+    // Build CDF-based LUT for each channel
+    function buildEqualizationLUT(hist) {
+      const cdf = new Array(256);
+      cdf[0] = hist[0];
+      for (let i = 1; i < 256; i++) {
+        cdf[i] = cdf[i - 1] + hist[i];
+      }
+      // Find cdf_min (first non-zero CDF value)
+      let cdfMin = 0;
+      for (let i = 0; i < 256; i++) {
+        if (cdf[i] > 0) { cdfMin = cdf[i]; break; }
+      }
+      // Build LUT: s = round((cdf(r) - cdf_min) / (totalPixels - cdf_min) * 255)
+      const lut = new Uint8ClampedArray(256);
+      const denom = totalPixels - cdfMin;
+      if (denom === 0) {
+        for (let i = 0; i < 256; i++) lut[i] = i;
+      } else {
+        for (let i = 0; i < 256; i++) {
+          lut[i] = Math.round(((cdf[i] - cdfMin) / denom) * 255);
+        }
+      }
+      return lut;
+    }
+
+    const lutR = buildEqualizationLUT(histR);
+    const lutG = buildEqualizationLUT(histG);
+    const lutB = buildEqualizationLUT(histB);
+
+    for (let i = 0; i < src.length; i += 4) {
+      dst[i]     = lutR[src[i]];
+      dst[i + 1] = lutG[src[i + 1]];
+      dst[i + 2] = lutB[src[i + 2]];
+      dst[i + 3] = src[i + 3]; // alpha
+    }
+    return new ImageData(dst, imageData.width, imageData.height);
+  }
+
+  /* ----------------------------------------------------------
+   * Utility: Compute per-channel histograms (R, G, B)
+   * Returns { r: array[256], g: array[256], b: array[256] }
+   * ---------------------------------------------------------- */
+  function computeChannelHistograms(imageData) {
+    const histR = new Array(256).fill(0);
+    const histG = new Array(256).fill(0);
+    const histB = new Array(256).fill(0);
+    const src = imageData.data;
+    for (let i = 0; i < src.length; i += 4) {
+      histR[src[i]]++;
+      histG[src[i + 1]]++;
+      histB[src[i + 2]]++;
+    }
+    return { r: histR, g: histG, b: histB };
+  }
+
+  /* ----------------------------------------------------------
    * Utility: Generate a sample grayscale gradient image
    * Used for concept simulations when no image is uploaded
    * ---------------------------------------------------------- */
@@ -194,9 +269,11 @@ const ImageProcessing = (() => {
     applyThreshold,
     applyContrastStretch,
     applyBitPlane,
+    applyHistogramEqualization,
     extractBitPlane,
     toGrayscale,
     computeHistogram,
+    computeChannelHistograms,
     generateGradient,
     buildLUT,
     applyLUT,

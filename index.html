@@ -6,8 +6,8 @@
   <title>Vision Studio — معالجة الصور الرقمية</title>
   <meta name="description" content="منصة أكاديمية تفاعلية لتعليم معالجة الصور الرقمية - محاكاة تفاعلية، توليد كود بايثون، ومعالجة مباشرة.">
 
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Tailwind CSS Local -->
+  <script src="js/tailwindcss.js"></script>
   <script>
     tailwind.config = {
       darkMode: 'class',
@@ -22,9 +22,7 @@
   </script>
 
   <!-- Google Fonts: Tajawal + JetBrains Mono -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+  <link href="css/fonts.css" rel="stylesheet">
 
   <!-- Custom CSS -->
   <link rel="stylesheet" href="css/custom.css">
@@ -392,7 +390,7 @@
           </div>
           <h1 class="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mb-3">التحسين على مستوى البكسل</h1>
           <p class="text-slate-500 dark:text-slate-400 text-lg max-w-2xl mx-auto">
-            ستة تحويلات أساسية تعمل على كل بكسل بشكل مستقل — الأساس الذي تُبنى عليه كل تقنيات معالجة الصور.
+            سبعة تحويلات أساسية تعمل على كل بكسل بشكل مستقل — الأساس الذي تُبنى عليه كل تقنيات معالجة الصور.
           </p>
         </div>
 
@@ -500,6 +498,25 @@
               bit<sub>k</sub> = (<span class="var-math">pixel</span> >> <span class="var-math">k</span>) & 1
             </div>
           </a>
+
+          <!-- 7. Histogram Equalization -->
+          <a href="#point-processing/histeq" data-route="point-processing/histeq" class="concept-card bg-white dark:bg-gray-800 rounded-2xl p-6 border border-slate-200 dark:border-gray-700 shadow-sm cursor-pointer block">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-10 h-10 rounded-lg bg-indigo-100 dark:bg-indigo-900/30 flex items-center justify-center">
+                <svg class="w-5 h-5 text-indigo-600 dark:text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-bold text-slate-900 dark:text-white">تسوية الهيستوغرام</h3>
+                <p class="text-xs text-slate-400">Histogram Equalization</p>
+              </div>
+            </div>
+            <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed mb-3">إعادة توزيع مستويات الرمادي لتحسين التباين تلقائياً عبر تسوية دالة التوزيع التراكمي (CDF).</p>
+            <div class="formula-box text-sm bg-slate-50 dark:bg-gray-700/50 rounded-lg p-2">
+              <span class="var-math">s</span> = T(<span class="var-math">r</span>) = (<span class="var-math">L</span>−1) · CDF(<span class="var-math">r</span>)
+            </div>
+          </a>
         </div>
                   <!-- CTA Banner to Playground -->
           <div class="mt-12 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-2xl p-8 text-center text-white shadow-lg relative overflow-hidden">
@@ -595,6 +612,7 @@
                 <option value="threshold">العتبة (Threshold)</option>
                 <option value="contrast">تمدد التباين (Contrast Stretch)</option>
                 <option value="bitplane">تقطيع المستوى البتّي (Bit-plane)</option>
+                <option value="histeq">تسوية الهيستوغرام (Histogram Equalization)</option>
               </select>
 
               <!-- Dynamic Controls Container -->
@@ -982,6 +1000,82 @@
             <div class="text-xs text-center text-slate-400">7 = MSB (الأهم) &nbsp;←→&nbsp; 0 = LSB (الأقل)</div>
           </div>
           <div id="sim-bitplane-canvas"></div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ---- Concept: Histogram Equalization ---- -->
+  <div id="section-concept-histeq" class="section-view">
+    <section class="py-12 px-4 sm:px-6">
+      <div class="max-w-4xl mx-auto">
+        <a href="#point-processing" data-route="point-processing" class="inline-flex items-center gap-2 text-sm text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300 mb-8 font-medium">
+          <svg class="w-4 h-4 rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+          العودة إلى معالجة النقاط
+        </a>
+        <div class="flex items-center gap-3 mb-6">
+          <div class="w-12 h-12 rounded-xl bg-indigo-100 dark:bg-indigo-900/30 flex items-center justify-center">
+            <svg class="w-6 h-6 text-indigo-600 dark:text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+            </svg>
+          </div>
+          <div>
+            <h1 class="text-3xl font-bold text-slate-900 dark:text-white">تسوية الهيستوغرام</h1>
+            <p class="text-slate-400">Histogram Equalization</p>
+          </div>
+        </div>
+
+        <!-- Formula -->
+        <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-slate-200 dark:border-gray-700 mb-8">
+          <h2 class="text-lg font-bold text-slate-800 dark:text-slate-200 mb-3">المعادلة الرياضية</h2>
+          <div class="formula-box text-xl bg-slate-50 dark:bg-gray-700/50 rounded-xl p-4 mb-4">
+            <span class="var-math">s</span> = T(<span class="var-math">r</span>) = (<span class="var-math">L</span> − 1) · CDF(<span class="var-math">r</span>)
+          </div>
+          <p class="text-sm text-slate-600 dark:text-slate-400 mb-3">
+            حيث <strong>CDF(r)</strong> هي دالة التوزيع التراكمي للهيستوغرام، و <strong>L</strong> عدد مستويات الرمادي (256 للصور 8-bit).
+          </p>
+          <div class="bg-slate-50 dark:bg-gray-700/30 rounded-lg p-3 text-sm text-slate-600 dark:text-slate-400">
+            <strong class="text-slate-800 dark:text-slate-200">خطوات الخوارزمية:</strong>
+            <ol class="list-decimal list-inside space-y-1 mt-2">
+              <li>حساب الهيستوغرام h(r) لكل مستوى رمادي</li>
+              <li>حساب التوزيع التراكمي: CDF(r) = Σ h(i) / N, i=0..r</li>
+              <li>تطبيق دالة التحويل: s = round((L-1) · CDF(r))</li>
+              <li>استبدال قيم البكسل الأصلية بالقيم الجديدة</li>
+            </ol>
+          </div>
+        </div>
+
+        <!-- Use Cases -->
+        <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-slate-200 dark:border-gray-700 mb-8">
+          <h2 class="text-lg font-bold text-slate-800 dark:text-slate-200 mb-3">الاستخدامات العملية</h2>
+          <ul class="space-y-2 text-sm text-slate-600 dark:text-slate-400">
+            <li class="flex items-start gap-2"><span class="text-indigo-500 mt-0.5">•</span>تحسين التباين التلقائي — لا يحتاج معاملات يدوية، مثالي للصور الباهتة والمظلمة</li>
+            <li class="flex items-start gap-2"><span class="text-indigo-500 mt-0.5">•</span>التصوير الطبي — تحسين وضوح صور الأشعة والرنين المغناطيسي</li>
+            <li class="flex items-start gap-2"><span class="text-indigo-500 mt-0.5">•</span>صور الأقمار الاصطناعية — إبراز التفاصيل الجغرافية المخفية</li>
+            <li class="flex items-start gap-2"><span class="text-indigo-500 mt-0.5">•</span>خطوة تمهيدية لعمليات التعرف على الأنماط والكشف عن الحواف</li>
+          </ul>
+        </div>
+
+        <!-- How it works -->
+        <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-slate-200 dark:border-gray-700 mb-8">
+          <h2 class="text-lg font-bold text-slate-800 dark:text-slate-200 mb-3">كيف تعمل التسوية؟</h2>
+          <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+            تسوية الهيستوغرام تهدف إلى جعل توزيع مستويات الرمادي منتظماً (Uniform Distribution).
+            بدلاً من أن تتركز البكسلات في نطاق ضيق من القيم، تُعاد توزيعها لتغطي كامل المدى [0, 255].
+            هذا ينتج عنه تحسين كبير في التباين، خاصة في الصور ذات التباين المنخفض.
+          </p>
+          <div class="mt-3 p-3 bg-amber-50 dark:bg-amber-900/20 rounded-lg border border-amber-200 dark:border-amber-700/50">
+            <p class="text-xs text-amber-800 dark:text-amber-300">
+              <strong>ملاحظة:</strong> في الصور الملونة (RGB)، يتم تطبيق التسوية على كل قناة لون بشكل مستقل. يمكن أيضاً تحويل الصورة إلى فضاء لوني آخر (مثل HSV أو YCrCb) وتطبيق التسوية على قناة الإضاءة فقط للحفاظ على الألوان.
+            </p>
+          </div>
+        </div>
+
+        <!-- Interactive Simulation -->
+        <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-slate-200 dark:border-gray-700">
+          <h2 class="text-lg font-bold text-slate-800 dark:text-slate-200 mb-4">محاكاة تفاعلية</h2>
+          <p class="text-xs text-center text-slate-400 mb-3">التسوية تُطبَّق تلقائياً — يُعرض الهيستوغرام لكل قناة لون (R, G, B) قبل وبعد</p>
+          <div id="sim-histeq-canvas"></div>
         </div>
       </div>
     </section>

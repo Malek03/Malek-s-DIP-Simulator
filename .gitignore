@@ -1,1 +1,11 @@
 LORE.md
+node_modules
+main.js
+package.json
+package-lock.json
+تشغيل المنصة.bat
+dist
+build_log.txt
+app.py
+app.spec
+build_log

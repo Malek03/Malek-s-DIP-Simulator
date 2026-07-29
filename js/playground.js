@@ -267,6 +267,16 @@ const Playground = (() => {
           </div>
         </div>
       `,
+      histeq: `
+        <div class="text-sm text-slate-500 dark:text-slate-400 text-center py-4">
+          <svg class="w-8 h-8 mx-auto mb-2 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+          </svg>
+          لا يحتاج معاملات — يُطبَّق تلقائياً<br>
+          <span class="text-xs text-slate-400">يتم عرض الهيستوغرام لكل قناة لون قبل وبعد التسوية أدناه</span>
+        </div>
+        <div id="pg-histeq-charts" class="space-y-3 mt-2"></div>
+      `,
     };
 
     controlsContainer.innerHTML = controlsMap[currentType] || '';
@@ -411,6 +421,8 @@ const Playground = (() => {
           : [7];
         return { planes };
       }
+      case 'histeq':
+        return {};
       default:
         return {};
     }
@@ -446,12 +458,21 @@ const Playground = (() => {
       case 'bitplane':
         result = ImageProcessing.applyBitPlane(originalImageData, params.planes);
         break;
+      case 'histeq':
+        result = ImageProcessing.applyHistogramEqualization(originalImageData);
+        break;
       default:
         result = originalImageData;
     }
 
     procCtx.putImageData(result, 0, 0);
     drawHistogram(result);
+
+    // For histogram equalization, draw per-channel before/after histograms
+    if (currentType === 'histeq') {
+      drawChannelHistograms(originalImageData, result);
+    }
+
     isProcessing = false;
   }
 
@@ -525,6 +546,105 @@ const Playground = (() => {
     for (let i = 0; i < 256; i++) {
       const barHeight = (hist[i] / maxFreq) * (h - 4);
       ctx.fillRect(i * barWidth, h - barHeight, Math.max(barWidth - 0.5, 1), barHeight);
+    }
+  }
+
+  /**
+   * Draw per-channel (R, G, B) histograms before and after equalization.
+   */
+  function drawChannelHistograms(beforeData, afterData) {
+    const container = document.getElementById('pg-histeq-charts');
+    if (!container) return;
+    container.innerHTML = '';
+
+    const isDark = document.documentElement.classList.contains('dark');
+    const bgColor = isDark ? '#1f2937' : '#f8fafc';
+    const borderColor = isDark ? '#374151' : '#e2e8f0';
+
+    const beforeHists = ImageProcessing.computeChannelHistograms(beforeData);
+    const afterHists = ImageProcessing.computeChannelHistograms(afterData);
+
+    const channels = [
+      { key: 'r', label: 'أحمر (Red)',  color: isDark ? 'rgba(248,113,113,0.7)' : 'rgba(239,68,68,0.6)' },
+      { key: 'g', label: 'أخضر (Green)', color: isDark ? 'rgba(74,222,128,0.7)' : 'rgba(34,197,94,0.6)' },
+      { key: 'b', label: 'أزرق (Blue)',  color: isDark ? 'rgba(96,165,250,0.7)' : 'rgba(59,130,246,0.6)' },
+    ];
+
+    for (const ch of channels) {
+      // Channel wrapper
+      const chWrapper = document.createElement('div');
+      chWrapper.className = 'rounded-lg border p-3';
+      chWrapper.style.borderColor = borderColor;
+      chWrapper.style.background = bgColor;
+
+      // Channel label
+      const label = document.createElement('div');
+      label.className = 'text-xs font-semibold text-center mb-2';
+      label.style.color = ch.color;
+      label.textContent = ch.label;
+      chWrapper.appendChild(label);
+
+      // Before/After row
+      const row = document.createElement('div');
+      row.className = 'grid grid-cols-2 gap-2';
+
+      // Before histogram
+      const beforeCol = document.createElement('div');
+      const beforeLabel = document.createElement('div');
+      beforeLabel.className = 'text-[10px] text-center text-slate-400 mb-1';
+      beforeLabel.textContent = 'قبل التسوية';
+      const beforeCanvas = document.createElement('canvas');
+      beforeCanvas.style.width = '100%';
+      beforeCanvas.style.height = '50px';
+      beforeCanvas.style.borderRadius = '4px';
+      beforeCol.appendChild(beforeLabel);
+      beforeCol.appendChild(beforeCanvas);
+
+      // After histogram
+      const afterCol = document.createElement('div');
+      const afterLabel = document.createElement('div');
+      afterLabel.className = 'text-[10px] text-center text-slate-400 mb-1';
+      afterLabel.textContent = 'بعد التسوية';
+      const afterCanvas = document.createElement('canvas');
+      afterCanvas.style.width = '100%';
+      afterCanvas.style.height = '50px';
+      afterCanvas.style.borderRadius = '4px';
+      afterCol.appendChild(afterLabel);
+      afterCol.appendChild(afterCanvas);
+
+      row.appendChild(beforeCol);
+      row.appendChild(afterCol);
+      chWrapper.appendChild(row);
+      container.appendChild(chWrapper);
+
+      // Draw on next frame after layout
+      requestAnimationFrame(() => {
+        drawSingleChannelHist(beforeCanvas, beforeHists[ch.key], ch.color, bgColor);
+        drawSingleChannelHist(afterCanvas, afterHists[ch.key], ch.color, bgColor);
+      });
+    }
+  }
+
+  /**
+   * Draw a single channel histogram on a canvas.
+   */
+  function drawSingleChannelHist(canvas, hist, barColor, bgColor) {
+    const w = canvas.width = canvas.offsetWidth || 150;
+    const h = canvas.height = 50;
+    const ctx = canvas.getContext('2d');
+
+    ctx.fillStyle = bgColor;
+    ctx.fillRect(0, 0, w, h);
+
+    const maxFreq = Math.max(...hist);
+    if (maxFreq === 0) return;
+
+    const barWidth = w / 256;
+    ctx.fillStyle = barColor;
+
+    for (let i = 0; i < 256; i++) {
+      const barHeight = (hist[i] / maxFreq) * (h - 2);
+      ctx.fillRect(i * barWidth, h - barHeight, Math.max(barWidth - 0.3, 0.8), barHeight);
     }
   }
 

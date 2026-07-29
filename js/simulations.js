@@ -279,6 +279,113 @@ const Simulations = (() => {
     initialized[containerId] = true;
   }
 
+  /* ----------------------------------------------------------
+   * 7. Histogram Equalization Simulation
+   * ---------------------------------------------------------- */
+  function initHistEq(containerId) {
+    if (initialized[containerId]) return;
+    const container = document.getElementById(containerId);
+    if (!container) return;
+
+    const { origCtx, procCtx } = setupCanvasPair(container, SIM_W, SIM_H);
+    const originalData = drawSampleImage(origCtx, SIM_W, SIM_H);
+    const result = ImageProcessing.applyHistogramEqualization(originalData);
+    procCtx.putImageData(result, 0, 0);
+
+    // Draw per-channel histograms (before and after)
+    const isDark = document.documentElement.classList.contains('dark');
+    const bgColor = isDark ? '#1f2937' : '#f8fafc';
+    const borderColor = isDark ? '#374151' : '#e2e8f0';
+
+    const beforeHists = ImageProcessing.computeChannelHistograms(originalData);
+    const afterHists = ImageProcessing.computeChannelHistograms(result);
+
+    const channels = [
+      { key: 'r', label: 'أحمر (Red)',  color: isDark ? 'rgba(248,113,113,0.7)' : 'rgba(239,68,68,0.6)' },
+      { key: 'g', label: 'أخضر (Green)', color: isDark ? 'rgba(74,222,128,0.7)' : 'rgba(34,197,94,0.6)' },
+      { key: 'b', label: 'أزرق (Blue)',  color: isDark ? 'rgba(96,165,250,0.7)' : 'rgba(59,130,246,0.6)' },
+    ];
+
+    const histContainer = document.createElement('div');
+    histContainer.className = 'space-y-3 mt-4';
+
+    for (const ch of channels) {
+      const chWrapper = document.createElement('div');
+      chWrapper.className = 'rounded-lg border p-3';
+      chWrapper.style.borderColor = borderColor;
+      chWrapper.style.background = bgColor;
+
+      const label = document.createElement('div');
+      label.className = 'text-xs font-semibold text-center mb-2';
+      label.style.color = ch.color;
+      label.textContent = ch.label;
+      chWrapper.appendChild(label);
+
+      const row = document.createElement('div');
+      row.className = 'grid grid-cols-2 gap-3';
+
+      // Before
+      const beforeCol = document.createElement('div');
+      const beforeLabel = document.createElement('div');
+      beforeLabel.className = 'text-[10px] text-center text-slate-400 mb-1';
+      beforeLabel.textContent = 'قبل التسوية';
+      const beforeCanvas = document.createElement('canvas');
+      beforeCanvas.style.width = '100%';
+      beforeCanvas.style.height = '60px';
+      beforeCanvas.style.borderRadius = '4px';
+      beforeCol.appendChild(beforeLabel);
+      beforeCol.appendChild(beforeCanvas);
+
+      // After
+      const afterCol = document.createElement('div');
+      const afterLabel = document.createElement('div');
+      afterLabel.className = 'text-[10px] text-center text-slate-400 mb-1';
+      afterLabel.textContent = 'بعد التسوية';
+      const afterCanvas = document.createElement('canvas');
+      afterCanvas.style.width = '100%';
+      afterCanvas.style.height = '60px';
+      afterCanvas.style.borderRadius = '4px';
+      afterCol.appendChild(afterLabel);
+      afterCol.appendChild(afterCanvas);
+
+      row.appendChild(beforeCol);
+      row.appendChild(afterCol);
+      chWrapper.appendChild(row);
+      histContainer.appendChild(chWrapper);
+
+      requestAnimationFrame(() => {
+        drawSimHistBar(beforeCanvas, beforeHists[ch.key], ch.color, bgColor);
+        drawSimHistBar(afterCanvas, afterHists[ch.key], ch.color, bgColor);
+      });
+    }
+
+    container.appendChild(histContainer);
+    initialized[containerId] = true;
+  }
+
+  /**
+   * Helper: Draw a single histogram bar chart on canvas.
+   */
+  function drawSimHistBar(canvas, hist, barColor, bgColor) {
+    const w = canvas.width = canvas.offsetWidth || 180;
+    const h = canvas.height = 60;
+    const ctx = canvas.getContext('2d');
+
+    ctx.fillStyle = bgColor;
+    ctx.fillRect(0, 0, w, h);
+
+    const maxFreq = Math.max(...hist);
+    if (maxFreq === 0) return;
+
+    const barWidth = w / 256;
+    ctx.fillStyle = barColor;
+
+    for (let i = 0; i < 256; i++) {
+      const barHeight = (hist[i] / maxFreq) * (h - 2);
+      ctx.fillRect(i * barWidth, h - barHeight, Math.max(barWidth - 0.3, 0.8), barHeight);
+    }
+  }
+
   // Public API
   return {
     initNegative,
@@ -287,5 +394,6 @@ const Simulations = (() => {
     initThreshold,
     initContrast,
     initBitPlane,
+    initHistEq,
   };
 })();

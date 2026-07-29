@@ -174,6 +174,59 @@ plt.tight_layout()
 plt.show()`;
   }
 
+  function generateHistEq() {
+    return `import cv2
+import numpy as np
+import matplotlib.pyplot as plt
+
+# قراءة الصورة الملونة
+img = cv2.imread('image.jpg')
+img_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+
+# تسوية الهيستوغرام لكل قناة لون
+channels = cv2.split(img)
+equalized_channels = [cv2.equalizeHist(ch) for ch in channels]
+equalized = cv2.merge(equalized_channels)
+equalized_rgb = cv2.cvtColor(equalized, cv2.COLOR_BGR2RGB)
+
+# رسم الهيستوغرام قبل وبعد لكل قناة
+colors = ('r', 'g', 'b')
+labels = ('أحمر (Red)', 'أخضر (Green)', 'أزرق (Blue)')
+
+fig, axes = plt.subplots(3, 2, figsize=(12, 10))
+fig.suptitle('تسوية الهيستوغرام - قبل وبعد', fontsize=14)
+
+for i, (color, label) in enumerate(zip(colors, labels)):
+    # هيستوغرام قبل التسوية
+    hist_before = cv2.calcHist([img], [i], None, [256], [0, 256])
+    axes[i, 0].bar(range(256), hist_before.ravel(), color=color, alpha=0.7)
+    axes[i, 0].set_title(f'{label} - قبل')
+    axes[i, 0].set_xlim([0, 256])
+    
+    # هيستوغرام بعد التسوية
+    hist_after = cv2.calcHist([equalized], [i], None, [256], [0, 256])
+    axes[i, 1].bar(range(256), hist_after.ravel(), color=color, alpha=0.7)
+    axes[i, 1].set_title(f'{label} - بعد')
+    axes[i, 1].set_xlim([0, 256])
+
+plt.tight_layout()
+plt.show()
+
+# عرض الصورة قبل وبعد
+fig2, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5))
+ax1.imshow(img_rgb)
+ax1.set_title('الأصلية')
+ax1.axis('off')
+ax2.imshow(equalized_rgb)
+ax2.set_title('بعد تسوية الهيستوغرام')
+ax2.axis('off')
+plt.tight_layout()
+plt.show()
+
+# حفظ الناتج
+cv2.imwrite('histogram_equalized.jpg', equalized)`;
+  }
+
   /* ----------------------------------------------------------
    * Syntax Highlighter — regex-based HTML coloring
    * ---------------------------------------------------------- */
@@ -208,7 +261,9 @@ plt.show()`;
                  'imread', 'imwrite', 'imshow', 'waitKey', 'destroyAllWindows',
                  'threshold', 'zeros_like', 'clip', 'astype', 'power', 'log',
                  'bitwise_or', 'subplots', 'show', 'tight_layout', 'set_title',
-                 'axis', 'zeros', 'ones', 'array', 'contrast_stretch'];
+                 'axis', 'zeros', 'ones', 'array', 'contrast_stretch',
+                 'equalizeHist', 'split', 'merge', 'calcHist', 'cvtColor',
+                 'suptitle', 'bar', 'set_xlim', 'ravel', 'enumerate', 'zip'];
     const fnRegex = new RegExp('\\b(' + fns.join('|') + ')\\b', 'g');
     html = html.replace(fnRegex, '{{span:fn}}$1{{/span}}');
 
@@ -217,8 +272,11 @@ plt.show()`;
 
     // Special variables
     const specialVars = ['img', 'output', 'result', 'negative', 'binary',
-                         'gamma_corrected', 'log_transformed', 'stretched',
-                         'normalized', 'plane', 'fig', 'axes', 'ax', 'mask1', 'mask2', 'mask3'];
+                          'gamma_corrected', 'log_transformed', 'stretched',
+                          'normalized', 'plane', 'fig', 'axes', 'ax', 'mask1', 'mask2', 'mask3',
+                          'equalized', 'equalized_rgb', 'img_rgb', 'channels',
+                          'equalized_channels', 'hist_before', 'hist_after',
+                          'ax1', 'ax2', 'fig2'];
     const varRegex = new RegExp('\\b(' + specialVars.join('|') + ')\\b', 'g');
     html = html.replace(varRegex, '{{span:var}}$1{{/span}}');
 
@@ -258,6 +316,9 @@ plt.show()`;
         break;
       case 'bitplane':
         raw = generateBitPlane(params.planes ?? [7]);
+        break;
+      case 'histeq':
+        raw = generateHistEq();
         break;
       default:
         raw = '# اختر نوع المعالجة من القائمة';

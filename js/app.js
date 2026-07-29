@@ -18,6 +18,7 @@ const App = (() => {
     'point-processing/threshold': 'section-concept-threshold',
     'point-processing/contrast': 'section-concept-contrast',
     'point-processing/bitplane': 'section-concept-bitplane',
+    'point-processing/histeq': 'section-concept-histeq',
     // Image Basics
     'image-basics': 'section-image-basics',
     'basics-playground': 'section-basics-playground',
@@ -180,6 +181,9 @@ const App = (() => {
         break;
       case 'bitplane':
         Simulations.initBitPlane('sim-bitplane-canvas', 'sim-bitplane-btns');
+        break;
+      case 'histeq':
+        Simulations.initHistEq('sim-histeq-canvas');
         break;
     }
   }

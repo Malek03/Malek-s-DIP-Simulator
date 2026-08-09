@@ -32,7 +32,13 @@ const App = (() => {
     'image-rep/rgb': 'section-concept-rgb',
     'image-rep/sampling': 'section-concept-sampling',
     'image-rep/quantization': 'section-concept-quantization',
-    'image-rep/colormix': 'section-concept-colormix'
+    'image-rep/colormix': 'section-concept-colormix',
+    // Smoothing Filters
+    'smooth-filters': 'section-smooth-filters',
+    'smooth-playground': 'section-smooth-playground',
+    'smooth-filters/mean': 'section-concept-mean',
+    'smooth-filters/gaussian': 'section-concept-gaussian',
+    'smooth-filters/median': 'section-concept-median'
   };
 
   let currentRoute = 'home';
@@ -130,12 +136,18 @@ const App = (() => {
       setTimeout(() => {
         initRepSimulation(view.split('/')[1]);
       }, 100);
+    } else if (view.startsWith('smooth-filters/')) {
+      setTimeout(() => {
+        initSmoothSimulation(view.split('/')[1]);
+      }, 100);
     } else if (view === 'playground' && typeof Playground !== 'undefined') {
       setTimeout(() => Playground.init(), 100);
     } else if (view === 'basics-playground' && typeof BasicsPlayground !== 'undefined') {
       setTimeout(() => BasicsPlayground.init(), 100);
     } else if (view === 'rep-playground' && typeof RepPlayground !== 'undefined') {
       setTimeout(() => RepPlayground.init(), 100);
+    } else if (view === 'smooth-playground' && typeof SmoothPlayground !== 'undefined') {
+      setTimeout(() => SmoothPlayground.init(), 100);
     }
   }
 
@@ -235,6 +247,26 @@ const App = (() => {
   }
 
   /* ----------------------------------------------------------
+   * Smoothing Filters Simulations Initializer
+   * ---------------------------------------------------------- */
+  
+  function initSmoothSimulation(concept) {
+    if (typeof SmoothSimulations === 'undefined') return;
+    
+    switch(concept) {
+      case 'mean':
+        SmoothSimulations.initMean('sim-mean-canvas', 'sim-mean-slider', 'sim-mean-value');
+        break;
+      case 'gaussian':
+        SmoothSimulations.initGaussian('sim-gaussian-canvas', 'sim-gaussian-size-slider', 'sim-gaussian-sigma-slider', 'sim-gaussian-size-value', 'sim-gaussian-sigma-value');
+        break;
+      case 'median':
+        SmoothSimulations.initMedian('sim-median-canvas', 'sim-median-slider', 'sim-median-value');
+        break;
+    }
+  }
+
+  /* ----------------------------------------------------------
    * Utility to Download Canvas Image
    * ---------------------------------------------------------- */
   function downloadCanvasImage(canvasId, defaultFilename) {
@@ -271,6 +303,9 @@ const App = (() => {
 
     const repSaveBtn = document.getElementById('rep-playground-save');
     if (repSaveBtn) repSaveBtn.addEventListener('click', () => downloadCanvasImage('rep-playground-processed', 'image_rep_result.png'));
+
+    const smoothSaveBtn = document.getElementById('smooth-playground-save');
+    if (smoothSaveBtn) smoothSaveBtn.addEventListener('click', () => downloadCanvasImage('smooth-playground-processed', 'smooth_filter_result.png'));
 
     // Mobile Menu
     const menuBtn = document.getElementById('mobile-menu-btn');

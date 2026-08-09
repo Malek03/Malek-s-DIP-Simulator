@@ -434,3 +434,228 @@ input[type="range"]::-moz-range-thumb {
 .dark .sim-canvas-wrap canvas {
   border-color: #374151;
 }
+
+/* ============================================================
+   Convolution Visualization Styles
+   ============================================================ */
+
+/* Wrapper */
+.conv-viz-wrapper {
+  direction: ltr;
+  text-align: center;
+  padding: 1rem 0;
+}
+
+/* Top row: Input ⊛ Kernel */
+.conv-viz-top-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+
+.conv-viz-section {
+  flex-shrink: 0;
+}
+
+.conv-viz-operator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #94a3b8;
+  min-height: 80px;
+  padding: 0 4px;
+}
+
+.dark .conv-viz-operator {
+  color: #64748b;
+}
+
+.conv-viz-eq-row {
+  margin: 8px 0;
+}
+
+/* Matrix Grid */
+.matrix-grid {
+  display: grid;
+  gap: 1px;
+  background: #e2e8f0;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  overflow: hidden;
+  width: fit-content;
+  margin: 0 auto;
+}
+
+.dark .matrix-grid {
+  background: #4b5563;
+  border-color: #4b5563;
+}
+
+/* Matrix Cell */
+.matrix-cell {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.6rem;
+  font-weight: 600;
+  font-family: 'JetBrains Mono', monospace;
+  background: #fff;
+  color: #334155;
+  transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.dark .matrix-cell {
+  background: #1f2937;
+  color: #e2e8f0;
+}
+
+/* Kernel cells — slightly smaller text */
+.matrix-cell.kernel-cell {
+  font-size: 0.5rem;
+  color: #6366f1;
+  font-weight: 700;
+}
+
+.dark .matrix-cell.kernel-cell {
+  color: #a5b4fc;
+}
+
+/* Padding cells — subtle red bg */
+.matrix-cell.padding-cell {
+  background: rgba(239, 68, 68, 0.12);
+  color: #94a3b8;
+}
+
+.dark .matrix-cell.padding-cell {
+  background: rgba(239, 68, 68, 0.15);
+  color: #64748b;
+}
+
+/* Highlight: current input window — yellow */
+.matrix-cell.highlight-input {
+  background: rgba(250, 204, 21, 0.35) !important;
+  transform: scale(1.05);
+}
+
+.dark .matrix-cell.highlight-input {
+  background: rgba(250, 204, 21, 0.25) !important;
+}
+
+/* Highlight: kernel cells — purple */
+.matrix-cell.highlight-kernel {
+  background: rgba(99, 102, 241, 0.3) !important;
+  transform: scale(1.05);
+}
+
+.dark .matrix-cell.highlight-kernel {
+  background: rgba(129, 140, 248, 0.3) !important;
+}
+
+/* Highlight: current output cell — teal accent */
+.matrix-cell.highlight-output {
+  background: rgba(20, 184, 166, 0.35) !important;
+  transform: scale(1.1);
+  font-weight: 800;
+}
+
+.dark .matrix-cell.highlight-output {
+  background: rgba(45, 212, 191, 0.3) !important;
+}
+
+/* Control Buttons */
+.conv-viz-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.conv-ctrl-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 16px;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid;
+}
+
+.conv-ctrl-pause {
+  background: #eef2ff;
+  color: #6366f1;
+  border-color: #c7d2fe;
+}
+
+.conv-ctrl-pause:hover {
+  background: #e0e7ff;
+}
+
+.dark .conv-ctrl-pause {
+  background: rgba(99, 102, 241, 0.15);
+  color: #a5b4fc;
+  border-color: rgba(99, 102, 241, 0.3);
+}
+
+.conv-ctrl-stop {
+  background: #fef2f2;
+  color: #ef4444;
+  border-color: #fecaca;
+}
+
+.conv-ctrl-stop:hover {
+  background: #fee2e2;
+}
+
+.dark .conv-ctrl-stop {
+  background: rgba(239, 68, 68, 0.12);
+  color: #fca5a5;
+  border-color: rgba(239, 68, 68, 0.25);
+}
+
+/* Calculation Display */
+.conv-calc-display {
+  margin-top: 12px;
+  padding: 8px 16px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  color: #475569;
+  direction: ltr;
+  text-align: left;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.dark .conv-calc-display {
+  background: #111827;
+  border-color: #374151;
+  color: #94a3b8;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .matrix-cell {
+    width: 24px;
+    height: 24px;
+    font-size: 0.5rem;
+  }
+  .matrix-cell.kernel-cell {
+    font-size: 0.4rem;
+  }
+  .conv-viz-top-row {
+    gap: 8px;
+  }
+}

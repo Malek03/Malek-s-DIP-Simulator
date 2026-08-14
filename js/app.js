@@ -38,7 +38,16 @@ const App = (() => {
     'smooth-playground': 'section-smooth-playground',
     'smooth-filters/mean': 'section-concept-mean',
     'smooth-filters/gaussian': 'section-concept-gaussian',
-    'smooth-filters/median': 'section-concept-median'
+    'smooth-filters/median': 'section-concept-median',
+    // Sharpening Filters
+    'sharpen-filters': 'section-sharpen-filters',
+    'sharpen-playground': 'section-sharpen-playground',
+    'sharpen-filters/laplacian': 'section-concept-laplacian',
+    'sharpen-filters/sobel': 'section-concept-sobel',
+    'sharpen-filters/unsharp': 'section-concept-unsharp',
+    'sharpen-filters/canny': 'section-concept-canny',
+    'sharpen-filters/prewitt': 'section-concept-prewitt',
+    'sharpen-filters/highboost': 'section-concept-highboost'
   };
 
   let currentRoute = 'home';
@@ -140,6 +149,10 @@ const App = (() => {
       setTimeout(() => {
         initSmoothSimulation(view.split('/')[1]);
       }, 100);
+    } else if (view.startsWith('sharpen-filters/')) {
+      setTimeout(() => {
+        initSharpenSimulation(view.split('/')[1]);
+      }, 100);
     } else if (view === 'playground' && typeof Playground !== 'undefined') {
       setTimeout(() => Playground.init(), 100);
     } else if (view === 'basics-playground' && typeof BasicsPlayground !== 'undefined') {
@@ -148,6 +161,8 @@ const App = (() => {
       setTimeout(() => RepPlayground.init(), 100);
     } else if (view === 'smooth-playground' && typeof SmoothPlayground !== 'undefined') {
       setTimeout(() => SmoothPlayground.init(), 100);
+    } else if (view === 'sharpen-playground' && typeof SharpenPlayground !== 'undefined') {
+      setTimeout(() => SharpenPlayground.init(), 100);
     }
   }
 
@@ -267,6 +282,35 @@ const App = (() => {
   }
 
   /* ----------------------------------------------------------
+   * Sharpening Filters Simulations Initializer
+   * ---------------------------------------------------------- */
+  
+  function initSharpenSimulation(concept) {
+    if (typeof SharpenSimulations === 'undefined') return;
+
+    switch(concept) {
+      case 'laplacian':
+        SharpenSimulations.initLaplacian('sim-laplacian-container', 'sim-lap-type', 'sim-lap-val');
+        break;
+      case 'sobel':
+        SharpenSimulations.initSobel('sim-sobel-container', 'sim-sobel-size', 'sim-sobel-axis', 'sim-sobel-val');
+        break;
+      case 'unsharp':
+        SharpenSimulations.initUnsharpMask('sim-unsharp-container', 'sim-unsharp-sigma', 'sim-unsharp-k', 'sim-unsharp-sigma-val', 'sim-unsharp-k-val');
+        break;
+      case 'canny':
+        SharpenSimulations.initCanny('sim-canny-container', 'sim-canny-low', 'sim-canny-high', 'sim-canny-low-val', 'sim-canny-high-val');
+        break;
+      case 'prewitt':
+        SharpenSimulations.initPrewitt('sim-prewitt-container');
+        break;
+      case 'highboost':
+        SharpenSimulations.initHighBoost('sim-highboost-container', 'sim-highboost-sigma', 'sim-highboost-a', 'sim-highboost-sigma-val', 'sim-highboost-a-val');
+        break;
+    }
+  }
+
+  /* ----------------------------------------------------------
    * Utility to Download Canvas Image
    * ---------------------------------------------------------- */
   function downloadCanvasImage(canvasId, defaultFilename) {
@@ -306,6 +350,9 @@ const App = (() => {
 
     const smoothSaveBtn = document.getElementById('smooth-playground-save');
     if (smoothSaveBtn) smoothSaveBtn.addEventListener('click', () => downloadCanvasImage('smooth-playground-processed', 'smooth_filter_result.png'));
+
+    const sharpenSaveBtn = document.getElementById('sharpen-playground-save');
+    if (sharpenSaveBtn) sharpenSaveBtn.addEventListener('click', () => downloadCanvasImage('sharpen-playground-processed', 'sharpen_filter_result.png'));
 
     // Mobile Menu
     const menuBtn = document.getElementById('mobile-menu-btn');

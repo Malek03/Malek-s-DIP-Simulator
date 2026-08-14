@@ -55,20 +55,49 @@ const SmoothProcessing = (() => {
    * ---------------------------------------------------------- */
 
   /**
-   * Add zero padding around a 2D matrix.
-   * padH = number of rows to add on top/bottom
-   * padW = number of cols to add on left/right
+   * Add padding around a 2D matrix.
+   * type: 'zero', 'replicate', 'reflect'
    */
-  function addZeroPadding(matrix, padH, padW) {
+  function addPadding(matrix, padH, padW, type = 'zero') {
+    if (type === 'none') return matrix;
+    
     const h = matrix.length;
     const w = matrix[0].length;
     const newH = h + 2 * padH;
     const newW = w + 2 * padW;
     const padded = Array.from({ length: newH }, () => Array(newW).fill(0));
 
-    for (let i = 0; i < h; i++) {
-      for (let j = 0; j < w; j++) {
-        padded[i + padH][j + padW] = matrix[i][j];
+    for (let i = 0; i < newH; i++) {
+      for (let j = 0; j < newW; j++) {
+        let srcI = i - padH;
+        let srcJ = j - padW;
+
+        if (srcI >= 0 && srcI < h && srcJ >= 0 && srcJ < w) {
+          // Inside original image
+          padded[i][j] = matrix[srcI][srcJ];
+        } else {
+          // Padding area
+          if (type === 'zero') {
+            padded[i][j] = 0;
+          } else if (type === 'replicate') {
+            srcI = Math.max(0, Math.min(h - 1, srcI));
+            srcJ = Math.max(0, Math.min(w - 1, srcJ));
+            padded[i][j] = matrix[srcI][srcJ];
+          } else if (type === 'reflect') {
+            // Reflect across edge (101 edge logic, where the edge pixel is NOT duplicated)
+            // Example: [c b a | a b c d | d c b] - standard reflect
+            if (srcI < 0) srcI = -srcI;
+            else if (srcI >= h) srcI = 2 * h - 2 - srcI;
+            
+            if (srcJ < 0) srcJ = -srcJ;
+            else if (srcJ >= w) srcJ = 2 * w - 2 - srcJ;
+            
+            // Safety bounds
+            srcI = Math.max(0, Math.min(h - 1, srcI));
+            srcJ = Math.max(0, Math.min(w - 1, srcJ));
+            padded[i][j] = matrix[srcI][srcJ];
+          }
+        }
       }
     }
     return padded;
@@ -120,30 +149,33 @@ const SmoothProcessing = (() => {
    * Perform 2D convolution on a grayscale matrix with a kernel.
    * @param {number[][]} matrix — 2D array of pixel values
    * @param {number[][]} kernel — 2D array of kernel weights
-   * @param {boolean} usePadding — whether to zero-pad (output same size as input) or not (valid convolution)
+   * @param {string} paddingType — 'zero', 'replicate', 'reflect', 'none'
+   * @param {number} stride — Stride step
    * @returns {number[][]} — 2D output matrix
    */
-  function convolve2D(matrix, kernel, usePadding = true) {
+  function convolve2D(matrix, kernel, paddingType = 'zero', stride = 1) {
     const kRows = kernel.length;
     const kCols = kernel[0].length;
     const padH = Math.floor(kRows / 2);
     const padW = Math.floor(kCols / 2);
 
-    const input = usePadding ? addZeroPadding(matrix, padH, padW) : matrix;
+    const input = (paddingType && paddingType !== 'none') ? addPadding(matrix, padH, padW, paddingType) : matrix;
     const inH = input.length;
     const inW = input[0].length;
 
-    const outH = inH - kRows + 1;
-    const outW = inW - kCols + 1;
+    const outH = Math.floor((inH - kRows) / stride) + 1;
+    const outW = Math.floor((inW - kCols) / stride) + 1;
     const output = [];
 
     for (let i = 0; i < outH; i++) {
       const row = [];
       for (let j = 0; j < outW; j++) {
         let sum = 0;
+        const startI = i * stride;
+        const startJ = j * stride;
         for (let ki = 0; ki < kRows; ki++) {
           for (let kj = 0; kj < kCols; kj++) {
-            sum += input[i + ki][j + kj] * kernel[ki][kj];
+            sum += input[startI + ki][startJ + kj] * kernel[ki][kj];
           }
         }
         row.push(Math.floor(Math.max(0, Math.min(255, sum))));
@@ -156,29 +188,53 @@ const SmoothProcessing = (() => {
   /**
    * Perform median filtering on a grayscale matrix.
    */
-  function medianFilter2D(matrix, kRows, kCols, usePadding = true) {
+  function medianFilter2D(matrix, kRows, kCols, paddingType = 'zero', stride = 1) {
+    return rankFilter2D(matrix, kRows, kCols, paddingType, stride, 'median');
+  }
+
+  function minFilter2D(matrix, kRows, kCols, paddingType = 'zero', stride = 1) {
+    return rankFilter2D(matrix, kRows, kCols, paddingType, stride, 'min');
+  }
+
+  function maxFilter2D(matrix, kRows, kCols, paddingType = 'zero', stride = 1) {
+    return rankFilter2D(matrix, kRows, kCols, paddingType, stride, 'max');
+  }
+
+  /**
+   * Generic rank filter (median, min, max)
+   */
+  function rankFilter2D(matrix, kRows, kCols, paddingType, stride, rankType) {
     const padH = Math.floor(kRows / 2);
     const padW = Math.floor(kCols / 2);
 
-    const input = usePadding ? addZeroPadding(matrix, padH, padW) : matrix;
+    const input = (paddingType && paddingType !== 'none') ? addPadding(matrix, padH, padW, paddingType) : matrix;
     const inH = input.length;
     const inW = input[0].length;
 
-    const outH = inH - kRows + 1;
-    const outW = inW - kCols + 1;
+    const outH = Math.floor((inH - kRows) / stride) + 1;
+    const outW = Math.floor((inW - kCols) / stride) + 1;
     const output = [];
 
     for (let i = 0; i < outH; i++) {
       const row = [];
       for (let j = 0; j < outW; j++) {
         const values = [];
+        const startI = i * stride;
+        const startJ = j * stride;
         for (let ki = 0; ki < kRows; ki++) {
           for (let kj = 0; kj < kCols; kj++) {
-            values.push(input[i + ki][j + kj]);
+            values.push(input[startI + ki][startJ + kj]);
           }
         }
-        values.sort((a, b) => a - b);
-        row.push(values[Math.floor(values.length / 2)]);
+        
+        if (rankType === 'median') {
+          values.sort((a, b) => a - b);
+          row.push(values[Math.floor(values.length / 2)]);
+        } else if (rankType === 'min') {
+          row.push(Math.min(...values));
+        } else if (rankType === 'max') {
+          row.push(Math.max(...values));
+        }
       }
       output.push(row);
     }
@@ -192,23 +248,35 @@ const SmoothProcessing = (() => {
   /**
    * Apply Mean filter on ImageData (per-channel convolution).
    */
-  function applyMeanFilter(imageData, rows = 3, cols = 3, usePadding = true) {
+  function applyMeanFilter(imageData, rows = 3, cols = 3, paddingType = 'zero', stride = 1) {
     const kernel = createMeanKernel(rows, cols);
-    return applyKernelToImageData(imageData, kernel, usePadding);
+    return applyKernelToImageData(imageData, kernel, paddingType, stride);
   }
 
   /**
    * Apply Gaussian filter on ImageData.
    */
-  function applyGaussianFilter(imageData, rows = 3, cols = 3, sigma = 1.0, usePadding = true) {
+  function applyGaussianFilter(imageData, rows = 3, cols = 3, sigma = 1.0, paddingType = 'zero', stride = 1) {
     const kernel = createGaussianKernel(rows, cols, sigma);
-    return applyKernelToImageData(imageData, kernel, usePadding);
+    return applyKernelToImageData(imageData, kernel, paddingType, stride);
   }
 
   /**
    * Apply Median filter on ImageData.
    */
-  function applyMedianFilter(imageData, rows = 3, cols = 3, usePadding = true) {
+  function applyMedianFilter(imageData, rows = 3, cols = 3, paddingType = 'zero', stride = 1) {
+    return applyRankFilterToImageData(imageData, rows, cols, paddingType, stride, medianFilter2D);
+  }
+
+  function applyMinFilter(imageData, rows = 3, cols = 3, paddingType = 'zero', stride = 1) {
+    return applyRankFilterToImageData(imageData, rows, cols, paddingType, stride, minFilter2D);
+  }
+
+  function applyMaxFilter(imageData, rows = 3, cols = 3, paddingType = 'zero', stride = 1) {
+    return applyRankFilterToImageData(imageData, rows, cols, paddingType, stride, maxFilter2D);
+  }
+
+  function applyRankFilterToImageData(imageData, rows, cols, paddingType, stride, filterFunc) {
     const src = imageData.data;
     const w = imageData.width;
     const h = imageData.height;
@@ -227,8 +295,8 @@ const SmoothProcessing = (() => {
       }
     }
 
-    // Apply median to each channel
-    const filtered = channels.map(ch => medianFilter2D(ch, rows, cols, usePadding));
+    // Apply rank filter to each channel
+    const filtered = channels.map(ch => filterFunc(ch, rows, cols, paddingType, stride));
 
     const outH = filtered[0].length;
     const outW = filtered[0][0].length;
@@ -250,7 +318,7 @@ const SmoothProcessing = (() => {
    * Apply a kernel to ImageData (per-channel convolution).
    * Internal helper used by Mean and Gaussian.
    */
-  function applyKernelToImageData(imageData, kernel, usePadding) {
+  function applyKernelToImageData(imageData, kernel, paddingType, stride) {
     const src = imageData.data;
     const w = imageData.width;
     const h = imageData.height;
@@ -270,7 +338,7 @@ const SmoothProcessing = (() => {
     }
 
     // Convolve each channel
-    const filtered = channels.map(ch => convolve2D(ch, kernel, usePadding));
+    const filtered = channels.map(ch => convolve2D(ch, kernel, paddingType, stride));
 
     const outH = filtered[0].length;
     const outW = filtered[0][0].length;
@@ -337,13 +405,17 @@ const SmoothProcessing = (() => {
   return {
     createMeanKernel,
     createGaussianKernel,
-    addZeroPadding,
+    addPadding,
     extractPixelMatrix,
     convolve2D,
     medianFilter2D,
+    minFilter2D,
+    maxFilter2D,
     applyMeanFilter,
     applyGaussianFilter,
     applyMedianFilter,
+    applyMinFilter,
+    applyMaxFilter,
     generateNoisySample,
   };
 })();

@@ -162,6 +162,24 @@ const SmoothPlayground = (() => {
   function renderControls() {
     if (!controlsContainer) return;
 
+    const getAdvancedControls = (prefix) => `
+      <div class="flex items-center justify-between mt-3">
+        <label class="text-sm font-medium text-slate-700 dark:text-slate-300">الخطوة (Stride)</label>
+        <span id="${prefix}-stride-val" class="text-sm font-mono text-teal-600 dark:text-teal-400 bg-teal-50 dark:bg-teal-900/30 px-2 py-0.5 rounded">1</span>
+      </div>
+      <input type="range" id="${prefix}-stride" min="1" max="5" step="1" value="1" class="w-full">
+      
+      <div class="space-y-1 mt-3">
+        <label class="text-sm font-medium text-slate-700 dark:text-slate-300">نوع الحواف (Padding Type)</label>
+        <select id="${prefix}-padding" class="w-full px-2 py-1.5 bg-white dark:bg-gray-800 border border-slate-300 dark:border-gray-600 rounded-lg text-sm text-slate-800 dark:text-slate-200 focus:ring-2 focus:ring-teal-500 outline-none">
+          <option value="zero">أصفار (Zero Padding)</option>
+          <option value="replicate">تكرار الحافة (Replicate)</option>
+          <option value="reflect">انعكاس (Reflect)</option>
+          <option value="none">بدون (Valid / None)</option>
+        </select>
+      </div>
+    `;
+
     const controlsMap = {
       mean: `
         <div class="space-y-3">
@@ -170,10 +188,7 @@ const SmoothPlayground = (() => {
             <span id="spg-mean-val" class="text-sm font-mono text-teal-600 dark:text-teal-400 bg-teal-50 dark:bg-teal-900/30 px-2 py-0.5 rounded">3×3</span>
           </div>
           <input type="range" id="spg-mean-size" min="3" max="11" step="2" value="3" class="w-full">
-          <div class="flex items-center gap-2 mt-2">
-            <input type="checkbox" id="spg-mean-padding" checked class="w-4 h-4 text-teal-600 rounded focus:ring-teal-500">
-            <label for="spg-mean-padding" class="text-sm text-slate-600 dark:text-slate-400">Zero Padding</label>
-          </div>
+          ${getAdvancedControls('spg-mean')}
         </div>
       `,
       gaussian: `
@@ -188,10 +203,7 @@ const SmoothPlayground = (() => {
             <span id="spg-gauss-sigma-val" class="text-sm font-mono text-teal-600 dark:text-teal-400 bg-teal-50 dark:bg-teal-900/30 px-2 py-0.5 rounded">1.0</span>
           </div>
           <input type="range" id="spg-gauss-sigma" min="0.1" max="5.0" step="0.1" value="1.0" class="w-full">
-          <div class="flex items-center gap-2 mt-2">
-            <input type="checkbox" id="spg-gauss-padding" checked class="w-4 h-4 text-teal-600 rounded focus:ring-teal-500">
-            <label for="spg-gauss-padding" class="text-sm text-slate-600 dark:text-slate-400">Zero Padding</label>
-          </div>
+          ${getAdvancedControls('spg-gauss')}
         </div>
       `,
       median: `
@@ -201,13 +213,40 @@ const SmoothPlayground = (() => {
             <span id="spg-median-val" class="text-sm font-mono text-teal-600 dark:text-teal-400 bg-teal-50 dark:bg-teal-900/30 px-2 py-0.5 rounded">3×3</span>
           </div>
           <input type="range" id="spg-median-size" min="3" max="11" step="2" value="3" class="w-full">
-          <div class="flex items-center gap-2 mt-2">
-            <input type="checkbox" id="spg-median-padding" checked class="w-4 h-4 text-teal-600 rounded focus:ring-teal-500">
-            <label for="spg-median-padding" class="text-sm text-slate-600 dark:text-slate-400">Zero Padding</label>
-          </div>
+          ${getAdvancedControls('spg-median')}
           <div class="p-2 bg-amber-50 dark:bg-amber-900/20 rounded-lg border border-amber-200 dark:border-amber-700/50 mt-2">
             <p class="text-xs text-amber-700 dark:text-amber-300">
               <strong>ملاحظة:</strong> فلتر الوسيط لا يستخدم Kernel رقمي — بل يرتب قيم النافذة ويختار القيمة الوسطى.
+            </p>
+          </div>
+        </div>
+      `,
+      min: `
+        <div class="space-y-3">
+          <div class="flex items-center justify-between">
+            <label class="text-sm font-medium text-slate-700 dark:text-slate-300">حجم النافذة</label>
+            <span id="spg-min-val" class="text-sm font-mono text-teal-600 dark:text-teal-400 bg-teal-50 dark:bg-teal-900/30 px-2 py-0.5 rounded">3×3</span>
+          </div>
+          <input type="range" id="spg-min-size" min="3" max="11" step="2" value="3" class="w-full">
+          ${getAdvancedControls('spg-min')}
+          <div class="p-2 bg-teal-50 dark:bg-teal-900/20 rounded-lg border border-teal-200 dark:border-teal-700/50 mt-2">
+            <p class="text-xs text-teal-700 dark:text-teal-300">
+              <strong>ملاحظة:</strong> فلتر الحد الأدنى يختار أصغر قيمة في النافذة (يعمل كـ Erode).
+            </p>
+          </div>
+        </div>
+      `,
+      max: `
+        <div class="space-y-3">
+          <div class="flex items-center justify-between">
+            <label class="text-sm font-medium text-slate-700 dark:text-slate-300">حجم النافذة</label>
+            <span id="spg-max-val" class="text-sm font-mono text-teal-600 dark:text-teal-400 bg-teal-50 dark:bg-teal-900/30 px-2 py-0.5 rounded">3×3</span>
+          </div>
+          <input type="range" id="spg-max-size" min="3" max="11" step="2" value="3" class="w-full">
+          ${getAdvancedControls('spg-max')}
+          <div class="p-2 bg-teal-50 dark:bg-teal-900/20 rounded-lg border border-teal-200 dark:border-teal-700/50 mt-2">
+            <p class="text-xs text-teal-700 dark:text-teal-300">
+              <strong>ملاحظة:</strong> فلتر الحد الأقصى يختار أكبر قيمة في النافذة (يعمل كـ Dilate).
             </p>
           </div>
         </div>
@@ -219,54 +258,55 @@ const SmoothPlayground = (() => {
   }
 
   function bindControlEvents() {
+    const attachCommon = (prefix, updateExtra) => {
+      const slider = document.getElementById(`${prefix}-size`);
+      const valEl = document.getElementById(`${prefix}-val`);
+      const paddingSel = document.getElementById(`${prefix}-padding`);
+      const strideSlider = document.getElementById(`${prefix}-stride`);
+      const strideVal = document.getElementById(`${prefix}-stride-val`);
+
+      const handler = () => {
+        if (slider && valEl) {
+          const size = parseInt(slider.value);
+          valEl.textContent = `${size}×${size}`;
+        }
+        if (strideSlider && strideVal) {
+          strideVal.textContent = strideSlider.value;
+        }
+        if (updateExtra) updateExtra();
+        applyFilter();
+        updateCode();
+      };
+
+      if (slider) slider.addEventListener('input', handler);
+      if (paddingSel) paddingSel.addEventListener('change', handler);
+      if (strideSlider) strideSlider.addEventListener('input', handler);
+      return handler;
+    };
+
     switch (currentFilter) {
-      case 'mean': {
-        const slider = document.getElementById('spg-mean-size');
-        const valEl = document.getElementById('spg-mean-val');
-        const paddingCb = document.getElementById('spg-mean-padding');
-        const handler = () => {
-          const size = parseInt(slider.value);
-          if (valEl) valEl.textContent = `${size}×${size}`;
-          applyFilter();
-          updateCode();
-        };
-        if (slider) slider.addEventListener('input', handler);
-        if (paddingCb) paddingCb.addEventListener('change', handler);
+      case 'mean':
+        attachCommon('spg-mean');
         break;
-      }
       case 'gaussian': {
-        const sizeSlider = document.getElementById('spg-gauss-size');
         const sigmaSlider = document.getElementById('spg-gauss-sigma');
-        const sizeVal = document.getElementById('spg-gauss-size-val');
         const sigmaVal = document.getElementById('spg-gauss-sigma-val');
-        const paddingCb = document.getElementById('spg-gauss-padding');
-        const handler = () => {
-          const size = parseInt(sizeSlider.value);
-          const sigma = parseFloat(sigmaSlider.value);
-          if (sizeVal) sizeVal.textContent = `${size}×${size}`;
-          if (sigmaVal) sigmaVal.textContent = sigma.toFixed(1);
-          applyFilter();
-          updateCode();
+        const extraGauss = () => {
+          if (sigmaSlider && sigmaVal) sigmaVal.textContent = parseFloat(sigmaSlider.value).toFixed(1);
         };
-        if (sizeSlider) sizeSlider.addEventListener('input', handler);
+        const handler = attachCommon('spg-gauss', extraGauss);
         if (sigmaSlider) sigmaSlider.addEventListener('input', handler);
-        if (paddingCb) paddingCb.addEventListener('change', handler);
         break;
       }
-      case 'median': {
-        const slider = document.getElementById('spg-median-size');
-        const valEl = document.getElementById('spg-median-val');
-        const paddingCb = document.getElementById('spg-median-padding');
-        const handler = () => {
-          const size = parseInt(slider.value);
-          if (valEl) valEl.textContent = `${size}×${size}`;
-          applyFilter();
-          updateCode();
-        };
-        if (slider) slider.addEventListener('input', handler);
-        if (paddingCb) paddingCb.addEventListener('change', handler);
+      case 'median':
+        attachCommon('spg-median');
         break;
-      }
+      case 'min':
+        attachCommon('spg-min');
+        break;
+      case 'max':
+        attachCommon('spg-max');
+        break;
     }
   }
 
@@ -275,27 +315,33 @@ const SmoothPlayground = (() => {
    * ---------------------------------------------------------- */
 
   function getParams() {
+    const getCommon = (prefix) => {
+      const slider = document.getElementById(`${prefix}-size`);
+      const paddingSel = document.getElementById(`${prefix}-padding`);
+      const strideSlider = document.getElementById(`${prefix}-stride`);
+      return {
+        size: slider ? parseInt(slider.value) : 3,
+        paddingType: paddingSel ? paddingSel.value : 'zero',
+        stride: strideSlider ? parseInt(strideSlider.value) : 1
+      };
+    };
+
     switch (currentFilter) {
       case 'mean': {
-        const slider = document.getElementById('spg-mean-size');
-        const cb = document.getElementById('spg-mean-padding');
-        const size = slider ? parseInt(slider.value) : 3;
-        return { rows: size, cols: size, usePadding: cb ? cb.checked : true };
+        const c = getCommon('spg-mean');
+        return { rows: c.size, cols: c.size, paddingType: c.paddingType, stride: c.stride };
       }
       case 'gaussian': {
-        const sizeSlider = document.getElementById('spg-gauss-size');
+        const c = getCommon('spg-gauss');
         const sigmaSlider = document.getElementById('spg-gauss-sigma');
-        const cb = document.getElementById('spg-gauss-padding');
-        const size = sizeSlider ? parseInt(sizeSlider.value) : 3;
-        const sigma = sigmaSlider ? parseFloat(sigmaSlider.value) : 1.0;
-        return { rows: size, cols: size, sigma, usePadding: cb ? cb.checked : true };
+        return { rows: c.size, cols: c.size, sigma: sigmaSlider ? parseFloat(sigmaSlider.value) : 1.0, paddingType: c.paddingType, stride: c.stride };
       }
-      case 'median': {
-        const slider = document.getElementById('spg-median-size');
-        const cb = document.getElementById('spg-median-padding');
-        const size = slider ? parseInt(slider.value) : 3;
-        return { size, usePadding: cb ? cb.checked : true };
-      }
+      case 'median':
+        return getCommon('spg-median');
+      case 'min':
+        return getCommon('spg-min');
+      case 'max':
+        return getCommon('spg-max');
       default:
         return {};
     }
@@ -314,13 +360,19 @@ const SmoothPlayground = (() => {
 
     switch (currentFilter) {
       case 'mean':
-        result = SmoothProcessing.applyMeanFilter(originalImageData, params.rows, params.cols, params.usePadding);
+        result = SmoothProcessing.applyMeanFilter(originalImageData, params.rows, params.cols, params.paddingType, params.stride);
         break;
       case 'gaussian':
-        result = SmoothProcessing.applyGaussianFilter(originalImageData, params.rows, params.cols, params.sigma, params.usePadding);
+        result = SmoothProcessing.applyGaussianFilter(originalImageData, params.rows, params.cols, params.sigma, params.paddingType, params.stride);
         break;
       case 'median':
-        result = SmoothProcessing.applyMedianFilter(originalImageData, params.size, params.size, params.usePadding);
+        result = SmoothProcessing.applyMedianFilter(originalImageData, params.size, params.size, params.paddingType, params.stride);
+        break;
+      case 'min':
+        result = SmoothProcessing.applyMinFilter(originalImageData, params.size, params.size, params.paddingType, params.stride);
+        break;
+      case 'max':
+        result = SmoothProcessing.applyMaxFilter(originalImageData, params.size, params.size, params.paddingType, params.stride);
         break;
       default:
         result = originalImageData;
@@ -344,7 +396,8 @@ const SmoothPlayground = (() => {
 
     const params = getParams();
     const kSize = params.rows || params.size || 3;
-    const usePadding = params.usePadding !== undefined ? params.usePadding : true;
+    const paddingType = params.paddingType || 'zero';
+    const stride = params.stride || 1;
 
     // Extract small pixel matrix
     const matrixSize = 8;
@@ -352,33 +405,36 @@ const SmoothPlayground = (() => {
 
     // Build kernel
     let kernel = null;
-    let isMedian = false;
+    let rankType = null;
     if (currentFilter === 'mean') {
       kernel = SmoothProcessing.createMeanKernel(kSize, kSize);
     } else if (currentFilter === 'gaussian') {
       const sigma = params.sigma || 1.0;
       kernel = SmoothProcessing.createGaussianKernel(kSize, kSize, sigma);
     } else {
-      isMedian = true;
+      rankType = currentFilter; // 'median', 'min', 'max'
     }
 
     // Apply padding if needed
     const padH = Math.floor(kSize / 2);
     const padW = Math.floor(kSize / 2);
-    const inputMatrix = usePadding ? SmoothProcessing.addZeroPadding(pixels, padH, padW) : pixels;
+    const hasPadding = paddingType && paddingType !== 'none';
+    const inputMatrix = hasPadding ? SmoothProcessing.addPadding(pixels, padH, padW, paddingType) : pixels;
 
     // Compute output size
-    const outH = inputMatrix.length - kSize + 1;
-    const outW = inputMatrix[0].length - kSize + 1;
+    const inH = inputMatrix.length;
+    const inW = inputMatrix[0].length;
+    const outH = Math.floor((inH - kSize) / stride) + 1;
+    const outW = Math.floor((inW - kSize) / stride) + 1;
 
     // Build the visualization layout
-    renderVisualizationLayout(inputMatrix, kernel, outH, outW, kSize, isMedian, usePadding, padH, padW, pixels.length, pixels[0].length);
+    renderVisualizationLayout(inputMatrix, kernel, outH, outW, kSize, rankType, hasPadding, padH, padW, pixels.length, pixels[0].length);
 
     // Start the step-by-step simulation
-    simulateConvolution(inputMatrix, kernel, kSize, outH, outW, isMedian);
+    simulateConvolution(inputMatrix, kernel, kSize, outH, outW, rankType, stride);
   }
 
-  function renderVisualizationLayout(inputMatrix, kernel, outH, outW, kSize, isMedian, usePadding, padH, padW, origH, origW) {
+  function renderVisualizationLayout(inputMatrix, kernel, outH, outW, kSize, rankType, hasPadding, padH, padW, origH, origW) {
     convContainer.innerHTML = '';
 
     // Main wrapper
@@ -390,17 +446,17 @@ const SmoothPlayground = (() => {
     topRow.className = 'conv-viz-top-row';
 
     // Input matrix
-    const inputSection = createGridSection('المدخلات (Input)', inputMatrix, 'input', usePadding, padH, padW, origH, origW);
+    const inputSection = createGridSection('المدخلات (Input)', inputMatrix, 'input', hasPadding, padH, padW, origH, origW);
     topRow.appendChild(inputSection);
 
     // Operator symbol
     const opSymbol = document.createElement('div');
     opSymbol.className = 'conv-viz-operator';
-    opSymbol.textContent = isMedian ? 'median' : '⊛';
+    opSymbol.textContent = rankType ? rankType : '⊛';
     topRow.appendChild(opSymbol);
 
     // Kernel or info section
-    if (!isMedian && kernel) {
+    if (!rankType && kernel) {
       const kernelSection = createGridSection('الـ Kernel', kernel, 'kernel', false);
       topRow.appendChild(kernelSection);
     } else {
@@ -408,7 +464,7 @@ const SmoothPlayground = (() => {
       medianInfo.className = 'conv-viz-section';
       const title = document.createElement('div');
       title.className = 'text-xs font-semibold text-slate-500 dark:text-slate-400 mb-2 text-center';
-      title.textContent = 'ترتيب + وسيط';
+      title.textContent = rankType === 'median' ? 'ترتيب + وسيط' : (rankType === 'min' ? 'أصغر قيمة' : 'أكبر قيمة');
       const info = document.createElement('div');
       info.className = 'text-xs text-slate-400 dark:text-slate-500 text-center p-4 bg-slate-50 dark:bg-gray-700/30 rounded-lg';
       info.id = 'conv-median-info';
@@ -540,7 +596,7 @@ const SmoothPlayground = (() => {
     return section;
   }
 
-  function simulateConvolution(inputMatrix, kernel, kSize, outH, outW, isMedian) {
+  function simulateConvolution(inputMatrix, kernel, kSize, outH, outW, rankType, stride = 1) {
     simState.currentI = 0;
     simState.currentJ = 0;
     simState.running = true;
@@ -565,16 +621,19 @@ const SmoothPlayground = (() => {
       // Clear previous highlights
       clearHighlights(inH, inW, kSize);
 
+      const startI = i * stride;
+      const startJ = j * stride;
+
       // Highlight current window in input
       for (let ki = 0; ki < kSize; ki++) {
         for (let kj = 0; kj < kSize; kj++) {
-          const inCell = document.getElementById(`input-${i + ki}-${j + kj}`);
+          const inCell = document.getElementById(`input-${startI + ki}-${startJ + kj}`);
           if (inCell) inCell.classList.add('highlight-input');
         }
       }
 
       // Highlight kernel
-      if (!isMedian && kernel) {
+      if (!rankType && kernel) {
         for (let ki = 0; ki < kSize; ki++) {
           for (let kj = 0; kj < kSize; kj++) {
             const kCell = document.getElementById(`kernel-${ki}-${kj}`);
@@ -587,30 +646,44 @@ const SmoothPlayground = (() => {
       let outputVal;
       let calcText;
 
-      if (isMedian) {
-        // Median: collect values, sort, pick middle
+      if (rankType) {
+        // Median/Min/Max
         const values = [];
         for (let ki = 0; ki < kSize; ki++) {
           for (let kj = 0; kj < kSize; kj++) {
-            values.push(inputMatrix[i + ki][j + kj]);
+            values.push(inputMatrix[startI + ki][startJ + kj]);
           }
         }
-        const sorted = [...values].sort((a, b) => a - b);
-        outputVal = sorted[Math.floor(sorted.length / 2)];
-        calcText = `الترتيب: [${sorted.join(', ')}] → الوسيط = ${outputVal}`;
-
-        // Update median info display
-        const medInfo = document.getElementById('conv-median-info');
-        if (medInfo) {
-          medInfo.innerHTML = `<div class="font-mono text-[10px] leading-relaxed">[${sorted.map((v, idx) => idx === Math.floor(sorted.length / 2) ? `<strong class="text-teal-500">${v}</strong>` : v).join(', ')}]</div>`;
+        
+        if (rankType === 'median') {
+          const sorted = [...values].sort((a, b) => a - b);
+          outputVal = sorted[Math.floor(sorted.length / 2)];
+          calcText = `الترتيب: [${sorted.join(', ')}] → الوسيط = ${outputVal}`;
+          
+          // Update median info display
+          const medInfo = document.getElementById('conv-median-info');
+          if (medInfo) {
+            medInfo.innerHTML = `<div class="font-mono text-[10px] leading-relaxed">[${sorted.map((v, idx) => idx === Math.floor(sorted.length / 2) ? `<strong class="text-teal-500">${v}</strong>` : v).join(', ')}]</div>`;
+          }
+        } else if (rankType === 'min') {
+          outputVal = Math.min(...values);
+          calcText = `min([${values.join(', ')}]) = ${outputVal}`;
+          const medInfo = document.getElementById('conv-median-info');
+          if (medInfo) medInfo.innerHTML = `<div class="font-mono text-[10px] leading-relaxed">أصغر قيمة هي: <strong class="text-teal-500">${outputVal}</strong></div>`;
+        } else if (rankType === 'max') {
+          outputVal = Math.max(...values);
+          calcText = `max([${values.join(', ')}]) = ${outputVal}`;
+          const medInfo = document.getElementById('conv-median-info');
+          if (medInfo) medInfo.innerHTML = `<div class="font-mono text-[10px] leading-relaxed">أكبر قيمة هي: <strong class="text-teal-500">${outputVal}</strong></div>`;
         }
+        
       } else {
         // Convolution: sum of element-wise products
         let sum = 0;
         const terms = [];
         for (let ki = 0; ki < kSize; ki++) {
           for (let kj = 0; kj < kSize; kj++) {
-            const pixVal = inputMatrix[i + ki][j + kj];
+            const pixVal = inputMatrix[startI + ki][startJ + kj];
             const kVal = kernel[ki][kj];
             sum += pixVal * kVal;
             terms.push(`${pixVal}×${kVal.toFixed(2)}`);

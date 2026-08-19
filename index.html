@@ -59,6 +59,7 @@
           <a href="#point-processing" data-route="point-processing" class="nav-link px-3 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 rounded-lg hover:bg-slate-100 dark:hover:bg-gray-800 transition-colors">معالجة النقاط</a>
           <a href="#smooth-filters" data-route="smooth-filters" class="nav-link px-3 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 rounded-lg hover:bg-slate-100 dark:hover:bg-gray-800 transition-colors">فلاتر التنعيم</a>
           <a href="#sharpen-filters" data-route="sharpen-filters" class="nav-link px-3 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-rose-600 dark:hover:text-rose-400 rounded-lg hover:bg-slate-100 dark:hover:bg-gray-800 transition-colors">فلاتر الحدة</a>
+          <a href="#morph-processing" data-route="morph-processing" class="nav-link px-3 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-pink-600 dark:hover:text-pink-400 rounded-lg hover:bg-slate-100 dark:hover:bg-gray-800 transition-colors">المورفولوجيا</a>
         </div>
 
         <!-- Theme Toggle + Mobile Menu -->
@@ -90,6 +91,7 @@
           <a href="#point-processing" data-route="point-processing" class="nav-link px-3 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 rounded-lg hover:bg-slate-100 dark:hover:bg-gray-800">معالجة النقاط</a>
           <a href="#smooth-filters" data-route="smooth-filters" class="nav-link px-3 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 rounded-lg hover:bg-slate-100 dark:hover:bg-gray-800">فلاتر التنعيم</a>
           <a href="#sharpen-filters" data-route="sharpen-filters" class="nav-link px-3 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-rose-600 dark:hover:text-rose-400 rounded-lg hover:bg-slate-100 dark:hover:bg-gray-800">فلاتر الحدة</a>
+          <a href="#morph-processing" data-route="morph-processing" class="nav-link px-3 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-pink-600 dark:hover:text-pink-400 rounded-lg hover:bg-slate-100 dark:hover:bg-gray-800">المورفولوجيا</a>
         </div>
       </div>
     </div>
@@ -377,25 +379,25 @@
             </p>
           </a>
 
-          <!-- Coming Soon 3: Morphological Processing -->
-          <div class="concept-card disabled bg-white dark:bg-gray-800 rounded-2xl p-6 border border-slate-200 dark:border-gray-700 shadow-sm relative overflow-hidden">
+          <!-- Card 6: Morphological Processing (Active) -->
+          <a href="#morph-processing" data-route="morph-processing" class="concept-card bg-white dark:bg-gray-800 rounded-2xl p-6 border border-slate-200 dark:border-gray-700 shadow-sm cursor-pointer block relative overflow-hidden group hover:border-pink-300 dark:hover:border-pink-600 transition-all">
             <div class="absolute top-4 left-4">
-              <span class="badge-coming-soon">
-                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
-                قريباً
+              <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 text-xs font-medium">
+                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                متاح الآن
               </span>
             </div>
-            <div class="w-12 h-12 rounded-xl bg-pink-100 dark:bg-pink-900/20 flex items-center justify-center mb-5">
-              <svg class="w-6 h-6 text-pink-500/60" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <div class="w-12 h-12 rounded-xl bg-pink-100 dark:bg-pink-900/30 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+              <svg class="w-6 h-6 text-pink-500/80 dark:text-pink-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5"/>
               </svg>
             </div>
-            <h3 class="text-lg font-bold text-slate-700 dark:text-slate-400 mb-2">المعالجة المورفولوجية</h3>
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2 group-hover:text-pink-600 dark:group-hover:text-pink-400 transition-colors">المعالجة المورفولوجية</h3>
             <p class="text-sm text-slate-400 dark:text-slate-500 mb-1">Morphological Processing</p>
-            <p class="text-xs text-slate-400 dark:text-slate-500 leading-relaxed">
-              التآكل، التمدد، الفتح، والإغلاق.
+            <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+              التآكل، التمدد، الفتح، الإغلاق، Top Hat، و Black Hat.
             </p>
-          </div>
+          </a>
 
           <!-- Coming Soon 4: Image Restoration -->
           <div class="concept-card disabled bg-white dark:bg-gray-800 rounded-2xl p-6 border border-slate-200 dark:border-gray-700 shadow-sm relative overflow-hidden">
@@ -2313,6 +2315,465 @@
   </div>
 
   <!-- ============================================================
+       SECTION 7: MORPHOLOGICAL PROCESSING
+       ============================================================ -->
+  <!-- Main Grid Page -->
+  <div id="section-morph-processing" class="section-view">
+    <section class="py-12 px-4 sm:px-6">
+      <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-10">
+          <div class="inline-flex items-center gap-2 px-3 py-1 mb-4 rounded-full bg-pink-50 dark:bg-pink-900/30 text-pink-600 dark:text-pink-400 text-xs font-semibold">
+            Morphological Processing
+          </div>
+          <h2 class="text-3xl font-bold text-slate-900 dark:text-white mb-3">المعالجة المورفولوجية</h2>
+          <p class="text-slate-500 dark:text-slate-400 text-lg max-w-2xl mx-auto">عمليات تعتمد على شكل العنصر البنيوي (Structuring Element) لتحليل وتعديل الأشكال الهندسية في الصور الثنائية والرمادية.</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+          <!-- 1. Dilate & Erode -->
+          <a href="#morph-processing/dilate-erode" data-route="morph-processing/dilate-erode" class="concept-card bg-white dark:bg-gray-800 rounded-2xl p-6 border border-slate-200 dark:border-gray-700 shadow-sm block relative overflow-hidden group hover:border-pink-300 dark:hover:border-pink-600 transition-all">
+            <div class="w-12 h-12 rounded-xl bg-pink-100 dark:bg-pink-900/30 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+              <svg class="w-6 h-6 text-pink-600 dark:text-pink-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"/>
+              </svg>
+            </div>
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2 group-hover:text-pink-600 dark:group-hover:text-pink-400 transition-colors">التآكل والتمدد</h3>
+            <p class="text-sm text-slate-400 dark:text-slate-500 mb-1">Erode & Dilate</p>
+            <p class="text-xs text-slate-500 dark:text-slate-400">العمليتان الأساسيتان: التآكل يُصغّر الأشكال والتمدد يُكبّرها باستخدام العنصر البنيوي.</p>
+          </a>
+
+          <!-- 2. Open & Top Hat -->
+          <a href="#morph-processing/open-tophat" data-route="morph-processing/open-tophat" class="concept-card bg-white dark:bg-gray-800 rounded-2xl p-6 border border-slate-200 dark:border-gray-700 shadow-sm block relative overflow-hidden group hover:border-pink-300 dark:hover:border-pink-600 transition-all">
+            <div class="w-12 h-12 rounded-xl bg-pink-100 dark:bg-pink-900/30 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+              <svg class="w-6 h-6 text-pink-600 dark:text-pink-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/>
+              </svg>
+            </div>
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2 group-hover:text-pink-600 dark:group-hover:text-pink-400 transition-colors">الفتح و Top Hat</h3>
+            <p class="text-sm text-slate-400 dark:text-slate-500 mb-1">Opening & Top Hat</p>
+            <p class="text-xs text-slate-500 dark:text-slate-400">الفتح يزيل الضوضاء الساطعة، و Top Hat يستخلص التفاصيل الساطعة الصغيرة.</p>
+          </a>
+
+          <!-- 3. Close & Black Hat -->
+          <a href="#morph-processing/close-blackhat" data-route="morph-processing/close-blackhat" class="concept-card bg-white dark:bg-gray-800 rounded-2xl p-6 border border-slate-200 dark:border-gray-700 shadow-sm block relative overflow-hidden group hover:border-pink-300 dark:hover:border-pink-600 transition-all">
+            <div class="w-12 h-12 rounded-xl bg-pink-100 dark:bg-pink-900/30 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+              <svg class="w-6 h-6 text-pink-600 dark:text-pink-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
+              </svg>
+            </div>
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2 group-hover:text-pink-600 dark:group-hover:text-pink-400 transition-colors">الإغلاق و Black Hat</h3>
+            <p class="text-sm text-slate-400 dark:text-slate-500 mb-1">Closing & Black Hat</p>
+            <p class="text-xs text-slate-500 dark:text-slate-400">الإغلاق يملأ الثقوب المظلمة، و Black Hat يستخلص التفاصيل المظلمة الصغيرة.</p>
+          </a>
+        </div>
+
+        <!-- CTA Banner to Playground -->
+        <div class="mt-12 bg-gradient-to-r from-pink-500 to-fuchsia-600 rounded-2xl p-8 text-center text-white shadow-lg relative overflow-hidden">
+          <div class="relative z-10">
+            <h3 class="text-2xl font-bold mb-3">مختبر المورفولوجيا</h3>
+            <p class="text-pink-100 mb-6 max-w-xl mx-auto">جرب جميع العمليات المورفولوجية على صورك مع تعديل شكل وحجم العنصر البنيوي وعدد التكرارات.</p>
+            <a href="#morph-playground" data-route="morph-playground" class="inline-flex items-center gap-2 px-6 py-3 bg-white text-pink-600 hover:bg-slate-50 font-bold rounded-xl shadow-md transition-all">
+              الانتقال لمختبر المورفولوجيا
+              <svg class="w-5 h-5 rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+              </svg>
+            </a>
+          </div>
+          <div class="absolute -top-24 -right-24 w-48 h-48 bg-white/10 rounded-full blur-2xl"></div>
+          <div class="absolute -bottom-24 -left-24 w-48 h-48 bg-fuchsia-900/20 rounded-full blur-2xl"></div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ---- Concept: Dilate & Erode ---- -->
+  <div id="section-concept-dilate-erode" class="section-view">
+    <section class="py-12 px-4 sm:px-6">
+      <div class="max-w-4xl mx-auto">
+        <a href="#morph-processing" data-route="morph-processing" class="inline-flex items-center gap-2 text-sm text-pink-600 dark:text-pink-400 hover:text-pink-800 dark:hover:text-pink-300 mb-8 font-medium">
+          <svg class="w-4 h-4 rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+          العودة إلى المعالجة المورفولوجية
+        </a>
+        <div class="flex items-center gap-3 mb-6">
+          <div class="w-12 h-12 rounded-xl bg-pink-100 dark:bg-pink-900/30 flex items-center justify-center">
+            <svg class="w-6 h-6 text-pink-600 dark:text-pink-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"/>
+            </svg>
+          </div>
+          <div>
+            <h1 class="text-3xl font-bold text-slate-900 dark:text-white">التآكل والتمدد</h1>
+            <p class="text-slate-400">Erosion & Dilation</p>
+          </div>
+        </div>
+
+        <!-- Erode Section -->
+        <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-slate-200 dark:border-gray-700 mb-8">
+          <h2 class="text-xl font-bold text-slate-800 dark:text-slate-200 mb-3">التآكل (Erosion)</h2>
+          <p class="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+            التآكل هو العملية المورفولوجية الأولى. يقوم بتمرير العنصر البنيوي (Structuring Element) على كل بكسل في الصورة، ويأخذ <strong>أقل قيمة (Minimum)</strong> من البكسلات الواقعة تحت العنصر البنيوي.
+          </p>
+          <div class="formula-box text-lg bg-slate-50 dark:bg-gray-700/50 rounded-xl p-4 mb-4 text-center">
+            Erode(x,y) = <span class="var-math">min</span>{ I(x+i, y+j) | SE(i,j) = 1 }
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="p-3 bg-pink-50 dark:bg-pink-900/20 rounded-lg border border-pink-200 dark:border-pink-700/50">
+              <p class="text-sm font-bold text-pink-700 dark:text-pink-300 mb-2">التأثير على الصور الثنائية:</p>
+              <ul class="text-xs text-pink-600 dark:text-pink-400 space-y-1">
+                <li>• يُصغّر المناطق البيضاء (الأمامية)</li>
+                <li>• يُوسّع المناطق السوداء (الخلفية)</li>
+                <li>• يُزيل النقاط البيضاء الصغيرة (ضوضاء)</li>
+                <li>• يفصل الأشكال المتصلة بروابط رفيعة</li>
+              </ul>
+            </div>
+            <div class="p-3 bg-slate-50 dark:bg-gray-700/50 rounded-lg border border-slate-200 dark:border-gray-600">
+              <p class="text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">مكافئ OpenCV:</p>
+              <div class="font-mono text-xs text-slate-600 dark:text-slate-400">
+                <code>cv2.erode(img, kernel, iterations=1)</code>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dilate Section -->
+        <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-slate-200 dark:border-gray-700 mb-8">
+          <h2 class="text-xl font-bold text-slate-800 dark:text-slate-200 mb-3">التمدد (Dilation)</h2>
+          <p class="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+            التمدد هو العملية المعاكسة للتآكل. يقوم بتمرير العنصر البنيوي على كل بكسل ويأخذ <strong>أعلى قيمة (Maximum)</strong> من البكسلات الواقعة تحته.
+          </p>
+          <div class="formula-box text-lg bg-slate-50 dark:bg-gray-700/50 rounded-xl p-4 mb-4 text-center">
+            Dilate(x,y) = <span class="var-math">max</span>{ I(x+i, y+j) | SE(i,j) = 1 }
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="p-3 bg-pink-50 dark:bg-pink-900/20 rounded-lg border border-pink-200 dark:border-pink-700/50">
+              <p class="text-sm font-bold text-pink-700 dark:text-pink-300 mb-2">التأثير على الصور الثنائية:</p>
+              <ul class="text-xs text-pink-600 dark:text-pink-400 space-y-1">
+                <li>• يُوسّع المناطق البيضاء (الأمامية)</li>
+                <li>• يُصغّر المناطق السوداء (الخلفية)</li>
+                <li>• يملأ الثقوب السوداء الصغيرة</li>
+                <li>• يوصل الأشكال القريبة من بعضها</li>
+              </ul>
+            </div>
+            <div class="p-3 bg-slate-50 dark:bg-gray-700/50 rounded-lg border border-slate-200 dark:border-gray-600">
+              <p class="text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">مكافئ OpenCV:</p>
+              <div class="font-mono text-xs text-slate-600 dark:text-slate-400">
+                <code>cv2.dilate(img, kernel, iterations=1)</code>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Interactive Simulation -->
+        <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-slate-200 dark:border-gray-700">
+          <h2 class="text-lg font-bold text-slate-800 dark:text-slate-200 mb-4">محاكاة تفاعلية</h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <label class="text-sm font-medium text-slate-700 dark:text-slate-300">حجم العنصر البنيوي</label>
+                <span id="sim-de-value" class="text-sm font-mono text-pink-600 dark:text-pink-400 bg-pink-50 dark:bg-pink-900/30 px-2 py-0.5 rounded">3×3</span>
+              </div>
+              <input type="range" id="sim-de-slider" min="3" max="11" step="2" value="3" class="w-full">
+            </div>
+            <div>
+              <label class="text-sm font-medium text-slate-700 dark:text-slate-300 mb-2 block">شكل SE</label>
+              <select id="sim-de-shape" class="w-full px-3 py-1.5 border border-slate-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 outline-none text-sm text-slate-800 dark:text-slate-200">
+                <option value="rect">مربع (Rectangle)</option>
+                <option value="cross">صليب (Cross)</option>
+                <option value="ellipse">بيضاوي (Ellipse)</option>
+              </select>
+            </div>
+          </div>
+          <div id="sim-de-container" class="mb-4"></div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ---- Concept: Open & Top Hat ---- -->
+  <div id="section-concept-open-tophat" class="section-view">
+    <section class="py-12 px-4 sm:px-6">
+      <div class="max-w-4xl mx-auto">
+        <a href="#morph-processing" data-route="morph-processing" class="inline-flex items-center gap-2 text-sm text-pink-600 dark:text-pink-400 hover:text-pink-800 dark:hover:text-pink-300 mb-8 font-medium">
+          <svg class="w-4 h-4 rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+          العودة إلى المعالجة المورفولوجية
+        </a>
+        <div class="flex items-center gap-3 mb-6">
+          <div class="w-12 h-12 rounded-xl bg-pink-100 dark:bg-pink-900/30 flex items-center justify-center">
+            <svg class="w-6 h-6 text-pink-600 dark:text-pink-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/>
+            </svg>
+          </div>
+          <div>
+            <h1 class="text-3xl font-bold text-slate-900 dark:text-white">الفتح و Top Hat</h1>
+            <p class="text-slate-400">Opening & Top Hat Transform</p>
+          </div>
+        </div>
+
+        <!-- Opening Section -->
+        <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-slate-200 dark:border-gray-700 mb-8">
+          <h2 class="text-xl font-bold text-slate-800 dark:text-slate-200 mb-3">الفتح (Opening)</h2>
+          <p class="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+            الفتح هو عملية مركبة تتكون من <strong>تآكل (Erode) يتبعه تمدد (Dilate)</strong> بنفس العنصر البنيوي. يُزيل الضوضاء الساطعة الصغيرة (النقاط البيضاء) مع الحفاظ على الأشكال الكبيرة وأحجامها.
+          </p>
+          <div class="formula-box text-lg bg-slate-50 dark:bg-gray-700/50 rounded-xl p-4 mb-4 text-center">
+            Open(I, SE) = Dilate( Erode(I, SE), SE )
+          </div>
+          <div class="p-3 bg-pink-50 dark:bg-pink-900/20 rounded-lg border border-pink-200 dark:border-pink-700/50">
+            <p class="text-sm font-bold text-pink-700 dark:text-pink-300 mb-2">الاستخدامات:</p>
+            <ul class="text-xs text-pink-600 dark:text-pink-400 space-y-1">
+              <li>• إزالة الضوضاء البيضاء الصغيرة من الصور الثنائية</li>
+              <li>• تنعيم حدود الأشكال من الخارج</li>
+              <li>• فصل الأشكال المتصلة بروابط رفيعة</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Top Hat Section -->
+        <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-slate-200 dark:border-gray-700 mb-8">
+          <h2 class="text-xl font-bold text-slate-800 dark:text-slate-200 mb-3">Top Hat Transform</h2>
+          <p class="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+            Top Hat هو الفرق بين <strong>الصورة الأصلية وعملية الفتح (Opening)</strong>. يستخلص التفاصيل الساطعة الصغيرة التي تكون أصغر من العنصر البنيوي. مفيد جداً لتصحيح الإضاءة غير المتساوية.
+          </p>
+          <div class="formula-box text-lg bg-slate-50 dark:bg-gray-700/50 rounded-xl p-4 mb-4 text-center">
+            TopHat(I, SE) = I − Open(I, SE)
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="p-3 bg-pink-50 dark:bg-pink-900/20 rounded-lg border border-pink-200 dark:border-pink-700/50">
+              <p class="text-sm font-bold text-pink-700 dark:text-pink-300 mb-2">الاستخدامات:</p>
+              <ul class="text-xs text-pink-600 dark:text-pink-400 space-y-1">
+                <li>• استخلاص التفاصيل الساطعة الدقيقة</li>
+                <li>• تصحيح الإضاءة غير المتساوية</li>
+                <li>• تحسين التباين المحلي</li>
+              </ul>
+            </div>
+            <div class="p-3 bg-slate-50 dark:bg-gray-700/50 rounded-lg border border-slate-200 dark:border-gray-600">
+              <p class="text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">مكافئ OpenCV:</p>
+              <div class="font-mono text-xs text-slate-600 dark:text-slate-400">
+                <code>cv2.morphologyEx(img, cv2.MORPH_TOPHAT, kernel)</code>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Interactive Simulation -->
+        <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-slate-200 dark:border-gray-700">
+          <h2 class="text-lg font-bold text-slate-800 dark:text-slate-200 mb-4">محاكاة تفاعلية</h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <label class="text-sm font-medium text-slate-700 dark:text-slate-300">حجم العنصر البنيوي</label>
+                <span id="sim-ot-value" class="text-sm font-mono text-pink-600 dark:text-pink-400 bg-pink-50 dark:bg-pink-900/30 px-2 py-0.5 rounded">3×3</span>
+              </div>
+              <input type="range" id="sim-ot-slider" min="3" max="15" step="2" value="3" class="w-full">
+            </div>
+            <div>
+              <label class="text-sm font-medium text-slate-700 dark:text-slate-300 mb-2 block">شكل SE</label>
+              <select id="sim-ot-shape" class="w-full px-3 py-1.5 border border-slate-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 outline-none text-sm text-slate-800 dark:text-slate-200">
+                <option value="rect">مربع (Rectangle)</option>
+                <option value="cross">صليب (Cross)</option>
+                <option value="ellipse">بيضاوي (Ellipse)</option>
+              </select>
+            </div>
+          </div>
+          <div id="sim-ot-container" class="mb-4"></div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ---- Concept: Close & Black Hat ---- -->
+  <div id="section-concept-close-blackhat" class="section-view">
+    <section class="py-12 px-4 sm:px-6">
+      <div class="max-w-4xl mx-auto">
+        <a href="#morph-processing" data-route="morph-processing" class="inline-flex items-center gap-2 text-sm text-pink-600 dark:text-pink-400 hover:text-pink-800 dark:hover:text-pink-300 mb-8 font-medium">
+          <svg class="w-4 h-4 rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+          العودة إلى المعالجة المورفولوجية
+        </a>
+        <div class="flex items-center gap-3 mb-6">
+          <div class="w-12 h-12 rounded-xl bg-pink-100 dark:bg-pink-900/30 flex items-center justify-center">
+            <svg class="w-6 h-6 text-pink-600 dark:text-pink-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
+            </svg>
+          </div>
+          <div>
+            <h1 class="text-3xl font-bold text-slate-900 dark:text-white">الإغلاق و Black Hat</h1>
+            <p class="text-slate-400">Closing & Black Hat Transform</p>
+          </div>
+        </div>
+
+        <!-- Closing Section -->
+        <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-slate-200 dark:border-gray-700 mb-8">
+          <h2 class="text-xl font-bold text-slate-800 dark:text-slate-200 mb-3">الإغلاق (Closing)</h2>
+          <p class="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+            الإغلاق هو العملية المعاكسة للفتح: <strong>تمدد (Dilate) يتبعه تآكل (Erode)</strong> بنفس العنصر البنيوي. يملأ الثقوب السوداء الصغيرة والشقوق الرفيعة داخل الأشكال البيضاء.
+          </p>
+          <div class="formula-box text-lg bg-slate-50 dark:bg-gray-700/50 rounded-xl p-4 mb-4 text-center">
+            Close(I, SE) = Erode( Dilate(I, SE), SE )
+          </div>
+          <div class="p-3 bg-pink-50 dark:bg-pink-900/20 rounded-lg border border-pink-200 dark:border-pink-700/50">
+            <p class="text-sm font-bold text-pink-700 dark:text-pink-300 mb-2">الاستخدامات:</p>
+            <ul class="text-xs text-pink-600 dark:text-pink-400 space-y-1">
+              <li>• ملء الثقوب والفجوات السوداء الصغيرة داخل الأشكال</li>
+              <li>• تنعيم حدود الأشكال من الداخل</li>
+              <li>• وصل الأجزاء القريبة من الحدود المتقطعة</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Black Hat Section -->
+        <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-slate-200 dark:border-gray-700 mb-8">
+          <h2 class="text-xl font-bold text-slate-800 dark:text-slate-200 mb-3">Black Hat Transform</h2>
+          <p class="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+            Black Hat هو الفرق بين <strong>عملية الإغلاق (Closing) والصورة الأصلية</strong>. يستخلص التفاصيل المظلمة الصغيرة (الثقوب والشقوق) من الصورة. وهو المقابل لـ Top Hat.
+          </p>
+          <div class="formula-box text-lg bg-slate-50 dark:bg-gray-700/50 rounded-xl p-4 mb-4 text-center">
+            BlackHat(I, SE) = Close(I, SE) − I
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="p-3 bg-pink-50 dark:bg-pink-900/20 rounded-lg border border-pink-200 dark:border-pink-700/50">
+              <p class="text-sm font-bold text-pink-700 dark:text-pink-300 mb-2">الاستخدامات:</p>
+              <ul class="text-xs text-pink-600 dark:text-pink-400 space-y-1">
+                <li>• استخلاص التفاصيل المظلمة الدقيقة</li>
+                <li>• كشف الشقوق والعيوب المظلمة</li>
+                <li>• تحليل الخلفيات المتفاوتة</li>
+              </ul>
+            </div>
+            <div class="p-3 bg-slate-50 dark:bg-gray-700/50 rounded-lg border border-slate-200 dark:border-gray-600">
+              <p class="text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">مكافئ OpenCV:</p>
+              <div class="font-mono text-xs text-slate-600 dark:text-slate-400">
+                <code>cv2.morphologyEx(img, cv2.MORPH_BLACKHAT, kernel)</code>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Interactive Simulation -->
+        <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-slate-200 dark:border-gray-700">
+          <h2 class="text-lg font-bold text-slate-800 dark:text-slate-200 mb-4">محاكاة تفاعلية</h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <label class="text-sm font-medium text-slate-700 dark:text-slate-300">حجم العنصر البنيوي</label>
+                <span id="sim-cb-value" class="text-sm font-mono text-pink-600 dark:text-pink-400 bg-pink-50 dark:bg-pink-900/30 px-2 py-0.5 rounded">3×3</span>
+              </div>
+              <input type="range" id="sim-cb-slider" min="3" max="15" step="2" value="3" class="w-full">
+            </div>
+            <div>
+              <label class="text-sm font-medium text-slate-700 dark:text-slate-300 mb-2 block">شكل SE</label>
+              <select id="sim-cb-shape" class="w-full px-3 py-1.5 border border-slate-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 outline-none text-sm text-slate-800 dark:text-slate-200">
+                <option value="rect">مربع (Rectangle)</option>
+                <option value="cross">صليب (Cross)</option>
+                <option value="ellipse">بيضاوي (Ellipse)</option>
+              </select>
+            </div>
+          </div>
+          <div id="sim-cb-container" class="mb-4"></div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ---- Morph Playground ---- -->
+  <div id="section-morph-playground" class="section-view">
+    <section class="py-12 px-4 sm:px-6">
+      <div class="max-w-7xl mx-auto">
+        <!-- Header -->
+        <div class="text-center mb-8">
+          <div class="inline-flex items-center gap-2 px-3 py-1 mb-3 rounded-full bg-pink-50 dark:bg-pink-900/30 text-pink-600 dark:text-pink-400 text-xs font-semibold">
+            Morphological Processing Lab
+          </div>
+          <h2 class="text-3xl font-bold text-slate-900 dark:text-white mb-2">مختبر المعالجة المورفولوجية</h2>
+          <p class="text-slate-500 dark:text-slate-400">ارفع صورتك واختر العملية المورفولوجية وعدّل حجم وشكل العنصر البنيوي</p>
+        </div>
+
+        <div class="playground-layout flex flex-col lg:flex-row gap-6">
+
+          <!-- RIGHT PANEL: Controls & Preview -->
+          <div class="lg:w-1/2 space-y-5">
+            <!-- Upload Zone -->
+            <div class="drop-zone p-6 text-center bg-white dark:bg-gray-800 border border-slate-200 dark:border-gray-700" id="morph-playground-dropzone">
+              <input type="file" accept="image/*" id="morph-playground-file-input" class="hidden">
+              <svg class="w-10 h-10 mx-auto mb-3 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+              </svg>
+              <p class="drop-text text-sm text-slate-500 dark:text-slate-400 font-medium">اسحب صورة هنا أو انقر للتحميل</p>
+              <p class="text-xs text-slate-400 mt-1">PNG, JPG, WebP — حد أقصى 512px</p>
+            </div>
+
+            <!-- Canvases -->
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <div class="text-xs font-semibold text-slate-500 dark:text-slate-400 mb-1 text-center">الأصلية</div>
+                <div class="canvas-container bg-white dark:bg-gray-800 border border-slate-200 dark:border-gray-700 rounded-lg p-1">
+                  <canvas id="morph-playground-original" width="300" height="200" class="rounded"></canvas>
+                </div>
+              </div>
+              <div>
+                <div class="text-xs font-semibold text-slate-500 dark:text-slate-400 mb-1 text-center">المعالَجة</div>
+                <div class="canvas-container bg-white dark:bg-gray-800 border border-slate-200 dark:border-gray-700 rounded-lg p-1">
+                  <canvas id="morph-playground-processed" width="300" height="200" class="rounded"></canvas>
+                </div>
+              </div>
+            </div>
+
+            <!-- Operation Selector -->
+            <div class="bg-white dark:bg-gray-800 rounded-xl p-4 border border-slate-200 dark:border-gray-700 shadow-sm">
+              <div class="flex items-center justify-between mb-3">
+                <label class="text-sm font-bold text-slate-700 dark:text-slate-300">نوع العملية</label>
+                <div class="flex gap-3">
+                  <button id="morph-playground-save" class="text-xs text-emerald-500 hover:text-emerald-600 transition-colors flex items-center gap-1" title="حفظ الصورة">
+                    <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                    حفظ الصورة
+                  </button>
+                  <button id="morph-playground-reset" class="text-xs text-slate-400 hover:text-pink-500 transition-colors flex items-center gap-1">
+                    <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+                    إعادة تعيين
+                  </button>
+                </div>
+              </div>
+              <select id="morph-playground-type-select" class="w-full px-3 py-2 bg-slate-50 dark:bg-gray-700 border border-slate-200 dark:border-gray-600 rounded-lg text-sm text-slate-800 dark:text-slate-200 focus:ring-2 focus:ring-pink-500 focus:border-pink-500 outline-none">
+                <option value="erode">التآكل (Erosion)</option>
+                <option value="dilate">التمدد (Dilation)</option>
+                <option value="open">الفتح (Opening)</option>
+                <option value="close">الإغلاق (Closing)</option>
+                <option value="tophat">Top Hat</option>
+                <option value="blackhat">Black Hat</option>
+              </select>
+
+              <div id="morph-playground-controls" class="mt-4"></div>
+            </div>
+          </div>
+
+          <!-- LEFT PANEL: Code Generation -->
+          <div class="lg:w-1/2">
+            <div class="bg-slate-900 dark:bg-gray-950 rounded-2xl overflow-hidden border border-slate-700/50 sticky top-20 shadow-lg">
+              <div class="flex items-center justify-between px-4 py-3 bg-slate-800 dark:bg-gray-900 border-b border-slate-700/50">
+                <div class="flex items-center gap-3">
+                  <div class="flex gap-1.5">
+                    <div class="w-3 h-3 rounded-full bg-red-500/80"></div>
+                    <div class="w-3 h-3 rounded-full bg-yellow-500/80"></div>
+                    <div class="w-3 h-3 rounded-full bg-green-500/80"></div>
+                  </div>
+                  <span class="text-xs text-slate-400 font-mono">morphological.py</span>
+                </div>
+                <button id="morph-playground-copy-code" class="copy-btn inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-slate-300 hover:text-white bg-slate-700 hover:bg-slate-600 rounded-lg transition-colors">
+                  <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                  </svg>
+                  نسخ الكود
+                </button>
+              </div>
+              <div class="p-5 overflow-auto max-h-[70vh]">
+                <pre id="morph-playground-code" class="code-block text-slate-100"></pre>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ============================================================
        SECTION 6: SHARPENING FILTERS
        ============================================================ -->
   <!-- Main Grid Page -->
@@ -2789,6 +3250,12 @@
   <script src="js/sharpen-codegen.js"></script>
   <script src="js/sharpen-simulations.js"></script>
   <script src="js/sharpen-playground.js"></script>
+
+  <!-- Morphological Processing Scripts -->
+  <script src="js/morph-processing.js"></script>
+  <script src="js/morph-codegen.js"></script>
+  <script src="js/morph-simulations.js"></script>
+  <script src="js/morph-playground.js"></script>
 
   <script src="js/ui-enhancements.js"></script>
   <script src="js/app.js"></script>

@@ -47,7 +47,13 @@ const App = (() => {
     'sharpen-filters/unsharp': 'section-concept-unsharp',
     'sharpen-filters/canny': 'section-concept-canny',
     'sharpen-filters/prewitt': 'section-concept-prewitt',
-    'sharpen-filters/highboost': 'section-concept-highboost'
+    'sharpen-filters/highboost': 'section-concept-highboost',
+    // Morphological Processing
+    'morph-processing': 'section-morph-processing',
+    'morph-playground': 'section-morph-playground',
+    'morph-processing/dilate-erode': 'section-concept-dilate-erode',
+    'morph-processing/open-tophat': 'section-concept-open-tophat',
+    'morph-processing/close-blackhat': 'section-concept-close-blackhat'
   };
 
   let currentRoute = 'home';
@@ -153,6 +159,10 @@ const App = (() => {
       setTimeout(() => {
         initSharpenSimulation(view.split('/')[1]);
       }, 100);
+    } else if (view.startsWith('morph-processing/')) {
+      setTimeout(() => {
+        initMorphSimulation(view.split('/')[1]);
+      }, 100);
     } else if (view === 'playground' && typeof Playground !== 'undefined') {
       setTimeout(() => Playground.init(), 100);
     } else if (view === 'basics-playground' && typeof BasicsPlayground !== 'undefined') {
@@ -163,6 +173,8 @@ const App = (() => {
       setTimeout(() => SmoothPlayground.init(), 100);
     } else if (view === 'sharpen-playground' && typeof SharpenPlayground !== 'undefined') {
       setTimeout(() => SharpenPlayground.init(), 100);
+    } else if (view === 'morph-playground' && typeof MorphPlayground !== 'undefined') {
+      setTimeout(() => MorphPlayground.init(), 100);
     }
   }
 
@@ -311,6 +323,26 @@ const App = (() => {
   }
 
   /* ----------------------------------------------------------
+   * Morphological Processing Simulations Initializer
+   * ---------------------------------------------------------- */
+  
+  function initMorphSimulation(concept) {
+    if (typeof MorphSimulations === 'undefined') return;
+
+    switch(concept) {
+      case 'dilate-erode':
+        MorphSimulations.initDilateErode('sim-de-container', 'sim-de-slider', 'sim-de-value', 'sim-de-shape');
+        break;
+      case 'open-tophat':
+        MorphSimulations.initOpenTopHat('sim-ot-container', 'sim-ot-slider', 'sim-ot-value', 'sim-ot-shape');
+        break;
+      case 'close-blackhat':
+        MorphSimulations.initCloseBlackHat('sim-cb-container', 'sim-cb-slider', 'sim-cb-value', 'sim-cb-shape');
+        break;
+    }
+  }
+
+  /* ----------------------------------------------------------
    * Utility to Download Canvas Image
    * ---------------------------------------------------------- */
   function downloadCanvasImage(canvasId, defaultFilename) {
@@ -353,6 +385,9 @@ const App = (() => {
 
     const sharpenSaveBtn = document.getElementById('sharpen-playground-save');
     if (sharpenSaveBtn) sharpenSaveBtn.addEventListener('click', () => downloadCanvasImage('sharpen-playground-processed', 'sharpen_filter_result.png'));
+
+    const morphSaveBtn = document.getElementById('morph-playground-save');
+    if (morphSaveBtn) morphSaveBtn.addEventListener('click', () => downloadCanvasImage('morph-playground-processed', 'morph_result.png'));
 
     // Mobile Menu
     const menuBtn = document.getElementById('mobile-menu-btn');

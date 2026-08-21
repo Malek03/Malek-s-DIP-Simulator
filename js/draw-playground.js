@@ -8,6 +8,9 @@ const DrawPlayground = (() => {
 
   // State
   let shapes = [];
+  let history = [];
+  let selectedShape = null;
+  let copiedShape = null;
   let currentTool = 'select'; // 'select', 'rectangle', 'circle', 'line', 'polygon', 'text'
   let isDrawing = false;
   let isDragging = false;
@@ -22,6 +25,57 @@ const DrawPlayground = (() => {
   
   let currentColor = '#000000';
   let currentThickness = 2;
+
+  // History Methods
+  function saveState() {
+    history.push(JSON.parse(JSON.stringify(shapes)));
+    if (history.length > 50) history.shift();
+  }
+
+  function undo() {
+    if (history.length > 0) {
+      shapes = history.pop();
+      selectedShape = null;
+      draggedShape = null;
+      redraw();
+      updateCode();
+    }
+  }
+
+  function deleteSelected() {
+    if (selectedShape) {
+      saveState();
+      shapes = shapes.filter(s => s !== selectedShape);
+      selectedShape = null;
+      redraw();
+      updateCode();
+    }
+  }
+
+  function copySelected() {
+    if (selectedShape) {
+      copiedShape = JSON.parse(JSON.stringify(selectedShape));
+    }
+  }
+
+  function pasteCopied() {
+    if (copiedShape) {
+      saveState();
+      let newShape = JSON.parse(JSON.stringify(copiedShape));
+      const offset = 20;
+      if (newShape.x !== undefined) newShape.x += offset;
+      if (newShape.y !== undefined) newShape.y += offset;
+      if (newShape.cx !== undefined) { newShape.cx += offset; newShape.cy += offset; }
+      if (newShape.x1 !== undefined) { newShape.x1 += offset; newShape.y1 += offset; newShape.x2 += offset; newShape.y2 += offset; }
+      if (newShape.points) { newShape.points.forEach(p => { p.x += offset; p.y += offset; }); }
+      
+      shapes.push(newShape);
+      selectedShape = newShape; // select the new copy
+      copiedShape = newShape; // update copiedShape so next paste offsets again
+      redraw();
+      updateCode();
+    }
+  }
 
   // DOM Elements
   const els = {};
@@ -47,6 +101,11 @@ const DrawPlayground = (() => {
     els.thicknessValue = document.getElementById('draw-thickness-value');
     els.fontContainer = document.getElementById('draw-font-container');
     els.fontSelect = document.getElementById('draw-font');
+    
+    els.undoBtn = document.getElementById('draw-undo-btn');
+    els.copyBtn = document.getElementById('draw-copy-btn');
+    els.pasteBtn = document.getElementById('draw-paste-btn');
+    els.deleteBtn = document.getElementById('draw-delete-shape-btn');
     
     bindEvents();
     resizeCanvas();
@@ -106,11 +165,18 @@ const DrawPlayground = (() => {
     if (els.uploadBtn) els.uploadBtn.addEventListener('click', () => els.uploadInput.click());
     if (els.uploadInput) els.uploadInput.addEventListener('change', handleUpload);
     if (els.clearBtn) els.clearBtn.addEventListener('click', () => {
+      saveState();
       shapes = [];
       currentShape = null;
+      selectedShape = null;
       redraw();
       updateCode();
     });
+
+    if (els.undoBtn) els.undoBtn.addEventListener('click', undo);
+    if (els.copyBtn) els.copyBtn.addEventListener('click', copySelected);
+    if (els.pasteBtn) els.pasteBtn.addEventListener('click', pasteCopied);
+    if (els.deleteBtn) els.deleteBtn.addEventListener('click', deleteSelected);
 
     // Canvas Mouse Events
     els.canvas.addEventListener('mousedown', handleMouseDown);
@@ -177,35 +243,45 @@ const DrawPlayground = (() => {
 
     if (currentTool === 'select') {
       // Find shape under cursor (search backwards for z-index)
-      draggedShape = null;
+      let found = null;
       for (let i = shapes.length - 1; i >= 0; i--) {
         if (DrawProcessing.isPointInShape(pos.x, pos.y, shapes[i])) {
-          draggedShape = shapes[i];
+          found = shapes[i];
           // move shape to top
           shapes.splice(i, 1);
-          shapes.push(draggedShape);
-          
-          isDragging = true;
-          // compute offsets
-          if (draggedShape.type === 'rectangle' || draggedShape.type === 'text') {
-            dragOffsetX = pos.x - draggedShape.x;
-            dragOffsetY = pos.y - draggedShape.y;
-          } else if (draggedShape.type === 'circle') {
-            dragOffsetX = pos.x - draggedShape.cx;
-            dragOffsetY = pos.y - draggedShape.cy;
-          } else if (draggedShape.type === 'line') {
-            dragOffsetX = pos.x - draggedShape.x1;
-            dragOffsetY = pos.y - draggedShape.y1;
-          } else if (draggedShape.type === 'polygon') {
-            dragOffsetX = pos.x - draggedShape.points[0].x;
-            dragOffsetY = pos.y - draggedShape.points[0].y;
-          }
+          shapes.push(found);
           break;
         }
       }
+
+      if (found) {
+        saveState();
+        selectedShape = found;
+        draggedShape = found;
+        isDragging = true;
+        // compute offsets
+        if (draggedShape.type === 'rectangle' || draggedShape.type === 'text') {
+          dragOffsetX = pos.x - draggedShape.x;
+          dragOffsetY = pos.y - draggedShape.y;
+        } else if (draggedShape.type === 'circle') {
+          dragOffsetX = pos.x - draggedShape.cx;
+          dragOffsetY = pos.y - draggedShape.cy;
+        } else if (draggedShape.type === 'line') {
+          dragOffsetX = pos.x - draggedShape.x1;
+          dragOffsetY = pos.y - draggedShape.y1;
+        } else if (draggedShape.type === 'polygon') {
+          dragOffsetX = pos.x - draggedShape.points[0].x;
+          dragOffsetY = pos.y - draggedShape.points[0].y;
+        }
+      } else {
+        selectedShape = null;
+      }
+      redraw();
     } else if (currentTool === 'text') {
+      selectedShape = null;
       const text = prompt('أدخل النص (إنجليزي):', 'Hello OpenCV');
       if (text) {
+        saveState();
         const font = els.fontSelect ? els.fontSelect.value : 'cv2.FONT_HERSHEY_SIMPLEX';
         currentShape = {
           type: 'text',
@@ -222,7 +298,9 @@ const DrawPlayground = (() => {
         updateCode();
       }
     } else if (currentTool === 'polygon') {
+      selectedShape = null;
       if (!currentShape || currentShape.type !== 'polygon' || currentShape.isClosed) {
+        saveState();
         currentShape = {
           type: 'polygon',
           points: [{x: pos.x, y: pos.y}],
@@ -232,12 +310,15 @@ const DrawPlayground = (() => {
         };
         shapes.push(currentShape);
       } else {
+        saveState();
         currentShape.points.push({x: pos.x, y: pos.y});
       }
       redraw();
       updateCode();
     } else {
       // rectangle, circle, line
+      selectedShape = null;
+      saveState();
       isDrawing = true;
       currentShape = {
         type: currentTool,
@@ -371,6 +452,43 @@ const DrawPlayground = (() => {
     // Draw Shapes
     shapes.forEach(shape => {
       DrawProcessing.drawShape(ctx, shape);
+      
+      // Draw highlight if selected
+      if (shape === selectedShape) {
+        ctx.save();
+        ctx.strokeStyle = '#f59e0b'; // amber
+        ctx.lineWidth = 2;
+        ctx.setLineDash([5, 5]);
+        let padding = (shape.thickness || 2) + 4;
+        
+        if (shape.type === 'rectangle') {
+          let minX = Math.min(shape.x, shape.x + shape.width);
+          let minY = Math.min(shape.y, shape.y + shape.height);
+          let w = Math.abs(shape.width);
+          let h = Math.abs(shape.height);
+          ctx.strokeRect(minX - padding, minY - padding, w + padding*2, h + padding*2);
+        } else if (shape.type === 'circle') {
+          ctx.beginPath();
+          ctx.arc(shape.cx, shape.cy, shape.radius + padding, 0, Math.PI * 2);
+          ctx.stroke();
+        } else if (shape.type === 'line') {
+          ctx.beginPath();
+          ctx.moveTo(shape.x1, shape.y1);
+          ctx.lineTo(shape.x2, shape.y2);
+          ctx.stroke();
+        } else if (shape.type === 'polygon') {
+          if (shape.points && shape.points.length > 0) {
+            let minX = Math.min(...shape.points.map(p => p.x));
+            let maxX = Math.max(...shape.points.map(p => p.x));
+            let minY = Math.min(...shape.points.map(p => p.y));
+            let maxY = Math.max(...shape.points.map(p => p.y));
+            ctx.strokeRect(minX - padding, minY - padding, maxX - minX + padding*2, maxY - minY + padding*2);
+          }
+        } else if (shape.type === 'text') {
+          ctx.strokeRect(shape.x - padding, shape.y - shape.fontSize - padding, shape.text.length * (shape.fontSize/1.5) + padding*2, shape.fontSize + padding*2);
+        }
+        ctx.restore();
+      }
     });
   }
 

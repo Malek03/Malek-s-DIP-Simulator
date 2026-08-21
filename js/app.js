@@ -53,7 +53,9 @@ const App = (() => {
     'morph-playground': 'section-morph-playground',
     'morph-processing/dilate-erode': 'section-concept-dilate-erode',
     'morph-processing/open-tophat': 'section-concept-open-tophat',
-    'morph-processing/close-blackhat': 'section-concept-close-blackhat'
+    'morph-processing/close-blackhat': 'section-concept-close-blackhat',
+    // Drawing on Images
+    'draw-playground': 'section-draw-playground'
   };
 
   let currentRoute = 'home';
@@ -175,6 +177,8 @@ const App = (() => {
       setTimeout(() => SharpenPlayground.init(), 100);
     } else if (view === 'morph-playground' && typeof MorphPlayground !== 'undefined') {
       setTimeout(() => MorphPlayground.init(), 100);
+    } else if (view === 'draw-playground' && typeof DrawPlayground !== 'undefined') {
+      setTimeout(() => DrawPlayground.init(), 100);
     }
   }
 

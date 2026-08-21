@@ -60,6 +60,7 @@
           <a href="#smooth-filters" data-route="smooth-filters" class="nav-link px-3 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 rounded-lg hover:bg-slate-100 dark:hover:bg-gray-800 transition-colors">فلاتر التنعيم</a>
           <a href="#sharpen-filters" data-route="sharpen-filters" class="nav-link px-3 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-rose-600 dark:hover:text-rose-400 rounded-lg hover:bg-slate-100 dark:hover:bg-gray-800 transition-colors">فلاتر الحدة</a>
           <a href="#morph-processing" data-route="morph-processing" class="nav-link px-3 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-pink-600 dark:hover:text-pink-400 rounded-lg hover:bg-slate-100 dark:hover:bg-gray-800 transition-colors">المورفولوجيا</a>
+          <a href="#draw-playground" data-route="draw-playground" class="nav-link px-3 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-green-600 dark:hover:text-green-400 rounded-lg hover:bg-slate-100 dark:hover:bg-gray-800 transition-colors">الرسم على الصور</a>
         </div>
 
         <!-- Theme Toggle + Mobile Menu -->
@@ -92,6 +93,7 @@
           <a href="#smooth-filters" data-route="smooth-filters" class="nav-link px-3 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 rounded-lg hover:bg-slate-100 dark:hover:bg-gray-800">فلاتر التنعيم</a>
           <a href="#sharpen-filters" data-route="sharpen-filters" class="nav-link px-3 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-rose-600 dark:hover:text-rose-400 rounded-lg hover:bg-slate-100 dark:hover:bg-gray-800">فلاتر الحدة</a>
           <a href="#morph-processing" data-route="morph-processing" class="nav-link px-3 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-pink-600 dark:hover:text-pink-400 rounded-lg hover:bg-slate-100 dark:hover:bg-gray-800">المورفولوجيا</a>
+          <a href="#draw-playground" data-route="draw-playground" class="nav-link px-3 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-green-600 dark:hover:text-green-400 rounded-lg hover:bg-slate-100 dark:hover:bg-gray-800">الرسم على الصور</a>
         </div>
       </div>
     </div>
@@ -419,25 +421,25 @@
             </p>
           </div>
 
-          <!-- Coming Soon 5: Drawing on Images -->
-          <div class="concept-card disabled bg-white dark:bg-gray-800 rounded-2xl p-6 border border-slate-200 dark:border-gray-700 shadow-sm relative overflow-hidden">
+          <!-- Card 7: Drawing on Images (Active) -->
+          <a href="#draw-playground" data-route="draw-playground" class="concept-card bg-white dark:bg-gray-800 rounded-2xl p-6 border border-slate-200 dark:border-gray-700 shadow-sm cursor-pointer block relative overflow-hidden group hover:border-green-300 dark:hover:border-green-600 transition-all">
             <div class="absolute top-4 left-4">
-              <span class="badge-coming-soon">
-                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
-                قريباً
+              <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 text-xs font-medium">
+                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                متاح الآن
               </span>
             </div>
-            <div class="w-12 h-12 rounded-xl bg-purple-100 dark:bg-purple-900/20 flex items-center justify-center mb-5">
-              <svg class="w-6 h-6 text-purple-500/60" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <div class="w-12 h-12 rounded-xl bg-green-100 dark:bg-green-900/30 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+              <svg class="w-6 h-6 text-green-500/80 dark:text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/>
               </svg>
             </div>
-            <h3 class="text-lg font-bold text-slate-700 dark:text-slate-400 mb-2">الرسم على الصور</h3>
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2 group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors">الرسم على الصور</h3>
             <p class="text-sm text-slate-400 dark:text-slate-500 mb-1">Drawing on Images</p>
-            <p class="text-xs text-slate-400 dark:text-slate-500 leading-relaxed">
+            <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
               رسم الأشكال الأساسية، الخطوط، والنصوص على الصور باستخدام OpenCV.
             </p>
-          </div>
+          </a>
 
         </div>
       </div>
@@ -3207,6 +3209,138 @@
     </section>
   </div>
 
+    <!-- ============================================================
+         DRAWING ON IMAGES MODULE
+         ============================================================ -->
+    <div id="section-draw-playground" class="section-view">
+      <section class="pt-16 md:pt-20">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div class="flex items-center gap-4 mb-8 border-b border-slate-200 dark:border-gray-700 pb-4">
+          <div class="w-12 h-12 rounded-xl bg-green-100 dark:bg-green-900/30 flex items-center justify-center">
+            <span class="material-symbols-rounded text-3xl text-green-600 dark:text-green-400">draw</span>
+          </div>
+          <div>
+            <h1 class="text-3xl font-bold text-slate-900 dark:text-white">الرسم على الصور</h1>
+            <p class="text-slate-500 dark:text-slate-400 mt-1">تطبيق أشكال هندسية ورسومات متغيرة على لوحة الرسم أو صورة خارجية</p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+          
+          <!-- Drawing Controls (Left Side) -->
+          <div class="lg:col-span-3 space-y-6">
+            <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-slate-200 dark:border-gray-700 p-5">
+              <h3 class="text-lg font-semibold text-slate-800 dark:text-white mb-4 flex items-center gap-2">
+                <span class="material-symbols-rounded text-green-500">settings</span> إعدادات اللوحة
+              </h3>
+              
+              <div class="space-y-4">
+                <div class="space-y-2">
+                  <label class="text-sm font-medium text-slate-600 dark:text-slate-300">الخلفية</label>
+                  <div class="grid grid-cols-3 gap-2">
+                    <button id="draw-bg-white" class="px-3 py-2 rounded-lg border border-slate-200 dark:border-gray-600 hover:bg-slate-50 dark:hover:bg-gray-700 text-sm">بيضاء</button>
+                    <button id="draw-bg-black" class="px-3 py-2 rounded-lg border border-slate-200 dark:border-gray-600 hover:bg-slate-50 dark:hover:bg-gray-700 text-sm">سوداء</button>
+                    <button id="draw-upload-btn" class="px-3 py-2 rounded-lg border border-slate-200 dark:border-gray-600 hover:bg-slate-50 dark:hover:bg-gray-700 text-sm text-green-600">صورة</button>
+                    <input type="file" id="draw-upload-input" accept="image/*" class="hidden">
+                  </div>
+                </div>
+
+                <div class="space-y-2">
+                  <label class="text-sm font-medium text-slate-600 dark:text-slate-300">الأدوات</label>
+                  <div class="grid grid-cols-3 gap-2">
+                    <button class="draw-tool-btn active bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 px-3 py-2 rounded-lg border border-slate-200 dark:border-gray-600 flex flex-col items-center gap-1" data-tool="select">
+                      <span class="material-symbols-rounded text-xl">near_me</span>
+                      <span class="text-xs">سحب</span>
+                    </button>
+                    <button class="draw-tool-btn px-3 py-2 rounded-lg border border-slate-200 dark:border-gray-600 hover:bg-slate-50 dark:hover:bg-gray-700 flex flex-col items-center gap-1" data-tool="rectangle">
+                      <span class="material-symbols-rounded text-xl">crop_square</span>
+                      <span class="text-xs">مربع</span>
+                    </button>
+                    <button class="draw-tool-btn px-3 py-2 rounded-lg border border-slate-200 dark:border-gray-600 hover:bg-slate-50 dark:hover:bg-gray-700 flex flex-col items-center gap-1" data-tool="circle">
+                      <span class="material-symbols-rounded text-xl">radio_button_unchecked</span>
+                      <span class="text-xs">دائرة</span>
+                    </button>
+                    <button class="draw-tool-btn px-3 py-2 rounded-lg border border-slate-200 dark:border-gray-600 hover:bg-slate-50 dark:hover:bg-gray-700 flex flex-col items-center gap-1" data-tool="line">
+                      <span class="material-symbols-rounded text-xl">horizontal_rule</span>
+                      <span class="text-xs">خط</span>
+                    </button>
+                    <button class="draw-tool-btn px-3 py-2 rounded-lg border border-slate-200 dark:border-gray-600 hover:bg-slate-50 dark:hover:bg-gray-700 flex flex-col items-center gap-1" data-tool="polygon">
+                      <span class="material-symbols-rounded text-xl">polyline</span>
+                      <span class="text-xs">مضلع</span>
+                    </button>
+                    <button class="draw-tool-btn px-3 py-2 rounded-lg border border-slate-200 dark:border-gray-600 hover:bg-slate-50 dark:hover:bg-gray-700 flex flex-col items-center gap-1" data-tool="text">
+                      <span class="material-symbols-rounded text-xl">title</span>
+                      <span class="text-xs">نص</span>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="space-y-2">
+                  <label class="text-sm font-medium text-slate-600 dark:text-slate-300">اللون</label>
+                  <input type="color" id="draw-color" value="#000000" class="w-full h-10 rounded-lg cursor-pointer">
+                </div>
+
+                <div id="draw-font-container" class="space-y-2 hidden">
+                  <label class="text-sm font-medium text-slate-600 dark:text-slate-300">نوع الخط</label>
+                  <select id="draw-font" class="w-full h-10 px-3 rounded-lg border border-slate-200 dark:border-gray-700 bg-slate-50 dark:bg-gray-800 text-sm">
+                    <option value="cv2.FONT_HERSHEY_SIMPLEX">SIMPLEX</option>
+                    <option value="cv2.FONT_HERSHEY_PLAIN">PLAIN</option>
+                    <option value="cv2.FONT_HERSHEY_DUPLEX">DUPLEX</option>
+                    <option value="cv2.FONT_HERSHEY_COMPLEX">COMPLEX</option>
+                    <option value="cv2.FONT_HERSHEY_TRIPLEX">TRIPLEX</option>
+                  </select>
+                </div>
+
+                <div class="space-y-2 pt-2">
+                  <div class="flex justify-between">
+                    <label class="text-sm font-medium text-slate-600 dark:text-slate-300">السُمك (Thickness)</label>
+                    <span id="draw-thickness-value" class="text-sm font-bold text-green-600">2</span>
+                  </div>
+                  <input type="range" id="draw-thickness" min="1" max="10" value="2" class="w-full">
+                </div>
+                
+                <div class="pt-4 mt-4 border-t border-slate-200 dark:border-gray-700">
+                  <button id="draw-clear-btn" class="w-full px-4 py-2 bg-red-50 text-red-600 hover:bg-red-100 dark:bg-red-900/20 dark:text-red-400 dark:hover:bg-red-900/40 rounded-lg font-medium transition-colors flex items-center justify-center gap-2">
+                    <span class="material-symbols-rounded text-xl">delete</span>
+                    مسح اللوحة
+                  </button>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- Canvas Workspace -->
+          <div class="lg:col-span-9 flex flex-col gap-6">
+            <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-slate-200 dark:border-gray-700 p-2 overflow-hidden flex flex-col">
+              <div class="w-full relative min-h-[500px]" style="min-height: 500px; overflow: hidden; border-radius: 0.5rem; background-color: #f1f5f9;">
+                <canvas id="draw-canvas" class="absolute inset-0 w-full h-full cursor-crosshair"></canvas>
+              </div>
+            </div>
+
+            <!-- Python Code Output -->
+            <div class="bg-slate-900 rounded-2xl overflow-hidden shadow-lg border border-slate-700 flex flex-col">
+              <div class="bg-slate-800 px-4 py-3 flex items-center justify-between border-b border-slate-700">
+                <div class="flex items-center gap-2 text-slate-300">
+                  <span class="material-symbols-rounded text-lg text-yellow-400">code</span>
+                  <span class="font-medium text-sm font-mono">OpenCV Python Code</span>
+                </div>
+                <button id="draw-copy-code" class="text-slate-400 hover:text-white transition-colors text-sm flex items-center gap-1 bg-slate-700/50 hover:bg-slate-700 px-3 py-1.5 rounded-lg">
+                  <span class="material-symbols-rounded text-base">content_copy</span>
+                  نسخ الكود
+                </button>
+              </div>
+              <div class="p-4 overflow-x-auto custom-scrollbar" dir="ltr">
+                <pre id="draw-code" class="code-block text-slate-100 font-mono text-sm leading-relaxed"></pre>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </div>
+
   <!-- Full Screen Matrices Modal -->
   <div id="rep-matrices-modal" class="fixed inset-0 z-[100] bg-slate-900/95 hidden flex-col transition-opacity duration-300 opacity-0" style="backdrop-filter: blur(4px);">
     <div class="flex justify-between items-center p-4 border-b border-slate-700 bg-slate-800/90 shadow-lg">
@@ -3256,6 +3390,11 @@
   <script src="js/morph-codegen.js"></script>
   <script src="js/morph-simulations.js"></script>
   <script src="js/morph-playground.js"></script>
+
+  <!-- Drawing on Images Scripts -->
+  <script src="js/draw-processing.js"></script>
+  <script src="js/draw-codegen.js"></script>
+  <script src="js/draw-playground.js"></script>
 
   <script src="js/ui-enhancements.js"></script>
   <script src="js/app.js"></script>

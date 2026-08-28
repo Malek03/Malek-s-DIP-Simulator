@@ -389,6 +389,42 @@ const RepPlayground = (() => {
 
     origCanvas.addEventListener('mouseup', endDrag);
     origCanvas.addEventListener('mouseleave', endDrag);
+
+    // Touch Events (mobile rect selection support)
+    origCanvas.addEventListener('touchstart', (e) => {
+      if (currentType !== 'colormix' || !currentImage) return;
+      e.preventDefault();
+      isDraggingRect = true;
+      const r = origCanvas.getBoundingClientRect();
+      const touch = e.touches[0];
+      startX = (touch.clientX - r.left) / r.width;
+      startY = (touch.clientY - r.top) / r.height;
+      
+      params.colormix.rect = { x: startX, y: startY, w: 0, h: 0 };
+      updateRectOverlay();
+    }, { passive: false });
+
+    origCanvas.addEventListener('touchmove', (e) => {
+      if (!isDraggingRect) return;
+      e.preventDefault();
+      const r = origCanvas.getBoundingClientRect();
+      const touch = e.touches[0];
+      const cx = Math.max(0, Math.min(1, (touch.clientX - r.left) / r.width));
+      const cy = Math.max(0, Math.min(1, (touch.clientY - r.top) / r.height));
+      
+      params.colormix.rect.x = Math.min(startX, cx);
+      params.colormix.rect.y = Math.min(startY, cy);
+      params.colormix.rect.w = Math.abs(cx - startX);
+      params.colormix.rect.h = Math.abs(cy - startY);
+      
+      updateRectOverlay();
+      processImage();
+    }, { passive: false });
+
+    origCanvas.addEventListener('touchend', (e) => {
+      e.preventDefault();
+      endDrag();
+    }, { passive: false });
     
     window.addEventListener('resize', () => {
       if (currentType === 'colormix') updateRectOverlay();

@@ -184,6 +184,20 @@ const DrawPlayground = (() => {
     els.canvas.addEventListener('mouseup', handleMouseUp);
     els.canvas.addEventListener('dblclick', handleDoubleClick);
 
+    // Canvas Touch Events (mobile support)
+    els.canvas.addEventListener('touchstart', (e) => {
+      e.preventDefault(); // Prevent scrolling while drawing
+      handleMouseDown(e);
+    }, { passive: false });
+    els.canvas.addEventListener('touchmove', (e) => {
+      e.preventDefault();
+      handleMouseMove(e);
+    }, { passive: false });
+    els.canvas.addEventListener('touchend', (e) => {
+      e.preventDefault();
+      handleMouseUp(e);
+    }, { passive: false });
+
     // Code Copy
     if (els.copyCodeBtn) {
       els.copyCodeBtn.addEventListener('click', () => {
@@ -229,12 +243,24 @@ const DrawPlayground = (() => {
     reader.readAsDataURL(file);
   }
 
-  // --- Mouse Handling ---
+  // --- Mouse / Touch Handling ---
   function getMousePos(e) {
     const rect = els.canvas.getBoundingClientRect();
+    // Support both mouse and touch events
+    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
     return {
-      x: e.clientX - rect.left,
-      y: e.clientY - rect.top
+      x: clientX - rect.left,
+      y: clientY - rect.top
+    };
+  }
+
+  function getTouchEndPos(e) {
+    const rect = els.canvas.getBoundingClientRect();
+    const touch = e.changedTouches[0];
+    return {
+      x: touch.clientX - rect.left,
+      y: touch.clientY - rect.top
     };
   }
 

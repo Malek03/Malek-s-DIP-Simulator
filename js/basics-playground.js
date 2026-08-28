@@ -322,6 +322,45 @@ const BasicsPlayground = (() => {
 
     origCanvas.addEventListener('mouseup', endDrag);
     origCanvas.addEventListener('mouseleave', endDrag);
+
+    // Touch Events (mobile crop support)
+    origCanvas.addEventListener('touchstart', (e) => {
+      if (currentType !== 'crop' || !currentImage) return;
+      e.preventDefault();
+      isDraggingCrop = true;
+      const rect = origCanvas.getBoundingClientRect();
+      const touch = e.touches[0];
+      cropStartX = (touch.clientX - rect.left) / rect.width;
+      cropStartY = (touch.clientY - rect.top) / rect.height;
+      
+      params.crop.x = cropStartX;
+      params.crop.y = cropStartY;
+      params.crop.w = 0;
+      params.crop.h = 0;
+      updateCropOverlay();
+    }, { passive: false });
+
+    origCanvas.addEventListener('touchmove', (e) => {
+      if (!isDraggingCrop) return;
+      e.preventDefault();
+      const rect = origCanvas.getBoundingClientRect();
+      const touch = e.touches[0];
+      const currentX = Math.max(0, Math.min(1, (touch.clientX - rect.left) / rect.width));
+      const currentY = Math.max(0, Math.min(1, (touch.clientY - rect.top) / rect.height));
+      
+      params.crop.x = Math.min(cropStartX, currentX);
+      params.crop.y = Math.min(cropStartY, currentY);
+      params.crop.w = Math.abs(currentX - cropStartX);
+      params.crop.h = Math.abs(currentY - cropStartY);
+      
+      updateCropOverlay();
+      processImage();
+    }, { passive: false });
+
+    origCanvas.addEventListener('touchend', (e) => {
+      e.preventDefault();
+      endDrag();
+    }, { passive: false });
     
     window.addEventListener('resize', () => {
       if (currentType === 'crop') updateCropOverlay();

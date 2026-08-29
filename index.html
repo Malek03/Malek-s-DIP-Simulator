@@ -59,6 +59,7 @@
           <a href="#point-processing" data-route="point-processing" class="nav-link px-3 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 rounded-lg hover:bg-slate-100 dark:hover:bg-gray-800 transition-colors">معالجة النقاط</a>
           <a href="#smooth-filters" data-route="smooth-filters" class="nav-link px-3 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 rounded-lg hover:bg-slate-100 dark:hover:bg-gray-800 transition-colors">فلاتر التنعيم</a>
           <a href="#sharpen-filters" data-route="sharpen-filters" class="nav-link px-3 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-rose-600 dark:hover:text-rose-400 rounded-lg hover:bg-slate-100 dark:hover:bg-gray-800 transition-colors">فلاتر الحدة</a>
+          <a href="#restore" data-route="restore" class="nav-link px-3 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-cyan-600 dark:hover:text-cyan-400 rounded-lg hover:bg-slate-100 dark:hover:bg-gray-800 transition-colors">استعادة الصور</a>
           <a href="#morph-processing" data-route="morph-processing" class="nav-link px-3 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-pink-600 dark:hover:text-pink-400 rounded-lg hover:bg-slate-100 dark:hover:bg-gray-800 transition-colors">المورفولوجيا</a>
           <a href="#draw-playground" data-route="draw-playground" class="nav-link px-3 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-green-600 dark:hover:text-green-400 rounded-lg hover:bg-slate-100 dark:hover:bg-gray-800 transition-colors">الرسم على الصور</a>
         </div>
@@ -92,6 +93,7 @@
           <a href="#point-processing" data-route="point-processing" class="nav-link px-3 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 rounded-lg hover:bg-slate-100 dark:hover:bg-gray-800">معالجة النقاط</a>
           <a href="#smooth-filters" data-route="smooth-filters" class="nav-link px-3 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 rounded-lg hover:bg-slate-100 dark:hover:bg-gray-800">فلاتر التنعيم</a>
           <a href="#sharpen-filters" data-route="sharpen-filters" class="nav-link px-3 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-rose-600 dark:hover:text-rose-400 rounded-lg hover:bg-slate-100 dark:hover:bg-gray-800">فلاتر الحدة</a>
+          <a href="#restore" data-route="restore" class="nav-link px-3 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-cyan-600 dark:hover:text-cyan-400 rounded-lg hover:bg-slate-100 dark:hover:bg-gray-800">استعادة الصور</a>
           <a href="#morph-processing" data-route="morph-processing" class="nav-link px-3 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-pink-600 dark:hover:text-pink-400 rounded-lg hover:bg-slate-100 dark:hover:bg-gray-800">المورفولوجيا</a>
           <a href="#draw-playground" data-route="draw-playground" class="nav-link px-3 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-green-600 dark:hover:text-green-400 rounded-lg hover:bg-slate-100 dark:hover:bg-gray-800">الرسم على الصور</a>
         </div>
@@ -401,25 +403,25 @@
             </p>
           </a>
 
-          <!-- Coming Soon 4: Image Restoration -->
-          <div class="concept-card disabled bg-white dark:bg-gray-800 rounded-2xl p-6 border border-slate-200 dark:border-gray-700 shadow-sm relative overflow-hidden">
+          <!-- Card: Image Restoration (Active) -->
+          <a href="#restore" data-route="restore" class="concept-card bg-white dark:bg-gray-800 rounded-2xl p-6 border border-slate-200 dark:border-gray-700 shadow-sm cursor-pointer block relative overflow-hidden group hover:border-cyan-300 dark:hover:border-cyan-600 transition-all">
             <div class="absolute top-4 left-4">
-              <span class="badge-coming-soon">
-                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
-                قريباً
+              <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 text-xs font-medium">
+                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                متاح الآن
               </span>
             </div>
-            <div class="w-12 h-12 rounded-xl bg-cyan-100 dark:bg-cyan-900/20 flex items-center justify-center mb-5">
-              <svg class="w-6 h-6 text-cyan-500/60" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <div class="w-12 h-12 rounded-xl bg-cyan-100 dark:bg-cyan-900/30 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+              <svg class="w-6 h-6 text-cyan-500/80 dark:text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
               </svg>
             </div>
-            <h3 class="text-lg font-bold text-slate-700 dark:text-slate-400 mb-2">استعادة الصور</h3>
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2 group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors">استعادة الصور</h3>
             <p class="text-sm text-slate-400 dark:text-slate-500 mb-1">Image Restoration</p>
-            <p class="text-xs text-slate-400 dark:text-slate-500 leading-relaxed">
-              إزالة الضوضاء، مرشح Wiener، واسترجاع الصور.
+            <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+              إضافة الضوضاء وفلاتر الاستعادة: المتوسط، ألفا المقطوع، وفلتر وينر.
             </p>
-          </div>
+          </a>
 
           <!-- Card 7: Drawing on Images (Active) -->
           <a href="#draw-playground" data-route="draw-playground" class="concept-card bg-white dark:bg-gray-800 rounded-2xl p-6 border border-slate-200 dark:border-gray-700 shadow-sm cursor-pointer block relative overflow-hidden group hover:border-green-300 dark:hover:border-green-600 transition-all">
@@ -440,6 +442,26 @@
               رسم الأشكال الأساسية، الخطوط، والنصوص على الصور باستخدام OpenCV.
             </p>
           </a>
+
+          <!-- Coming Soon: Segmentation -->
+          <div class="concept-card disabled bg-white dark:bg-gray-800 rounded-2xl p-6 border border-slate-200 dark:border-gray-700 shadow-sm relative overflow-hidden">
+            <div class="absolute top-4 left-4">
+              <span class="badge-coming-soon">
+                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+                قريباً
+              </span>
+            </div>
+            <div class="w-12 h-12 rounded-xl bg-purple-100 dark:bg-purple-900/20 flex items-center justify-center mb-5">
+              <svg class="w-6 h-6 text-purple-500/60" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5"/>
+              </svg>
+            </div>
+            <h3 class="text-lg font-bold text-slate-700 dark:text-slate-400 mb-2">تجزئة الصور</h3>
+            <p class="text-sm text-slate-400 dark:text-slate-500 mb-1">Image Segmentation</p>
+            <p class="text-xs text-slate-400 dark:text-slate-500 leading-relaxed">
+              فصل مكونات الصورة، اكتشاف الحواف المتقدم، وتجزئة الألوان والأشكال.
+            </p>
+          </div>
 
         </div>
       </div>
@@ -2317,6 +2339,377 @@
   </div>
 
   <!-- ============================================================
+       SECTION: IMAGE RESTORATION
+       ============================================================ -->
+  <!-- Main Grid Page -->
+  <div id="section-restore" class="section-view">
+    <section class="py-12 px-4 sm:px-6">
+      <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-10">
+          <div class="inline-flex items-center gap-2 px-3 py-1 mb-4 rounded-full bg-cyan-50 dark:bg-cyan-900/30 text-cyan-600 dark:text-cyan-400 text-xs font-semibold">
+            Image Restoration
+          </div>
+          <h2 class="text-3xl font-bold text-slate-900 dark:text-white mb-3">استعادة الصور</h2>
+          <p class="text-slate-500 dark:text-slate-400 text-lg max-w-2xl mx-auto">تحسين الصور التي تعرضت للتشويه (مثل الضوضاء) ومحاولة استرجاعها لأقرب شكل ممكن للصورة الأصلية.</p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+          <!-- 1. Noise Generation -->
+          <a href="#restore/noise" data-route="restore/noise" class="concept-card bg-white dark:bg-gray-800 rounded-2xl p-6 border border-slate-200 dark:border-gray-700 shadow-sm block relative overflow-hidden group hover:border-cyan-300 dark:hover:border-cyan-600 transition-all">
+            <div class="w-12 h-12 rounded-xl bg-cyan-100 dark:bg-cyan-900/30 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+              <svg class="w-6 h-6 text-cyan-600 dark:text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
+              </svg>
+            </div>
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2 group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors">إضافة الضوضاء</h3>
+            <p class="text-sm text-slate-400 dark:text-slate-500 mb-1">Noise Generation</p>
+            <p class="text-xs text-slate-500 dark:text-slate-400">فهم أنواع الضوضاء مثل Gaussian و Salt & Pepper و Uniform لتجربة فلاتر الاستعادة.</p>
+          </a>
+
+          <!-- 2. Arithmetic Mean -->
+          <a href="#restore/arithmetic" data-route="restore/arithmetic" class="concept-card bg-white dark:bg-gray-800 rounded-2xl p-6 border border-slate-200 dark:border-gray-700 shadow-sm block relative overflow-hidden group hover:border-cyan-300 dark:hover:border-cyan-600 transition-all">
+            <div class="w-12 h-12 rounded-xl bg-cyan-100 dark:bg-cyan-900/30 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+              <svg class="w-6 h-6 text-cyan-600 dark:text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
+              </svg>
+            </div>
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2 group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors">المتوسط الحسابي والهندسي</h3>
+            <p class="text-sm text-slate-400 dark:text-slate-500 mb-1">Arithmetic & Geometric Mean</p>
+            <p class="text-xs text-slate-500 dark:text-slate-400">أبسط أنواع فلاتر الاستعادة المكانية لإزالة الضوضاء العشوائية.</p>
+          </a>
+
+          <!-- 3. Contra-Harmonic Mean -->
+          <a href="#restore/contraharmonic" data-route="restore/contraharmonic" class="concept-card bg-white dark:bg-gray-800 rounded-2xl p-6 border border-slate-200 dark:border-gray-700 shadow-sm block relative overflow-hidden group hover:border-cyan-300 dark:hover:border-cyan-600 transition-all">
+            <div class="w-12 h-12 rounded-xl bg-cyan-100 dark:bg-cyan-900/30 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+              <svg class="w-6 h-6 text-cyan-600 dark:text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
+              </svg>
+            </div>
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2 group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors">المتوسط التوافقي المعاكس</h3>
+            <p class="text-sm text-slate-400 dark:text-slate-500 mb-1">Contra-Harmonic Mean</p>
+            <p class="text-xs text-slate-500 dark:text-slate-400">يستخدم لإزالة ضوضاء Salt & Pepper بالتحكم في المتغير Q.</p>
+          </a>
+
+          <!-- 4. Alpha Trimmed -->
+          <a href="#restore/alphatrimmed" data-route="restore/alphatrimmed" class="concept-card bg-white dark:bg-gray-800 rounded-2xl p-6 border border-slate-200 dark:border-gray-700 shadow-sm block relative overflow-hidden group hover:border-cyan-300 dark:hover:border-cyan-600 transition-all">
+            <div class="w-12 h-12 rounded-xl bg-cyan-100 dark:bg-cyan-900/30 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+              <svg class="w-6 h-6 text-cyan-600 dark:text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M14.121 14.121L19 19m-7-7l7-7m-7 7l-2.879-2.879M12 12L9.121 14.879m0 0L4.242 19.828a2 2 0 01-2.828-2.828l5.586-5.586m0 0L9.121 9.121m0 5.758L12 12" />
+              </svg>
+            </div>
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2 group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors">متوسط ألفا المقطوع</h3>
+            <p class="text-sm text-slate-400 dark:text-slate-500 mb-1">Alpha-Trimmed Mean</p>
+            <p class="text-xs text-slate-500 dark:text-slate-400">يجمع بين فلاتر المتوسط والوسيط لمعالجة مزيج من أنواع الضوضاء.</p>
+          </a>
+
+          <!-- 5. Wiener Filter -->
+          <a href="#restore/wiener" data-route="restore/wiener" class="concept-card bg-white dark:bg-gray-800 rounded-2xl p-6 border border-slate-200 dark:border-gray-700 shadow-sm block relative overflow-hidden group hover:border-cyan-300 dark:hover:border-cyan-600 transition-all">
+            <div class="w-12 h-12 rounded-xl bg-cyan-100 dark:bg-cyan-900/30 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+              <svg class="w-6 h-6 text-cyan-600 dark:text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+              </svg>
+            </div>
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2 group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors">فلتر وينر (Wiener)</h3>
+            <p class="text-sm text-slate-400 dark:text-slate-500 mb-1">Adaptive Wiener Filter</p>
+            <p class="text-xs text-slate-500 dark:text-slate-400">فلتر تكيفي يقلل خطأ MSE بناءً على تقدير التباين المحلي للضوضاء.</p>
+          </a>
+
+        </div>
+
+        <!-- CTA Banner to Playground -->
+        <div class="mt-12 bg-gradient-to-r from-cyan-500 to-teal-600 rounded-2xl p-8 text-center text-white shadow-lg relative overflow-hidden">
+          <div class="relative z-10">
+            <h3 class="text-2xl font-bold mb-3">مختبر الاستعادة التفاعلي</h3>
+            <p class="text-cyan-100 mb-6 max-w-xl mx-auto">ارفع صورة، أضف إليها ضوضاء بنفسك، ثم حاول استعادتها وتطبيق الفلاتر لرؤية النتيجة وقياس جودة الاسترجاع (PSNR).</p>
+            <a href="#restore-playground" data-route="restore-playground" class="inline-flex items-center gap-2 px-6 py-3 bg-white text-cyan-600 hover:bg-slate-50 font-bold rounded-xl shadow-md transition-all">
+              الانتقال لمختبر استعادة الصور
+              <svg class="w-5 h-5 rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+              </svg>
+            </a>
+          </div>
+          <div class="absolute -top-24 -right-24 w-48 h-48 bg-white/10 rounded-full blur-2xl"></div>
+          <div class="absolute -bottom-24 -left-24 w-48 h-48 bg-teal-900/20 rounded-full blur-2xl"></div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ---- Concept: Noise ---- -->
+  <div id="section-concept-noise" class="section-view">
+    <section class="py-12 px-4 sm:px-6">
+      <div class="max-w-4xl mx-auto">
+        <a href="#restore" data-route="restore" class="inline-flex items-center gap-2 text-sm text-cyan-600 dark:text-cyan-400 hover:text-cyan-800 dark:hover:text-cyan-300 mb-8 font-medium">
+          <svg class="w-4 h-4 rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+          العودة إلى استعادة الصور
+        </a>
+        <h1 class="text-3xl font-bold text-slate-900 dark:text-white mb-6">أنواع الضوضاء (Noise Models)</h1>
+        <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-slate-200 dark:border-gray-700 mb-8">
+          <p class="text-slate-600 dark:text-slate-300 mb-4">يُعد فهم النماذج الرياضية للضوضاء الخطوة الأولى لاستعادة الصور. إليك أشهر 3 نماذج:</p>
+          <ul class="list-disc list-inside text-slate-600 dark:text-slate-300 space-y-2 mb-6">
+            <li><strong>ضوضاء جاوس (Gaussian Noise):</strong> تتوزع بشكل طبيعي حول متوسط معين. ناتجة غالباً من الدوائر الإلكترونية.</li>
+            <li><strong>ضوضاء الملح والفلفل (Salt & Pepper):</strong> نقاط بيضاء وسوداء عشوائية. ناتجة عن أخطاء البث أو التحويل.</li>
+            <li><strong>الضوضاء المنتظمة (Uniform Noise):</strong> مستويات الضوضاء موزعة بالتساوي ضمن نطاق محدد.</li>
+          </ul>
+          
+          <div class="bg-slate-50 dark:bg-gray-900 rounded-xl p-4 border border-slate-200 dark:border-gray-700">
+            <h3 class="text-sm font-bold text-slate-700 dark:text-slate-300 mb-3">محاكاة أنواع الضوضاء</h3>
+            <div class="flex flex-col md:flex-row gap-4 items-center">
+              <div class="w-full md:w-1/2" id="sim-noise-container"></div>
+              <div class="w-full md:w-1/2 space-y-3">
+                <select id="sim-noise-type" class="w-full px-3 py-2 bg-white dark:bg-gray-800 border border-slate-300 dark:border-gray-600 rounded">
+                  <option value="gaussian">Gaussian</option>
+                  <option value="salt-pepper">Salt & Pepper</option>
+                  <option value="uniform">Uniform</option>
+                </select>
+                <div>
+                  <label class="text-xs text-slate-500">المعامل 1: <span id="sim-noise-val1">0</span></label>
+                  <input type="range" id="sim-noise-slider1" min="-50" max="50" step="1" value="0" class="w-full">
+                </div>
+                <div>
+                  <label class="text-xs text-slate-500">المعامل 2: <span id="sim-noise-val2">25</span></label>
+                  <input type="range" id="sim-noise-slider2" min="0" max="100" step="1" value="25" class="w-full">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ---- Concept: Arithmetic Mean ---- -->
+  <div id="section-concept-arithmetic-mean" class="section-view">
+    <section class="py-12 px-4 sm:px-6">
+      <div class="max-w-4xl mx-auto">
+        <a href="#restore" data-route="restore" class="inline-flex items-center gap-2 text-sm text-cyan-600 dark:text-cyan-400 hover:text-cyan-800 dark:hover:text-cyan-300 mb-8 font-medium">
+          <svg class="w-4 h-4 rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+          العودة
+        </a>
+        <h1 class="text-3xl font-bold text-slate-900 dark:text-white mb-6">المتوسط الحسابي (Arithmetic Mean)</h1>
+        <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-slate-200 dark:border-gray-700 mb-8">
+          <p class="text-slate-600 dark:text-slate-300 mb-4">أبسط فلاتر تقليل الضوضاء المكانية. يستبدل كل بكسل بمتوسط قيم البكسلات المجاورة له. يقلل من ضوضاء جاوس لكنه يسبب ضبابية شديدة للصورة (Blur).</p>
+          <div class="formula-box text-lg bg-slate-50 dark:bg-gray-700/50 rounded-xl p-4 mb-4 text-center font-mono text-cyan-700 dark:text-cyan-300">
+            f̂(x,y) = (1/mn) × Σ g(s,t)
+          </div>
+          <div class="bg-slate-50 dark:bg-gray-900 rounded-xl p-4 border border-slate-200 dark:border-gray-700">
+            <div id="sim-arithmetic-container"></div>
+            <div class="mt-4 max-w-xs mx-auto">
+              <label class="text-xs text-slate-500">حجم النافذة: <span id="sim-arithmetic-val">3×3</span></label>
+              <input type="range" id="sim-arithmetic-slider" min="3" max="9" step="2" value="3" class="w-full">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ---- Concept: Geometric Mean ---- -->
+  <div id="section-concept-geometric-mean" class="section-view">
+    <section class="py-12 px-4 sm:px-6">
+      <div class="max-w-4xl mx-auto">
+        <a href="#restore" data-route="restore" class="inline-flex items-center gap-2 text-sm text-cyan-600 dark:text-cyan-400 hover:text-cyan-800 dark:hover:text-cyan-300 mb-8 font-medium">
+          <svg class="w-4 h-4 rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+          العودة
+        </a>
+        <h1 class="text-3xl font-bold text-slate-900 dark:text-white mb-6">المتوسط الهندسي (Geometric Mean)</h1>
+        <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-slate-200 dark:border-gray-700 mb-8">
+          <p class="text-slate-600 dark:text-slate-300 mb-4">يحقق هذا الفلتر تقليل ضوضاء مشابه للمتوسط الحسابي، لكنه <strong>يحافظ على تفاصيل الصورة وحوافها بشكل أفضل</strong>. يعيبه أنه يفشل كلياً إذا كان أحد البكسلات في النافذة يساوي 0.</p>
+          <div class="formula-box text-lg bg-slate-50 dark:bg-gray-700/50 rounded-xl p-4 mb-4 text-center font-mono text-cyan-700 dark:text-cyan-300">
+            f̂(x,y) = (Π g(s,t))^(1/mn)
+          </div>
+          <div class="bg-slate-50 dark:bg-gray-900 rounded-xl p-4 border border-slate-200 dark:border-gray-700">
+            <div id="sim-geometric-container"></div>
+            <div class="mt-4 max-w-xs mx-auto">
+              <label class="text-xs text-slate-500">حجم النافذة: <span id="sim-geometric-val">3×3</span></label>
+              <input type="range" id="sim-geometric-slider" min="3" max="9" step="2" value="3" class="w-full">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ---- Concept: Contra-Harmonic Mean ---- -->
+  <div id="section-concept-contraharmonic-mean" class="section-view">
+    <section class="py-12 px-4 sm:px-6">
+      <div class="max-w-4xl mx-auto">
+        <a href="#restore" data-route="restore" class="inline-flex items-center gap-2 text-sm text-cyan-600 dark:text-cyan-400 hover:text-cyan-800 dark:hover:text-cyan-300 mb-8 font-medium">
+          <svg class="w-4 h-4 rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+          العودة
+        </a>
+        <h1 class="text-3xl font-bold text-slate-900 dark:text-white mb-6">المتوسط التوافقي المعاكس (Contra-Harmonic)</h1>
+        <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-slate-200 dark:border-gray-700 mb-8">
+          <p class="text-slate-600 dark:text-slate-300 mb-4">ممتاز في إزالة ضوضاء الملح والفلفل بناءً على المتغير Q. إذا كان Q > 0 يزيل ضوضاء الفلفل، وإذا كان Q < 0 يزيل ضوضاء الملح. (لا يمكنه إزالة الاثنين معاً).</p>
+          <div class="formula-box text-lg bg-slate-50 dark:bg-gray-700/50 rounded-xl p-4 mb-4 text-center font-mono text-cyan-700 dark:text-cyan-300">
+            f̂(x,y) = Σ g(s,t)^(Q+1) / Σ g(s,t)^Q
+          </div>
+          <div class="bg-slate-50 dark:bg-gray-900 rounded-xl p-4 border border-slate-200 dark:border-gray-700">
+            <div id="sim-contraharmonic-container"></div>
+            <div class="mt-4 flex gap-4 max-w-md mx-auto">
+              <div class="w-1/2">
+                <label class="text-xs text-slate-500">حجم النافذة: <span id="sim-ch-size-val">3×3</span></label>
+                <input type="range" id="sim-ch-size" min="3" max="9" step="2" value="3" class="w-full">
+              </div>
+              <div class="w-1/2">
+                <label class="text-xs text-slate-500">الترتيب Q: <span id="sim-ch-q-val">1.5</span></label>
+                <input type="range" id="sim-ch-q" min="-5" max="5" step="0.5" value="1.5" class="w-full">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ---- Concept: Alpha Trimmed Mean ---- -->
+  <div id="section-concept-alpha-trimmed" class="section-view">
+    <section class="py-12 px-4 sm:px-6">
+      <div class="max-w-4xl mx-auto">
+        <a href="#restore" data-route="restore" class="inline-flex items-center gap-2 text-sm text-cyan-600 dark:text-cyan-400 hover:text-cyan-800 dark:hover:text-cyan-300 mb-8 font-medium">
+          <svg class="w-4 h-4 rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+          العودة
+        </a>
+        <h1 class="text-3xl font-bold text-slate-900 dark:text-white mb-6">متوسط ألفا المقطوع (Alpha-Trimmed)</h1>
+        <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-slate-200 dark:border-gray-700 mb-8">
+          <p class="text-slate-600 dark:text-slate-300 mb-4">يقوم بترتيب البكسلات المجاورة تصاعدياً، ثم يحذف أكبر عدد (d/2) وأصغر عدد (d/2)، ويحسب المتوسط للباقي. هذا يجمع مزايا فلتر الوسيط (Median) والمتوسط الحسابي للتعامل مع مزيج الضوضاء.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ---- Concept: Wiener Filter ---- -->
+  <div id="section-concept-wiener" class="section-view">
+    <section class="py-12 px-4 sm:px-6">
+      <div class="max-w-4xl mx-auto">
+        <a href="#restore" data-route="restore" class="inline-flex items-center gap-2 text-sm text-cyan-600 dark:text-cyan-400 hover:text-cyan-800 dark:hover:text-cyan-300 mb-8 font-medium">
+          <svg class="w-4 h-4 rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+          العودة
+        </a>
+        <h1 class="text-3xl font-bold text-slate-900 dark:text-white mb-6">فلتر وينر (Adaptive Wiener Filter)</h1>
+        <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-slate-200 dark:border-gray-700 mb-8">
+          <p class="text-slate-600 dark:text-slate-300 mb-4">فلتر ذكي (تكيفي) يعتمد على الإحصائيات المحلية (التباين). إذا كان التباين المحلي عالياً (يدل على وجود حافة)، فإنه يقلل التنعيم للحفاظ عليها. يتطلب معرفة أو تقدير تباين الضوضاء الإجمالي.</p>
+          <div class="formula-box text-lg bg-slate-50 dark:bg-gray-700/50 rounded-xl p-4 mb-4 text-center font-mono text-cyan-700 dark:text-cyan-300">
+            f̂ = g - (σn² / σL²) × (g - μL)
+          </div>
+          <div class="bg-slate-50 dark:bg-gray-900 rounded-xl p-4 border border-slate-200 dark:border-gray-700">
+            <div id="sim-wiener-container"></div>
+            <div class="mt-4 flex gap-4 max-w-md mx-auto">
+              <div class="w-1/2">
+                <label class="text-xs text-slate-500">حجم النافذة: <span id="sim-wiener-size-val">5×5</span></label>
+                <input type="range" id="sim-wiener-size" min="3" max="9" step="2" value="5" class="w-full">
+              </div>
+              <div class="w-1/2">
+                <label class="text-xs text-slate-500">تباين الضوضاء: <span id="sim-wiener-var-val">500</span></label>
+                <input type="range" id="sim-wiener-var" min="10" max="2000" step="10" value="500" class="w-full">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ============================================================
+       RESTORE PLAYGROUND SECTION
+       ============================================================ -->
+  <div id="section-restore-playground" class="section-view">
+    <section class="py-12 px-4 sm:px-6">
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-8">
+          <div class="inline-flex items-center gap-2 px-3 py-1 mb-3 rounded-full bg-cyan-50 dark:bg-cyan-900/30 text-cyan-600 dark:text-cyan-400 text-xs font-semibold">
+            Image Restoration Lab
+          </div>
+          <h2 class="text-3xl font-bold text-slate-900 dark:text-white mb-2">مختبر استعادة الصور</h2>
+          <p class="text-slate-500 dark:text-slate-400">أضف الضوضاء وطبق الفلاتر لرؤية النتيجة مع قياس الـ PSNR</p>
+        </div>
+
+        <div class="playground-layout flex flex-col lg:flex-row gap-6">
+
+          <!-- RIGHT PANEL -->
+          <div class="lg:w-1/2 space-y-5">
+            <!-- Upload Zone -->
+            <div class="drop-zone p-6 text-center bg-white dark:bg-gray-800 border border-slate-200 dark:border-gray-700" id="restore-playground-dropzone">
+              <input type="file" accept="image/*" id="restore-playground-file-input" class="hidden">
+              <svg class="w-10 h-10 mx-auto mb-3 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+              </svg>
+              <p class="drop-text text-sm text-slate-500 dark:text-slate-400 font-medium">اسحب صورة هنا أو انقر للتحميل</p>
+            </div>
+
+            <!-- Canvases -->
+            <div class="grid grid-cols-3 gap-2">
+              <div>
+                <div class="text-xs font-semibold text-slate-500 text-center mb-1">الأصلية</div>
+                <div class="canvas-container bg-white border border-slate-200 dark:border-gray-700 rounded-lg p-1">
+                  <canvas id="restore-playground-original" width="200" height="150" class="rounded w-full"></canvas>
+                </div>
+              </div>
+              <div>
+                <div class="text-xs font-semibold text-slate-500 text-center mb-1">بعد الضوضاء</div>
+                <div class="canvas-container bg-white border border-slate-200 dark:border-gray-700 rounded-lg p-1 relative">
+                  <canvas id="restore-playground-noisy" width="200" height="150" class="rounded w-full"></canvas>
+                  <div class="absolute bottom-1 right-1 bg-black/60 text-white text-[10px] px-1 rounded" id="restore-noisy-psnr-value"></div>
+                </div>
+              </div>
+              <div>
+                <div class="text-xs font-semibold text-cyan-600 dark:text-cyan-400 text-center mb-1">الاستعادة (PSNR: <span id="restore-psnr-value">--</span>)</div>
+                <div class="canvas-container bg-white border border-slate-200 dark:border-gray-700 rounded-lg p-1">
+                  <canvas id="restore-playground-processed" width="200" height="150" class="rounded w-full"></canvas>
+                </div>
+              </div>
+            </div>
+
+            <!-- Selectors -->
+            <div class="bg-white dark:bg-gray-800 rounded-xl p-4 border border-slate-200 dark:border-gray-700 shadow-sm">
+              <div class="flex justify-between mb-3">
+                <label class="text-sm font-bold text-slate-700 dark:text-slate-300">الضوضاء والفلتر</label>
+                <button id="restore-playground-reset" class="text-xs text-slate-400 hover:text-cyan-500 transition-colors">إعادة تعيين</button>
+              </div>
+              <div class="grid grid-cols-2 gap-3 mb-3">
+                <div>
+                  <label class="block text-xs text-slate-500 mb-1">نوع الضوضاء</label>
+                  <select id="restore-noise-type-select" class="w-full px-2 py-1.5 bg-slate-50 dark:bg-gray-700 border border-slate-200 dark:border-gray-600 rounded-lg text-sm outline-none">
+                    <option value="gaussian">جاوس (Gaussian)</option>
+                    <option value="salt-pepper">ملح وفلفل (Salt & Pepper)</option>
+                    <option value="uniform">منتظمة (Uniform)</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-xs text-slate-500 mb-1">فلتر الاستعادة</label>
+                  <select id="restore-filter-type-select" class="w-full px-2 py-1.5 bg-slate-50 dark:bg-gray-700 border border-slate-200 dark:border-gray-600 rounded-lg text-sm outline-none">
+                    <option value="arithmetic">المتوسط الحسابي</option>
+                    <option value="geometric">المتوسط الهندسي</option>
+                    <option value="harmonic">المتوسط التوافقي</option>
+                    <option value="contraharmonic">التوافقي المعاكس (Q)</option>
+                    <option value="alpha-trimmed">ألفا المقطوع (d)</option>
+                    <option value="wiener">وينر التكيفي (Wiener)</option>
+                  </select>
+                </div>
+              </div>
+              <div id="restore-playground-controls"></div>
+            </div>
+          </div>
+
+          <!-- LEFT PANEL -->
+          <div class="lg:w-1/2">
+            <div class="bg-slate-900 dark:bg-gray-950 rounded-2xl overflow-hidden border border-slate-700/50 sticky top-20 shadow-lg">
+              <div class="flex items-center justify-between px-4 py-3 bg-slate-800 border-b border-slate-700/50">
+                <span class="text-xs text-slate-400 font-mono">restoration.py</span>
+                <button id="restore-playground-copy-code" class="copy-btn inline-flex items-center gap-1.5 px-3 py-1.5 text-xs text-slate-300 bg-slate-700 rounded-lg">نسخ الكود</button>
+              </div>
+              <div class="p-5 overflow-auto max-h-[70vh]">
+                <pre id="restore-playground-code" class="code-block text-slate-100"></pre>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ============================================================
        SECTION 7: MORPHOLOGICAL PROCESSING
        ============================================================ -->
   <!-- Main Grid Page -->
@@ -3414,6 +3807,12 @@
   <script src="js/sharpen-codegen.js"></script>
   <script src="js/sharpen-simulations.js"></script>
   <script src="js/sharpen-playground.js"></script>
+
+  <!-- Image Restoration Modules -->
+  <script src="js/restore-processing.js"></script>
+  <script src="js/restore-codegen.js"></script>
+  <script src="js/restore-simulations.js"></script>
+  <script src="js/restore-playground.js"></script>
 
   <!-- Morphological Processing Scripts -->
   <script src="js/morph-processing.js"></script>

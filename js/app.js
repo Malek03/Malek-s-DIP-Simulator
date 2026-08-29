@@ -48,6 +48,15 @@ const App = (() => {
     'sharpen-filters/canny': 'section-concept-canny',
     'sharpen-filters/prewitt': 'section-concept-prewitt',
     'sharpen-filters/highboost': 'section-concept-highboost',
+    // Image Restoration
+    'restore': 'section-restore',
+    'restore-playground': 'section-restore-playground',
+    'restore/noise': 'section-concept-noise',
+    'restore/arithmetic': 'section-concept-arithmetic-mean',
+    'restore/geometric': 'section-concept-geometric-mean',
+    'restore/contraharmonic': 'section-concept-contraharmonic-mean',
+    'restore/alphatrimmed': 'section-concept-alpha-trimmed',
+    'restore/wiener': 'section-concept-wiener',
     // Morphological Processing
     'morph-processing': 'section-morph-processing',
     'morph-playground': 'section-morph-playground',
@@ -161,6 +170,10 @@ const App = (() => {
       setTimeout(() => {
         initSharpenSimulation(view.split('/')[1]);
       }, 100);
+    } else if (view.startsWith('restore/')) {
+      setTimeout(() => {
+        initRestoreSimulation(view.split('/')[1]);
+      }, 100);
     } else if (view.startsWith('morph-processing/')) {
       setTimeout(() => {
         initMorphSimulation(view.split('/')[1]);
@@ -175,6 +188,8 @@ const App = (() => {
       setTimeout(() => SmoothPlayground.init(), 100);
     } else if (view === 'sharpen-playground' && typeof SharpenPlayground !== 'undefined') {
       setTimeout(() => SharpenPlayground.init(), 100);
+    } else if (view === 'restore-playground' && typeof RestorePlayground !== 'undefined') {
+      setTimeout(() => RestorePlayground.init(), 100);
     } else if (view === 'morph-playground' && typeof MorphPlayground !== 'undefined') {
       setTimeout(() => MorphPlayground.init(), 100);
     } else if (view === 'draw-playground' && typeof DrawPlayground !== 'undefined') {
@@ -342,6 +357,28 @@ const App = (() => {
         break;
       case 'close-blackhat':
         MorphSimulations.initCloseBlackHat('sim-cb-container', 'sim-cb-slider', 'sim-cb-value', 'sim-cb-shape');
+        break;
+    }
+  }
+
+  function initRestoreSimulation(concept) {
+    if (typeof RestoreSimulations === 'undefined') return;
+    
+    switch (concept) {
+      case 'noise':
+        RestoreSimulations.initNoise('sim-noise-container', 'sim-noise-type', 'sim-noise-slider1', 'sim-noise-slider2', 'sim-noise-val1', 'sim-noise-val2');
+        break;
+      case 'arithmetic':
+        RestoreSimulations.initArithmeticMean('sim-arithmetic-container', 'sim-arithmetic-slider', 'sim-arithmetic-val');
+        break;
+      case 'geometric':
+        RestoreSimulations.initGeometricMean('sim-geometric-container', 'sim-geometric-slider', 'sim-geometric-val');
+        break;
+      case 'contraharmonic':
+        RestoreSimulations.initContraHarmonicMean('sim-contraharmonic-container', 'sim-ch-size', 'sim-ch-q', 'sim-ch-size-val', 'sim-ch-q-val');
+        break;
+      case 'wiener':
+        RestoreSimulations.initWiener('sim-wiener-container', 'sim-wiener-size', 'sim-wiener-var', 'sim-wiener-size-val', 'sim-wiener-var-val');
         break;
     }
   }

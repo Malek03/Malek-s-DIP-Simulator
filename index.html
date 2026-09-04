@@ -51,19 +51,12 @@
           <span class="text-lg font-bold text-slate-800 dark:text-white">Malek Studio</span>
         </a>
 
-        <!-- Desktop Nav Links -->
-        <div class="hidden md:flex items-center gap-1">
-          <a href="#home" data-route="home" class="nav-link px-3 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 rounded-lg hover:bg-slate-100 dark:hover:bg-gray-800 transition-colors">الرئيسية</a>
-          <a href="#image-basics" data-route="image-basics" class="nav-link px-3 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 rounded-lg hover:bg-slate-100 dark:hover:bg-gray-800 transition-colors">أساسيات الصورة</a>
-          <a href="#image-rep" data-route="image-rep" class="nav-link px-3 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 rounded-lg hover:bg-slate-100 dark:hover:bg-gray-800 transition-colors">تمثيل الصورة</a>
-          <a href="#point-processing" data-route="point-processing" class="nav-link px-3 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 rounded-lg hover:bg-slate-100 dark:hover:bg-gray-800 transition-colors">معالجة النقاط</a>
-          <a href="#smooth-filters" data-route="smooth-filters" class="nav-link px-3 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 rounded-lg hover:bg-slate-100 dark:hover:bg-gray-800 transition-colors">فلاتر التنعيم</a>
-          <a href="#sharpen-filters" data-route="sharpen-filters" class="nav-link px-3 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-rose-600 dark:hover:text-rose-400 rounded-lg hover:bg-slate-100 dark:hover:bg-gray-800 transition-colors">فلاتر الحدة</a>
-          <a href="#restore" data-route="restore" class="nav-link px-3 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-cyan-600 dark:hover:text-cyan-400 rounded-lg hover:bg-slate-100 dark:hover:bg-gray-800 transition-colors">استعادة الصور</a>
-          <a href="#morph-processing" data-route="morph-processing" class="nav-link px-3 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-pink-600 dark:hover:text-pink-400 rounded-lg hover:bg-slate-100 dark:hover:bg-gray-800 transition-colors">المورفولوجيا</a>
-          <a href="#draw-playground" data-route="draw-playground" class="nav-link px-3 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-green-600 dark:hover:text-green-400 rounded-lg hover:bg-slate-100 dark:hover:bg-gray-800 transition-colors">الرسم على الصور</a>
-          <a href="#gfx-playground" data-route="gfx-playground" class="nav-link px-3 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-teal-600 dark:hover:text-teal-400 rounded-lg hover:bg-slate-100 dark:hover:bg-gray-800 transition-colors">رسوميات متقدمة</a>
-        </div>
+    <!-- Desktop Nav Links -->
+    <div class="hidden md:flex items-center gap-2">
+      <a href="#home" data-route="home" class="nav-link px-2 py-1.5 text-base font-medium text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 rounded-md hover:bg-slate-100 dark:hover:bg-gray-800 transition-all">الرئيسية</a>
+      <a href="#about" data-route="about" class="nav-link px-2 py-1.5 text-base font-medium text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 rounded-md hover:bg-slate-100 dark:hover:bg-gray-800 transition-all">عني</a>
+      <a href="#services" data-route="operations" class="nav-link px-2 py-1.5 text-base font-medium text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 rounded-md hover:bg-slate-100 dark:hover:bg-gray-800 transition-all">الخدمات</a>
+    </div>
 
         <!-- Theme Toggle + Mobile Menu -->
         <div class="flex items-center gap-2">
@@ -278,7 +271,7 @@
     </section>
     
     <!-- Services Section -->
-    <section class="py-16 px-4 sm:px-6 bg-slate-50/50 dark:bg-gray-800/30 border-t border-slate-200 dark:border-gray-700/50">
+    <section class="py-16 px-4 sm:px-6 bg-slate-50/50 dark:bg-gray-800/30 border-t border-slate-200 dark:border-gray-700/50" id="services">
       <div class="max-w-6xl mx-auto">
         <div class="text-center mb-12">
           <h2 class="text-3xl font-bold text-slate-900 dark:text-white mb-3">الخدمات</h2>
@@ -3679,10 +3672,19 @@
                 <!-- 2D Controls -->
                 <div id="gfx-controls-2d" class="gfx-controls-section space-y-4">
                   <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">ألوان الرؤوس</h4>
-                  <div class="grid grid-cols-3 gap-2">
-                    <input type="color" id="gfx-color1" value="#ff0000" class="w-full h-10 rounded-lg cursor-pointer" title="النقطة 1">
-                    <input type="color" id="gfx-color2" value="#00ff00" class="w-full h-10 rounded-lg cursor-pointer" title="النقطة 2">
-                    <input type="color" id="gfx-color3" value="#0000ff" class="w-full h-10 rounded-lg cursor-pointer" title="النقطة 3">
+                  <div class="space-y-2">
+                    <div class="flex items-center justify-between">
+                      <span class="text-xs text-slate-500">الرأس 1</span>
+                      <input type="color" id="gfx-color1" value="#ff0000" class="w-12 h-8 rounded cursor-pointer" title="النقطة 1">
+                    </div>
+                    <div class="flex items-center justify-between">
+                      <span class="text-xs text-slate-500">الرأس 2</span>
+                      <input type="color" id="gfx-color2" value="#00ff00" class="w-12 h-8 rounded cursor-pointer" title="النقطة 2">
+                    </div>
+                    <div class="flex items-center justify-between">
+                      <span class="text-xs text-slate-500">الرأس 3</span>
+                      <input type="color" id="gfx-color3" value="#0000ff" class="w-12 h-8 rounded cursor-pointer" title="النقطة 3">
+                    </div>
                   </div>
                 </div>
 
@@ -3794,18 +3796,18 @@
                   </div>
 
                   <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider mt-4 mb-2">خصائص المادة (Material)</h4>
-                  <div class="grid grid-cols-3 gap-2 mb-2">
-                    <div>
-                      <div class="text-[10px] text-center text-slate-500 mb-1">Ambient</div>
-                      <input type="color" id="gfx-mat-amb" value="#b21919" class="w-full h-8 rounded cursor-pointer">
+                  <div class="space-y-2 mb-2">
+                    <div class="flex items-center justify-between">
+                      <span class="text-xs text-slate-500">المحيطية (Ambient)</span>
+                      <input type="color" id="gfx-mat-amb" value="#b21919" class="w-12 h-8 rounded cursor-pointer">
                     </div>
-                    <div>
-                      <div class="text-[10px] text-center text-slate-500 mb-1">Diffuse</div>
-                      <input type="color" id="gfx-mat-diff" value="#e53333" class="w-full h-8 rounded cursor-pointer">
+                    <div class="flex items-center justify-between">
+                      <span class="text-xs text-slate-500">المنتشرة (Diffuse)</span>
+                      <input type="color" id="gfx-mat-diff" value="#e53333" class="w-12 h-8 rounded cursor-pointer">
                     </div>
-                    <div>
-                      <div class="text-[10px] text-center text-slate-500 mb-1">Specular</div>
-                      <input type="color" id="gfx-mat-spec" value="#ffffff" class="w-full h-8 rounded cursor-pointer">
+                    <div class="flex items-center justify-between">
+                      <span class="text-xs text-slate-500">اللمعان (Specular)</span>
+                      <input type="color" id="gfx-mat-spec" value="#ffffff" class="w-12 h-8 rounded cursor-pointer">
                     </div>
                   </div>
                   <div class="space-y-1">

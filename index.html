@@ -62,6 +62,7 @@
           <a href="#restore" data-route="restore" class="nav-link px-3 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-cyan-600 dark:hover:text-cyan-400 rounded-lg hover:bg-slate-100 dark:hover:bg-gray-800 transition-colors">استعادة الصور</a>
           <a href="#morph-processing" data-route="morph-processing" class="nav-link px-3 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-pink-600 dark:hover:text-pink-400 rounded-lg hover:bg-slate-100 dark:hover:bg-gray-800 transition-colors">المورفولوجيا</a>
           <a href="#draw-playground" data-route="draw-playground" class="nav-link px-3 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-green-600 dark:hover:text-green-400 rounded-lg hover:bg-slate-100 dark:hover:bg-gray-800 transition-colors">الرسم على الصور</a>
+          <a href="#gfx-playground" data-route="gfx-playground" class="nav-link px-3 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-teal-600 dark:hover:text-teal-400 rounded-lg hover:bg-slate-100 dark:hover:bg-gray-800 transition-colors">رسوميات متقدمة</a>
         </div>
 
         <!-- Theme Toggle + Mobile Menu -->
@@ -96,6 +97,7 @@
           <a href="#restore" data-route="restore" class="nav-link px-3 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-cyan-600 dark:hover:text-cyan-400 rounded-lg hover:bg-slate-100 dark:hover:bg-gray-800">استعادة الصور</a>
           <a href="#morph-processing" data-route="morph-processing" class="nav-link px-3 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-pink-600 dark:hover:text-pink-400 rounded-lg hover:bg-slate-100 dark:hover:bg-gray-800">المورفولوجيا</a>
           <a href="#draw-playground" data-route="draw-playground" class="nav-link px-3 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-green-600 dark:hover:text-green-400 rounded-lg hover:bg-slate-100 dark:hover:bg-gray-800">الرسم على الصور</a>
+          <a href="#gfx-playground" data-route="gfx-playground" class="nav-link px-3 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-teal-600 dark:hover:text-teal-400 rounded-lg hover:bg-slate-100 dark:hover:bg-gray-800">رسوميات متقدمة</a>
         </div>
       </div>
     </div>
@@ -440,6 +442,24 @@
             <p class="text-sm text-slate-400 dark:text-slate-500 mb-1">Drawing on Images</p>
             <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
               رسم الأشكال الأساسية، الخطوط، والنصوص على الصور باستخدام OpenCV.
+            </p>
+          </a>
+
+          <!-- Advanced Graphics -->
+          <a href="#gfx-playground" class="concept-card block bg-white dark:bg-gray-800 rounded-2xl p-6 border border-slate-200 dark:border-gray-700 hover:border-teal-300 dark:hover:border-teal-500/50 shadow-sm hover:shadow-md transition-all group relative overflow-hidden">
+            <div class="absolute top-4 left-4">
+              <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-teal-100 text-teal-700 dark:bg-teal-900/40 dark:text-teal-400">
+                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                متاح الآن
+              </span>
+            </div>
+            <div class="w-12 h-12 rounded-xl bg-teal-100 dark:bg-teal-900/30 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+              <span class="material-symbols-rounded text-2xl text-teal-500 dark:text-teal-400">3d_rotation</span>
+            </div>
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2 group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors">رسوميات متقدمة</h3>
+            <p class="text-sm text-slate-400 dark:text-slate-500 mb-1">Advanced Graphics</p>
+            <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+              الأشكال ثنائية وثلاثية الأبعاد، الإضاءة، التظليل، والتأثيرات البيئية باستخدام WebGL.
             </p>
           </a>
 
@@ -3617,6 +3637,333 @@
     <!-- ============================================================
          DRAWING ON IMAGES MODULE
          ============================================================ -->
+    <!-- ============================================================
+         SECTION: ADVANCED GRAPHICS PLAYGROUND
+         ============================================================ -->
+    <div id="section-gfx-playground" class="section-view">
+      <section class="pt-16 md:pt-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          <div class="flex items-center gap-4 mb-8 border-b border-slate-200 dark:border-gray-700 pb-4">
+            <div class="w-12 h-12 rounded-xl bg-teal-100 dark:bg-teal-900/30 flex items-center justify-center">
+              <span class="material-symbols-rounded text-3xl text-teal-600 dark:text-teal-400">3d_rotation</span>
+            </div>
+            <div>
+              <h1 class="text-3xl font-bold text-slate-900 dark:text-white">رسوميات متقدمة (Advanced Graphics)</h1>
+              <p class="text-slate-500 dark:text-slate-400 mt-1">محاكاة تفاعلية للرسوميات ثنائية وثلاثية الأبعاد، الإضاءة، وتأثيرات البيئة (WebGL)</p>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            
+            <!-- Sidebar Controls -->
+            <div class="lg:col-span-3 space-y-6">
+              <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-slate-200 dark:border-gray-700 p-5">
+                
+                <h3 class="text-lg font-semibold text-slate-800 dark:text-white mb-4 flex items-center gap-2">
+                  <span class="material-symbols-rounded text-teal-500">settings</span> إعدادات المشهد
+                </h3>
+                
+                <!-- Scene Selector -->
+                <div class="space-y-2 mb-6">
+                  <label class="text-sm font-medium text-slate-600 dark:text-slate-300">اختر المشهد</label>
+                  <select id="gfx-scene-select" class="w-full h-10 px-3 rounded-lg border border-slate-200 dark:border-gray-700 bg-slate-50 dark:bg-gray-800 text-sm font-medium">
+                    <option value="2d">أشكال ثنائية الأبعاد (2D Shapes)</option>
+                    <option value="3d">أشكال ثلاثية الأبعاد (3D Shapes)</option>
+                    <option value="lighting">الإضاءة والتظليل (Illumination)</option>
+                    <option value="fog">التأثيرات البيئية — الضباب (Fog)</option>
+                  </select>
+                </div>
+
+                <!-- Scene Specific Controls -->
+                
+                <!-- 2D Controls -->
+                <div id="gfx-controls-2d" class="gfx-controls-section space-y-4">
+                  <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">ألوان الرؤوس</h4>
+                  <div class="grid grid-cols-3 gap-2">
+                    <input type="color" id="gfx-color1" value="#ff0000" class="w-full h-10 rounded-lg cursor-pointer" title="النقطة 1">
+                    <input type="color" id="gfx-color2" value="#00ff00" class="w-full h-10 rounded-lg cursor-pointer" title="النقطة 2">
+                    <input type="color" id="gfx-color3" value="#0000ff" class="w-full h-10 rounded-lg cursor-pointer" title="النقطة 3">
+                  </div>
+                </div>
+
+                <!-- 3D Controls -->
+                <div id="gfx-controls-3d" class="gfx-controls-section hidden space-y-4">
+                  <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">خيارات الشكل</h4>
+                  <label class="flex items-center gap-2 cursor-pointer">
+                    <input type="checkbox" id="gfx-show-faces" checked class="rounded text-teal-600 focus:ring-teal-500">
+                    <span class="text-sm text-slate-700 dark:text-slate-300">إظهار الأوجه الملونة</span>
+                  </label>
+                  <label class="flex items-center gap-2 cursor-pointer">
+                    <input type="checkbox" id="gfx-show-edges" checked class="rounded text-teal-600 focus:ring-teal-500">
+                    <span class="text-sm text-slate-700 dark:text-slate-300">إظهار الحواف (Wireframe)</span>
+                  </label>
+
+                  <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider mt-4 mb-2">الإسقاط (Projection)</h4>
+                  <select id="gfx-proj-type" class="w-full h-9 px-3 rounded-lg border border-slate-200 dark:border-gray-700 bg-slate-50 dark:bg-gray-800 text-sm mb-2">
+                    <option value="perspective">منظوري (Perspective)</option>
+                    <option value="ortho">متوازي (Orthographic)</option>
+                  </select>
+                  
+                  <div class="space-y-1">
+                    <div class="flex justify-between text-xs">
+                      <span class="text-slate-500">مجال الرؤية (FOV)</span>
+                      <span id="gfx-fov-val" class="font-mono text-teal-600">45</span>
+                    </div>
+                    <input type="range" id="gfx-fov" min="15" max="120" value="45" class="w-full">
+                  </div>
+                  
+                  <div class="space-y-1">
+                    <div class="flex justify-between text-xs">
+                      <span class="text-slate-500">مسافة الكاميرا (Z)</span>
+                      <span id="gfx-cam-z-val" class="font-mono text-teal-600">7</span>
+                    </div>
+                    <input type="range" id="gfx-cam-z" min="2" max="20" value="7" step="0.5" class="w-full">
+                  </div>
+                </div>
+
+                <!-- Lighting Controls -->
+                <div id="gfx-controls-lighting" class="gfx-controls-section hidden space-y-4">
+                  <div class="flex items-center justify-between mb-2">
+                    <span class="text-sm font-medium text-slate-700 dark:text-slate-300">تفعيل الإضاءة</span>
+                    <label class="relative inline-flex items-center cursor-pointer">
+                      <input type="checkbox" id="gfx-light-enabled" checked class="sr-only peer">
+                      <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all dark:border-gray-600 peer-checked:bg-teal-600"></div>
+                    </label>
+                  </div>
+
+                  <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider mt-4 mb-2">موقع الضوء (Light Position)</h4>
+                  <div class="grid grid-cols-3 gap-2 mb-4">
+                    <div>
+                      <div class="text-[10px] text-center text-slate-500 mb-1">X</div>
+                      <input type="range" id="gfx-light-x" min="-10" max="10" value="5" step="0.5" class="w-full">
+                    </div>
+                    <div>
+                      <div class="text-[10px] text-center text-slate-500 mb-1">Y</div>
+                      <input type="range" id="gfx-light-y" min="-10" max="10" value="5" step="0.5" class="w-full">
+                    </div>
+                    <div>
+                      <div class="text-[10px] text-center text-slate-500 mb-1">Z</div>
+                      <input type="range" id="gfx-light-z" min="-10" max="10" value="5" step="0.5" class="w-full">
+                    </div>
+                  </div>
+
+                  <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider mt-4 mb-2">مكونات الإضاءة</h4>
+                  <div class="space-y-3">
+                    <!-- Ambient -->
+                    <div class="flex items-center gap-2">
+                      <div class="flex-1 space-y-1">
+                        <div class="flex justify-between text-xs">
+                          <span class="text-slate-500">المحيطية (Ambient)</span>
+                          <span id="gfx-light-amb-intensity-val" class="font-mono text-teal-600">0.2</span>
+                        </div>
+                        <input type="range" id="gfx-light-amb-intensity" min="0" max="1" value="0.2" step="0.05" class="w-full">
+                      </div>
+                      <input type="color" id="gfx-light-amb-color" value="#ffffff" class="w-8 h-8 rounded shrink-0 cursor-pointer">
+                    </div>
+                    <!-- Diffuse -->
+                    <div class="flex items-center gap-2">
+                      <div class="flex-1 space-y-1">
+                        <div class="flex justify-between text-xs">
+                          <span class="text-slate-500">المنتشرة (Diffuse)</span>
+                          <span id="gfx-light-diff-intensity-val" class="font-mono text-teal-600">0.8</span>
+                        </div>
+                        <input type="range" id="gfx-light-diff-intensity" min="0" max="1" value="0.8" step="0.05" class="w-full">
+                      </div>
+                      <input type="color" id="gfx-light-diff-color" value="#ffffff" class="w-8 h-8 rounded shrink-0 cursor-pointer">
+                    </div>
+                    <!-- Specular -->
+                    <div class="flex items-center gap-2">
+                      <div class="flex-1 space-y-1">
+                        <div class="flex justify-between text-xs">
+                          <span class="text-slate-500">اللمعان (Specular)</span>
+                          <span id="gfx-light-spec-intensity-val" class="font-mono text-teal-600">1.0</span>
+                        </div>
+                        <input type="range" id="gfx-light-spec-intensity" min="0" max="1" value="1.0" step="0.05" class="w-full">
+                      </div>
+                      <input type="color" id="gfx-light-spec-color" value="#ffffff" class="w-8 h-8 rounded shrink-0 cursor-pointer">
+                    </div>
+                  </div>
+
+                  <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider mt-4 mb-2">خصائص المادة (Material)</h4>
+                  <div class="grid grid-cols-3 gap-2 mb-2">
+                    <div>
+                      <div class="text-[10px] text-center text-slate-500 mb-1">Ambient</div>
+                      <input type="color" id="gfx-mat-amb" value="#b21919" class="w-full h-8 rounded cursor-pointer">
+                    </div>
+                    <div>
+                      <div class="text-[10px] text-center text-slate-500 mb-1">Diffuse</div>
+                      <input type="color" id="gfx-mat-diff" value="#e53333" class="w-full h-8 rounded cursor-pointer">
+                    </div>
+                    <div>
+                      <div class="text-[10px] text-center text-slate-500 mb-1">Specular</div>
+                      <input type="color" id="gfx-mat-spec" value="#ffffff" class="w-full h-8 rounded cursor-pointer">
+                    </div>
+                  </div>
+                  <div class="space-y-1">
+                    <div class="flex justify-between text-xs">
+                      <span class="text-slate-500">قوة اللمعان (Shininess)</span>
+                      <span id="gfx-shininess-val" class="font-mono text-teal-600">50</span>
+                    </div>
+                    <input type="range" id="gfx-shininess" min="1" max="128" value="50" class="w-full">
+                  </div>
+                </div>
+
+                <!-- Fog Controls -->
+                <div id="gfx-controls-fog" class="gfx-controls-section hidden space-y-4">
+                  <div class="flex items-center justify-between mb-2">
+                    <span class="text-sm font-medium text-slate-700 dark:text-slate-300">تفعيل الضباب</span>
+                    <label class="relative inline-flex items-center cursor-pointer">
+                      <input type="checkbox" id="gfx-fog-enabled" checked class="sr-only peer">
+                      <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all dark:border-gray-600 peer-checked:bg-teal-600"></div>
+                    </label>
+                  </div>
+
+                  <div class="space-y-2">
+                    <label class="text-sm font-medium text-slate-600 dark:text-slate-300">لون الضباب</label>
+                    <input type="color" id="gfx-fog-color" value="#808080" class="w-full h-10 rounded-lg cursor-pointer">
+                  </div>
+                  
+                  <div class="space-y-2">
+                    <label class="text-sm font-medium text-slate-600 dark:text-slate-300">معادلة الكثافة (Mode)</label>
+                    <select id="gfx-fog-mode" class="w-full h-9 px-3 rounded-lg border border-slate-200 dark:border-gray-700 bg-slate-50 dark:bg-gray-800 text-sm">
+                      <option value="0">خطي (LINEAR)</option>
+                      <option value="1">أُسّي (EXP)</option>
+                      <option value="2" selected>أُسّي تربيعي (EXP2)</option>
+                    </select>
+                  </div>
+
+                  <div class="space-y-1">
+                    <div class="flex justify-between text-xs">
+                      <span class="text-slate-500">كثافة الضباب (Density)</span>
+                      <span id="gfx-fog-density-val" class="font-mono text-teal-600">0.15</span>
+                    </div>
+                    <input type="range" id="gfx-fog-density" min="0.01" max="0.5" value="0.15" step="0.01" class="w-full">
+                  </div>
+                  
+                  <div class="space-y-1">
+                    <div class="flex justify-between text-xs">
+                      <span class="text-slate-500">عدد الأجسام (Cubes)</span>
+                      <span id="gfx-fog-count-val" class="font-mono text-teal-600">15</span>
+                    </div>
+                    <input type="range" id="gfx-fog-count" min="5" max="30" value="15" class="w-full">
+                  </div>
+                </div>
+
+                <!-- Shared Transforms & Animation Controls -->
+                <div id="gfx-controls-shared" class="mt-6 pt-6 border-t border-slate-200 dark:border-gray-700 space-y-4">
+                  <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">التحويلات والحركة</h4>
+                  
+                  <!-- Scale -->
+                  <div class="space-y-1">
+                    <div class="flex justify-between text-xs">
+                      <span class="text-slate-500">التكبير (Scale)</span>
+                      <span id="gfx-scale-val" class="font-mono text-teal-600">1.0</span>
+                    </div>
+                    <input type="range" id="gfx-scale" min="0.1" max="3.0" value="1.0" step="0.1" class="w-full">
+                  </div>
+
+                  <!-- Translate -->
+                  <div class="grid grid-cols-3 gap-2">
+                    <div>
+                      <div class="text-[10px] text-center text-slate-500 mb-1">إزاحة X</div>
+                      <input type="range" id="gfx-trans-x" min="-5" max="5" value="0" step="0.1" class="w-full">
+                    </div>
+                    <div>
+                      <div class="text-[10px] text-center text-slate-500 mb-1">إزاحة Y</div>
+                      <input type="range" id="gfx-trans-y" min="-5" max="5" value="0" step="0.1" class="w-full">
+                    </div>
+                    <div>
+                      <div class="text-[10px] text-center text-slate-500 mb-1">إزاحة Z</div>
+                      <input type="range" id="gfx-trans-z" min="-5" max="5" value="0" step="0.1" class="w-full">
+                    </div>
+                  </div>
+
+                  <!-- Rotate -->
+                  <div class="grid grid-cols-3 gap-2">
+                    <div>
+                      <div class="text-[10px] text-center text-slate-500 mb-1">دوران X</div>
+                      <input type="range" id="gfx-rot-x" min="0" max="360" value="0" step="1" class="w-full">
+                    </div>
+                    <div>
+                      <div class="text-[10px] text-center text-slate-500 mb-1">دوران Y</div>
+                      <input type="range" id="gfx-rot-y" min="0" max="360" value="0" step="1" class="w-full">
+                    </div>
+                    <div>
+                      <div class="text-[10px] text-center text-slate-500 mb-1">دوران Z</div>
+                      <input type="range" id="gfx-rot-z" min="0" max="360" value="0" step="1" class="w-full">
+                    </div>
+                  </div>
+                  
+                  <!-- Animation Controls -->
+                  <div class="flex items-center gap-2 mt-4 pt-2">
+                    <button id="gfx-anim-toggle" class="flex-1 py-2 bg-teal-50 text-teal-600 hover:bg-teal-100 dark:bg-teal-900/20 dark:text-teal-400 dark:hover:bg-teal-900/40 rounded-lg text-sm font-medium transition-colors flex items-center justify-center gap-1">
+                      <span class="material-symbols-rounded">pause</span> إيقاف الحركة
+                    </button>
+                    <button id="gfx-reset-btn" class="px-3 py-2 bg-slate-100 text-slate-700 hover:bg-slate-200 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600 rounded-lg transition-colors flex items-center justify-center" title="إعادة تعيين التحويلات">
+                      <span class="material-symbols-rounded">refresh</span>
+                    </button>
+                  </div>
+                  
+                  <div class="space-y-1 pt-2">
+                    <div class="flex justify-between text-xs">
+                      <span class="text-slate-500">سرعة الحركة</span>
+                      <span id="gfx-speed-val" class="font-mono text-teal-600">1.0</span>
+                    </div>
+                    <input type="range" id="gfx-speed" min="0.1" max="5.0" value="1.0" step="0.1" class="w-full">
+                  </div>
+                  
+                  <!-- Rotation Axes Toggles for Animation -->
+                  <div class="flex gap-4 justify-center mt-2">
+                    <label class="flex items-center gap-1 cursor-pointer">
+                      <input type="checkbox" id="gfx-anim-x" checked class="rounded text-teal-600 focus:ring-teal-500"><span class="text-xs font-mono text-slate-600 dark:text-slate-400">X</span>
+                    </label>
+                    <label class="flex items-center gap-1 cursor-pointer">
+                      <input type="checkbox" id="gfx-anim-y" checked class="rounded text-teal-600 focus:ring-teal-500"><span class="text-xs font-mono text-slate-600 dark:text-slate-400">Y</span>
+                    </label>
+                    <label class="flex items-center gap-1 cursor-pointer">
+                      <input type="checkbox" id="gfx-anim-z" class="rounded text-teal-600 focus:ring-teal-500"><span class="text-xs font-mono text-slate-600 dark:text-slate-400">Z</span>
+                    </label>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Canvas & Code -->
+            <div class="lg:col-span-9 flex flex-col gap-6">
+              <!-- Render Canvas -->
+              <div class="bg-slate-50 dark:bg-gray-900 rounded-2xl shadow-sm border border-slate-200 dark:border-gray-700 p-2 overflow-hidden flex flex-col relative group">
+                <div class="w-full relative min-h-[500px]" style="min-height: 500px; border-radius: 0.5rem; overflow: hidden;">
+                  <canvas id="gfx-canvas" class="absolute inset-0 w-full h-full cursor-move"></canvas>
+                  <div class="absolute top-2 left-2 bg-black/40 text-white/80 text-[10px] px-2 py-1 rounded pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity">
+                    اسحب بالماوس للتدوير الحر
+                  </div>
+                </div>
+              </div>
+
+              <!-- Python Code Output -->
+              <div class="bg-slate-900 rounded-2xl overflow-hidden shadow-lg border border-slate-700 flex flex-col">
+                <div class="bg-slate-800 px-4 py-3 flex items-center justify-between border-b border-slate-700">
+                  <div class="flex items-center gap-2 text-slate-300">
+                    <span class="material-symbols-rounded text-lg text-yellow-400">code</span>
+                    <span class="font-medium text-sm font-mono">PyOpenGL Code</span>
+                  </div>
+                  <button id="gfx-copy-code" class="text-slate-400 hover:text-white transition-colors text-sm flex items-center gap-1 bg-slate-700/50 hover:bg-slate-700 px-3 py-1.5 rounded-lg">
+                    <span class="material-symbols-rounded text-base">content_copy</span>
+                    نسخ الكود
+                  </button>
+                </div>
+                <div class="p-4 overflow-x-auto custom-scrollbar" dir="ltr">
+                  <pre id="gfx-code" class="code-block text-slate-100 font-mono text-sm leading-relaxed"></pre>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+    </div>
+
     <div id="section-draw-playground" class="section-view">
       <section class="pt-16 md:pt-20">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -3824,6 +4171,12 @@
   <script src="js/draw-processing.js"></script>
   <script src="js/draw-codegen.js"></script>
   <script src="js/draw-playground.js"></script>
+
+  <!-- Advanced Graphics Scripts -->
+  <script src="js/gfx-processing.js"></script>
+  <script src="js/gfx-codegen.js"></script>
+  <script src="js/gfx-simulations.js"></script>
+  <script src="js/gfx-playground.js"></script>
 
   <script src="js/ui-enhancements.js"></script>
   <script src="js/app.js"></script>

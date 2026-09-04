@@ -60,11 +60,14 @@ const App = (() => {
     // Morphological Processing
     'morph-processing': 'section-morph-processing',
     'morph-playground': 'section-morph-playground',
-    'morph-processing/dilate-erode': 'section-concept-dilate-erode',
-    'morph-processing/open-tophat': 'section-concept-open-tophat',
-    'morph-processing/close-blackhat': 'section-concept-close-blackhat',
-    // Drawing on Images
-    'draw-playground': 'section-draw-playground'
+    'morph-processing/dilation': 'section-concept-dilation',
+    'morph-processing/erosion': 'section-concept-erosion',
+    'morph-processing/opening': 'section-concept-opening',
+    'morph-processing/closing': 'section-concept-closing',
+    // Drawing
+    'draw-playground': 'section-draw-playground',
+    // Advanced Graphics
+    'gfx-playground': 'section-gfx-playground'
   };
 
   let currentRoute = 'home';
@@ -194,6 +197,8 @@ const App = (() => {
       setTimeout(() => MorphPlayground.init(), 100);
     } else if (view === 'draw-playground' && typeof DrawPlayground !== 'undefined') {
       setTimeout(() => DrawPlayground.init(), 100);
+    } else if (view === 'gfx-playground' && typeof GfxPlayground !== 'undefined') {
+      setTimeout(() => GfxPlayground.init(), 100);
     }
   }
 

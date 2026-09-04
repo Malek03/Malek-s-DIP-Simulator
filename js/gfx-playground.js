@@ -173,7 +173,7 @@ const GfxPlayground = (() => {
     dX = 0; dY = 0;
     
     if (scene === SCENE_2D) {
-      if (ctx2d) {
+      if (!ctx2d) {
         gl = null; // force 2D
         canvas.style.display = 'none'; // Recreate canvas to clear context type if needed
         const parent = canvas.parentElement;
@@ -187,6 +187,7 @@ const GfxPlayground = (() => {
       }
     } else {
       if (!gl) {
+        ctx2d = null; // force 3D
         canvas.style.display = 'none';
         const parent = canvas.parentElement;
         parent.removeChild(canvas);
